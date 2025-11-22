@@ -205,7 +205,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2025-11-22 16:07:39 / Modified: 16:14:59" itemprop="dateCreated datePublished" datetime="2025-11-22T16:07:39+08:00">2025-11-22</time>
+      <time title="Created: 2025-11-22 16:07:39 / Modified: 16:34:48" itemprop="dateCreated datePublished" datetime="2025-11-22T16:07:39+08:00">2025-11-22</time>
     </span>
 
   
@@ -291,7 +291,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2025-11-22 14:02:57 / Modified: 14:58:24" itemprop="dateCreated datePublished" datetime="2025-11-22T14:02:57+08:00">2025-11-22</time>
+      <time title="Created: 2025-11-22 14:02:57 / Modified: 19:04:09" itemprop="dateCreated datePublished" datetime="2025-11-22T14:02:57+08:00">2025-11-22</time>
     </span>
 
   
@@ -305,11 +305,11 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>首先，我们要明白为什么obb检测中不连续问题会一直无法得到根本解决。</p>
-<p>在传统的obb表示方法中，由五个变量来确定一个正确的obb框，即（x，y，w，h，sigema）</p>
+<p>在传统的obb表示方法中，由五个变量来确定一个正确的obb框，即（x，y，w，h，θ）</p>
 <p>而obb的不连续性就来源于<strong>角度的周期性</strong>和<strong>边长的交换性</strong></p>
-<h3 id="角度的周期性"><a href="#角度的周期性" class="headerlink" title="角度的周期性"></a>角度的周期性</h3><p>我们定义角度的范围是-90~90°之间，当一个obb框的角度从-90旋转到1°时，我们肉眼来看两个obb框其实是没有任何区别的，也就是说可以认为这两个框是一样的。但是在我们的编码中，sigema确产生了很大的变化。角度由-90°到1°之间跨越了一个周期，在损失函数中，神经网络会认为第二个框产生了相当大的误差，从而对第二个框进行剧烈的惩罚，但实际上两个框就是紧挨着的，完全可以认为是正确的框。 </p>
+<h3 id="角度的周期性"><a href="#角度的周期性" class="headerlink" title="角度的周期性"></a>角度的周期性</h3><p>我们定义角度的范围是-90~90°之间，当一个obb框的角度从-90旋转到1°时，我们肉眼来看两个obb框其实是没有任何区别的，也就是说可以认为这两个框是一样的。但是在我们的编码中，θ确产生了很大的变化。角度由-90°到1°之间跨越了一个周期，在损失函数中，神经网络会认为第二个框产生了相当大的误差，从而对第二个框进行剧烈的惩罚，但实际上两个框就是紧挨着的，完全可以认为是正确的框。 </p>
 <h3 id="边长的交换性"><a href="#边长的交换性" class="headerlink" title="边长的交换性"></a>边长的交换性</h3><p><strong>先介绍计算机中为什么需要边长的交换性</strong> </p>
-<p>在我们人类的几何知识中，一个矩形的长和宽是固定不动的。宽就是短的边，高就是长的边。但是在计算机的定义中，我们表示一个矩阵是由宽高和角度来定义的。假定一个细长的矩阵里在水平面上，我们通常就可以用w ，h ，sigema&#x3D;0°来对这个矩阵来定义。如果这个矩阵旋转到水平状态，如果依然保持原来的宽高来定义，那么此时的sigema就会来到90°。但是在opencv的定义中，你的角度都是有范围的，比如-90<del>90 甚者0</del>90 。为了保证你的sigema不超过这个范围，计算机就会自动交换宽高的定义。宽变高，高变宽，sigema也就从90降到了0，规避了角度超出范围的风险。</p>
+<p>在我们人类的几何知识中，一个矩形的长和宽是固定不动的。宽就是短的边，高就是长的边。但是在计算机的定义中，我们表示一个矩阵是由宽高和角度来定义的。假定一个细长的矩阵里在水平面上，我们通常就可以用w ，h ，θ&#x3D;0°来对这个矩阵来定义。如果这个矩阵旋转到水平状态，如果依然保持原来的宽高来定义，那么此时的θ就会来到90°。但是在opencv的定义中，你的角度都是有范围的，比如-90<del>90 甚者0</del>90 。为了保证你的θ不超过这个范围，计算机就会自动交换宽高的定义。宽变高，高变宽，θ也就从90降到了0，规避了角度超出范围的风险。</p>
 <p><strong>然后是为什么边长交换性会带来不连续性问题</strong></p>
 <p>​		正是因为这个特性，当一个矩阵在旋转过程中触发了旋转交换性，w h sigema三个数的数值都会发生很大的变化，和角度周期性一致，明明两个矩阵只是旋转了一点点，但是俩者表示的编码却相差极大，如果这个时候依然使用传统的L1loss，那么就会对矩阵产生很大的惩罚，不利于模型的训练。</p>
 
@@ -442,9 +442,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2025-11-21 16:23:57 / Modified: 16:37:14" itemprop="dateCreated datePublished" datetime="2025-11-21T16:23:57+08:00">2025-11-21</time>
+      <time title="Created: 2025-11-21 16:23:57" itemprop="dateCreated datePublished" datetime="2025-11-21T16:23:57+08:00">2025-11-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-11-22 19:03:19" itemprop="dateModified" datetime="2025-11-22T19:03:19+08:00">2025-11-22</time>
     </span>
 
   
@@ -457,7 +463,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>​	后面我会尽可能在这里分享我的学习笔记和学习心得，目前想记录的主要是科研路上遇到的一些知识，方便后面及时复习。</p>
+          <p>​	后面我会尽可能在这里分享我的学习笔记和学习心得，目前想记录的主要是科研路上遇到的困难和解决方法，方便后面及时复习。</p>
 <p>​	同时也要同步推进Java的学习，每次看完网课都要做好课程笔记的总结。 </p>
 <p>​	希望可以记录这一路的成长！</p>
 

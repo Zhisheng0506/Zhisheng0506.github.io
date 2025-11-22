@@ -19,15 +19,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"localhost","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="首先，我们要明白为什么obb检测中不连续问题会一直无法得到根本解决。 在传统的obb表示方法中，由五个变量来确定一个正确的obb框，即（x，y，w，h，sigema） 而obb的不连续性就来源于角度的周期性和边长的交换性 角度的周期性我们定义角度的范围是-90~90°之间，当一个obb框的角度从-90旋转到1°时，我们肉眼来看两个obb框其实是没有任何区别的，也就是说可以认为这两个框是一样的。但是">
+    <meta name="description" content="首先，我们要明白为什么obb检测中不连续问题会一直无法得到根本解决。 在传统的obb表示方法中，由五个变量来确定一个正确的obb框，即（x，y，w，h，θ） 而obb的不连续性就来源于角度的周期性和边长的交换性 角度的周期性我们定义角度的范围是-90~90°之间，当一个obb框的角度从-90旋转到1°时，我们肉眼来看两个obb框其实是没有任何区别的，也就是说可以认为这两个框是一样的。但是在我们的编">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OBB中的连续性问题">
 <meta property="og:url" content="http://localhost:4000/2025/11/22/OBB%E4%B8%AD%E7%9A%84%E8%BF%9E%E7%BB%AD%E6%80%A7%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="Kmon Blogs">
-<meta property="og:description" content="首先，我们要明白为什么obb检测中不连续问题会一直无法得到根本解决。 在传统的obb表示方法中，由五个变量来确定一个正确的obb框，即（x，y，w，h，sigema） 而obb的不连续性就来源于角度的周期性和边长的交换性 角度的周期性我们定义角度的范围是-90~90°之间，当一个obb框的角度从-90旋转到1°时，我们肉眼来看两个obb框其实是没有任何区别的，也就是说可以认为这两个框是一样的。但是">
+<meta property="og:description" content="首先，我们要明白为什么obb检测中不连续问题会一直无法得到根本解决。 在传统的obb表示方法中，由五个变量来确定一个正确的obb框，即（x，y，w，h，θ） 而obb的不连续性就来源于角度的周期性和边长的交换性 角度的周期性我们定义角度的范围是-90~90°之间，当一个obb框的角度从-90旋转到1°时，我们肉眼来看两个obb框其实是没有任何区别的，也就是说可以认为这两个框是一样的。但是在我们的编">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-11-22T06:02:57.000Z">
-<meta property="article:modified_time" content="2025-11-22T06:58:24.695Z">
+<meta property="article:modified_time" content="2025-11-22T11:04:09.749Z">
 <meta property="article:author" content="Kmon">
 <meta property="article:tag" content="obb">
 <meta name="twitter:card" content="summary">
@@ -212,7 +212,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2025-11-22 14:02:57 / Modified: 14:58:24" itemprop="dateCreated datePublished" datetime="2025-11-22T14:02:57+08:00">2025-11-22</time>
+      <time title="Created: 2025-11-22 14:02:57 / Modified: 19:04:09" itemprop="dateCreated datePublished" datetime="2025-11-22T14:02:57+08:00">2025-11-22</time>
     </span>
 
   
@@ -225,11 +225,11 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>首先，我们要明白为什么obb检测中不连续问题会一直无法得到根本解决。</p>
-<p>在传统的obb表示方法中，由五个变量来确定一个正确的obb框，即（x，y，w，h，sigema）</p>
+<p>在传统的obb表示方法中，由五个变量来确定一个正确的obb框，即（x，y，w，h，θ）</p>
 <p>而obb的不连续性就来源于<strong>角度的周期性</strong>和<strong>边长的交换性</strong></p>
-<h3 id="角度的周期性"><a href="#角度的周期性" class="headerlink" title="角度的周期性"></a>角度的周期性</h3><p>我们定义角度的范围是-90~90°之间，当一个obb框的角度从-90旋转到1°时，我们肉眼来看两个obb框其实是没有任何区别的，也就是说可以认为这两个框是一样的。但是在我们的编码中，sigema确产生了很大的变化。角度由-90°到1°之间跨越了一个周期，在损失函数中，神经网络会认为第二个框产生了相当大的误差，从而对第二个框进行剧烈的惩罚，但实际上两个框就是紧挨着的，完全可以认为是正确的框。 </p>
+<h3 id="角度的周期性"><a href="#角度的周期性" class="headerlink" title="角度的周期性"></a>角度的周期性</h3><p>我们定义角度的范围是-90~90°之间，当一个obb框的角度从-90旋转到1°时，我们肉眼来看两个obb框其实是没有任何区别的，也就是说可以认为这两个框是一样的。但是在我们的编码中，θ确产生了很大的变化。角度由-90°到1°之间跨越了一个周期，在损失函数中，神经网络会认为第二个框产生了相当大的误差，从而对第二个框进行剧烈的惩罚，但实际上两个框就是紧挨着的，完全可以认为是正确的框。 </p>
 <h3 id="边长的交换性"><a href="#边长的交换性" class="headerlink" title="边长的交换性"></a>边长的交换性</h3><p><strong>先介绍计算机中为什么需要边长的交换性</strong> </p>
-<p>在我们人类的几何知识中，一个矩形的长和宽是固定不动的。宽就是短的边，高就是长的边。但是在计算机的定义中，我们表示一个矩阵是由宽高和角度来定义的。假定一个细长的矩阵里在水平面上，我们通常就可以用w ，h ，sigema&#x3D;0°来对这个矩阵来定义。如果这个矩阵旋转到水平状态，如果依然保持原来的宽高来定义，那么此时的sigema就会来到90°。但是在opencv的定义中，你的角度都是有范围的，比如-90<del>90 甚者0</del>90 。为了保证你的sigema不超过这个范围，计算机就会自动交换宽高的定义。宽变高，高变宽，sigema也就从90降到了0，规避了角度超出范围的风险。</p>
+<p>在我们人类的几何知识中，一个矩形的长和宽是固定不动的。宽就是短的边，高就是长的边。但是在计算机的定义中，我们表示一个矩阵是由宽高和角度来定义的。假定一个细长的矩阵里在水平面上，我们通常就可以用w ，h ，θ&#x3D;0°来对这个矩阵来定义。如果这个矩阵旋转到水平状态，如果依然保持原来的宽高来定义，那么此时的θ就会来到90°。但是在opencv的定义中，你的角度都是有范围的，比如-90<del>90 甚者0</del>90 。为了保证你的θ不超过这个范围，计算机就会自动交换宽高的定义。宽变高，高变宽，θ也就从90降到了0，规避了角度超出范围的风险。</p>
 <p><strong>然后是为什么边长交换性会带来不连续性问题</strong></p>
 <p>​		正是因为这个特性，当一个矩阵在旋转过程中触发了旋转交换性，w h sigema三个数的数值都会发生很大的变化，和角度周期性一致，明明两个矩阵只是旋转了一点点，但是俩者表示的编码却相差极大，如果这个时候依然使用传统的L1loss，那么就会对矩阵产生很大的惩罚，不利于模型的训练。</p>
 

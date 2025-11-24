@@ -19,16 +19,16 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"zhisheng0506.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="​	我们之前学习过的注释通常就是单行注释和多行注释，比如下面的例子 1234567&#x2F;&#x2F; 这是一个单行注释&#x2F;*	这是一个多行注释	这是一个多行注释*&#x2F;  java中还有一种注释方法名为  文档注释 文档注释的定义 ：  又JDK所提供的一种工具  注释内容可以由javadoc所解析  生成一套以网页文件形式体现的程序说明文档。 其编译的基本形式为 1javadoc -d 目的文件夹名 -xx -yy">
+    <meta name="description" content="​	我们之前学习过的注释通常就是单行注释和多行注释，比如下面的例子 1234567&#x2F;&#x2F; 这是一个单行注释&#x2F;*	这是一个多行注释	这是一个多行注释*&#x2F;  java中还有一种注释方法名为  文档注释 文档注释的定义 ：  由JDK所提供的一种工具  注释内容可以由javadoc所解析  生成一套以网页文件形式体现的程序说明文档。 其编译的基本形式为 1javadoc -d 目的文件夹名 -xx -yy">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java基础-文档注释">
 <meta property="og:url" content="https://zhisheng0506.github.io/2025/11/24/Java%E5%9F%BA%E7%A1%80-%E6%96%87%E6%A1%A3%E6%B3%A8%E9%87%8A/index.html">
 <meta property="og:site_name" content="Kmon Blogs">
-<meta property="og:description" content="​	我们之前学习过的注释通常就是单行注释和多行注释，比如下面的例子 1234567&#x2F;&#x2F; 这是一个单行注释&#x2F;*	这是一个多行注释	这是一个多行注释*&#x2F;  java中还有一种注释方法名为  文档注释 文档注释的定义 ：  又JDK所提供的一种工具  注释内容可以由javadoc所解析  生成一套以网页文件形式体现的程序说明文档。 其编译的基本形式为 1javadoc -d 目的文件夹名 -xx -yy">
+<meta property="og:description" content="​	我们之前学习过的注释通常就是单行注释和多行注释，比如下面的例子 1234567&#x2F;&#x2F; 这是一个单行注释&#x2F;*	这是一个多行注释	这是一个多行注释*&#x2F;  java中还有一种注释方法名为  文档注释 文档注释的定义 ：  由JDK所提供的一种工具  注释内容可以由javadoc所解析  生成一套以网页文件形式体现的程序说明文档。 其编译的基本形式为 1javadoc -d 目的文件夹名 -xx -yy">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://zhisheng0506.github.io/img/1.png">
 <meta property="article:published_time" content="2025-11-24T08:35:25.000Z">
-<meta property="article:modified_time" content="2025-11-24T09:38:24.474Z">
+<meta property="article:modified_time" content="2025-11-24T11:05:35.456Z">
 <meta property="article:author" content="Kmon">
 <meta property="article:tag" content="JAVA">
 <meta name="twitter:card" content="summary">
@@ -213,7 +213,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2025-11-24 16:35:25 / Modified: 17:38:24" itemprop="dateCreated datePublished" datetime="2025-11-24T16:35:25+08:00">2025-11-24</time>
+      <time title="Created: 2025-11-24 16:35:25 / Modified: 19:05:35" itemprop="dateCreated datePublished" datetime="2025-11-24T16:35:25+08:00">2025-11-24</time>
     </span>
 
   
@@ -229,7 +229,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这是一个单行注释</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	这是一个多行注释</span></span><br><span class="line"><span class="comment">	这是一个多行注释</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>java中还有一种注释方法名为  <strong>文档注释</strong></p>
-<p>文档注释的定义 ：  又JDK所提供的一种工具  注释内容可以由javadoc所解析  生成一套以网页文件形式体现的程序说明文档。</p>
+<p>文档注释的定义 ：  由JDK所提供的一种工具  注释内容可以由javadoc所解析  生成一套以网页文件形式体现的程序说明文档。</p>
 <p>其编译的基本形式为</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javadoc -d 目的文件夹名 -xx -yy 目标java文件</span><br></pre></td></tr></table></figure>
 

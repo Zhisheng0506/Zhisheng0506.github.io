@@ -205,7 +205,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2025-11-24 16:35:25 / Modified: 17:38:24" itemprop="dateCreated datePublished" datetime="2025-11-24T16:35:25+08:00">2025-11-24</time>
+      <time title="Created: 2025-11-24 16:35:25 / Modified: 19:05:35" itemprop="dateCreated datePublished" datetime="2025-11-24T16:35:25+08:00">2025-11-24</time>
     </span>
 
   
@@ -222,7 +222,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这是一个单行注释</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	这是一个多行注释</span></span><br><span class="line"><span class="comment">	这是一个多行注释</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>java中还有一种注释方法名为  <strong>文档注释</strong></p>
-<p>文档注释的定义 ：  又JDK所提供的一种工具  注释内容可以由javadoc所解析  生成一套以网页文件形式体现的程序说明文档。</p>
+<p>文档注释的定义 ：  由JDK所提供的一种工具  注释内容可以由javadoc所解析  生成一套以网页文件形式体现的程序说明文档。</p>
 <p>其编译的基本形式为</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javadoc -d 目的文件夹名 -xx -yy 目标java文件</span><br></pre></td></tr></table></figure>
 
@@ -423,7 +423,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://zhisheng0506.github.io/2025/11/21/JAVA%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94day01/">
+    <link itemprop="mainEntityOfPage" href="https://zhisheng0506.github.io/2025/11/21/Java%E5%9F%BA%E7%A1%80%E2%80%94%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/photo.jpg">
@@ -441,7 +441,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/11/21/JAVA%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94day01/" class="post-title-link" itemprop="url">JAVA基础—转义字符</a>
+          <a href="/2025/11/21/Java%E5%9F%BA%E7%A1%80%E2%80%94%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6/" class="post-title-link" itemprop="url">Java基础—转义字符</a>
         </h2>
 
         <div class="post-meta-container">
@@ -459,7 +459,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-11-24 16:26:01" itemprop="dateModified" datetime="2025-11-24T16:26:01+08:00">2025-11-24</time>
+      <time title="Modified: 2025-11-24 19:08:31" itemprop="dateModified" datetime="2025-11-24T19:08:31+08:00">2025-11-24</time>
     </span>
 
   
@@ -475,20 +475,15 @@
           <p>​	转义字符在java中的使用和c语言几乎一样，这里就不做过多描述。</p>
 <p>我们只需要了解最常用的转移字符即可，更复杂的使用可以遇到再查</p>
 <ul>
-<li><p>\t  制表符，实现对齐的作用</p>
-</li>
-<li><p>\n 换行符</p>
-</li>
-<li><p>\\  打印一个正常的 ’&#39;</p>
-</li>
-<li><p>\“ 打印一个正常的“</p>
-</li>
-<li><p>\’ 打印一个正常的‘</p>
-</li>
-<li><p>\r  一个回车 将光标回到语句的其实位置（想象一下传统的打字机的回车，但是这里不包括换行）</p>
-<p>在java中，\后面通常会作为转移字符的起始，如果你想单纯打印一个\符号时，计算机会自动把它作为转移字符的起始。因此想正常打印  “\” ，应该用两个斜杠 \\   后面的\“ 和 \‘  都是同理</p>
-</li>
+<li>\t  制表符，实现对齐的作用</li>
+<li>\n 换行符</li>
+<li>\\  打印一个正常的 \</li>
+<li>\“ 打印一个正常的 ‘’</li>
+<li>\’ 打印一个正常的 ’</li>
+<li>\r  一个回车 将光标回到语句的其实位置（想象一下传统的打字机的回车，但是这里不包括换行）</li>
 </ul>
+<p>在java中，\后面通常会作为转移字符的起始，如果你想单纯打印一个\符号时，应该用两个斜杠 \\ </p>
+<p>后面的\“ 和 \‘  都是同理</p>
 
       
     </div>

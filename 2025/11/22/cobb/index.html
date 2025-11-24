@@ -26,15 +26,15 @@
 <meta property="og:site_name" content="Kmon Blogs">
 <meta property="og:description" content="​	作者为了解决obb领域的不连续问题，提出了一种全新的obb表达方式，在传统的五维表示方法上修改成了九维表示 推导九维表达 (xc, yc, w, h, rs, s0, s1, s2, s3)cobb的核心思想是利用obb与外界hbb的面积之比来确定obb的唯一性。那么起初我们就可以用五个变量来确定，(x,y,w,h,ra)   其中前四个都是HBB的参数而非obb的参数，ra则代表hbb中ob">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://localhost:4000/http://localhost:4000//11/22/cobb/rs.png">
-<meta property="og:image" content="http://localhost:4000/http://localhost:4000//11/22/cobb/DA.png">
+<meta property="og:image" content="http://localhost:4000/http://localhost:4000//rs.png">
+<meta property="og:image" content="http://localhost:4000/http://localhost:4000//DA.png">
 <meta property="article:published_time" content="2025-11-22T08:07:39.000Z">
-<meta property="article:modified_time" content="2025-11-24T09:21:32.449Z">
+<meta property="article:modified_time" content="2025-11-24T09:37:13.463Z">
 <meta property="article:author" content="Kmon">
 <meta property="article:tag" content="cobb">
 <meta property="article:tag" content="obb">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://localhost:4000/http://localhost:4000//11/22/cobb/rs.png">
+<meta name="twitter:image" content="http://localhost:4000/http://localhost:4000//rs.png">
 
 
 <link rel="canonical" href="http://localhost:4000/2025/11/22/cobb/">
@@ -222,7 +222,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-11-24 17:21:32" itemprop="dateModified" datetime="2025-11-24T17:21:32+08:00">2025-11-24</time>
+      <time title="Modified: 2025-11-24 17:37:13" itemprop="dateModified" datetime="2025-11-24T17:37:13+08:00">2025-11-24</time>
     </span>
 
   
@@ -239,17 +239,11 @@
 <p>但是问题也很显而易见，单纯靠这五个参数是无法固定唯一的obb的，同时解码回到obb也是个复杂的事情。</p>
 <p>为此，作者又一次引入了rs（滑动比率）这一新参数，由rs来间接估计得到ra。</p>
 <p>rs的数学定义如下:</p>
-<img src="/http://localhost:4000//11/22/cobb/rs.png" class title="res">
-
-
-
+<p><img src="/http://localhost:4000//rs.png" alt="res"></p>
 <p><strong>为什么不选择ra而是选择新引入一个rs变量?</strong></p>
 <p>如果真的就用四维hbb+ra的组合  那么仅仅靠面积比来计算和恢复obb框是一个很复杂的事情，复杂的计算的过程很容易导致精度的损失。然而rs不仅很好计算，而且与ra再数学上有着严格的递增关系，所以rs即保留了连续性理论的证明，又可以简化运算</p>
 <h2 id="解码模糊性问题"><a href="#解码模糊性问题" class="headerlink" title="解码模糊性问题"></a>解码模糊性问题</h2><p>我们现在已经敲定用rs  那么就是（x,y,w,h,rs)五维来表示。但是同样的参数组合，我们其实是可以得到四种完全不同的obb框的。这就是我们说的解码模糊性，同一套编码对应着不同的答案，模型在训练的过程中就不知道该走向哪个答案，因为四个答案都是对的。 为确保答案的唯一性，我们由引入了四个变量来解决DA（编码模糊性）的问题。</p>
-<img src="/http://localhost:4000//11/22/cobb/DA.png" class title="DA">
-
-
-
+<p><img src="/http://localhost:4000//DA.png" alt="DA"></p>
 <p>随后我们就得到了cobb编码的最终形态</p>
 <h3 id="xc-yc-w-h-rs-s0-s1-s2-s3"><a href="#xc-yc-w-h-rs-s0-s1-s2-s3" class="headerlink" title="(xc, yc, w, h, rs, s0, s1, s2, s3)"></a>(xc, yc, w, h, rs, s0, s1, s2, s3)</h3>
     </div>
@@ -260,8 +254,8 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/obb/" rel="tag"># obb</a>
               <a href="/tags/cobb/" rel="tag"># cobb</a>
+              <a href="/tags/obb/" rel="tag"># obb</a>
           </div>
 
         

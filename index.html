@@ -205,7 +205,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2025-11-24 16:35:25 / Modified: 16:48:13" itemprop="dateCreated datePublished" datetime="2025-11-24T16:35:25+08:00">2025-11-24</time>
+      <time title="Created: 2025-11-24 16:35:25 / Modified: 17:01:16" itemprop="dateCreated datePublished" datetime="2025-11-24T16:35:25+08:00">2025-11-24</time>
     </span>
 
   
@@ -233,8 +233,7 @@
 <p>我们可以发现  文档注释和多行注释的区别在于  它是以&#x2F;** 开头  并且标签是由官方规定的 我们不能随便乱取</p>
 <p>并且文档注释通常是放在一个类里面</p>
 <p>常用的文档标签如下</p>
-<p><img src="/http://localhost:4000//Blog\my-blog\source_posts\Java基础-文档注释\1.png" alt="常见的文档标签"></p>
-
+<img src="/http://localhost:4000//11/24/Java%E5%9F%BA%E7%A1%80-%E6%96%87%E6%A1%A3%E6%B3%A8%E9%87%8A/1.png" class title="文档标签">
       
     </div>
 
@@ -288,9 +287,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2025-11-22 16:07:39 / Modified: 16:34:48" itemprop="dateCreated datePublished" datetime="2025-11-22T16:07:39+08:00">2025-11-22</time>
+      <time title="Created: 2025-11-22 16:07:39" itemprop="dateCreated datePublished" datetime="2025-11-22T16:07:39+08:00">2025-11-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-11-24 16:56:17" itemprop="dateModified" datetime="2025-11-24T16:56:17+08:00">2025-11-24</time>
     </span>
 
   
@@ -308,17 +313,11 @@
 <p>但是问题也很显而易见，单纯靠这五个参数是无法固定唯一的obb的，同时解码回到obb也是个复杂的事情。</p>
 <p>为此，作者又一次引入了rs（滑动比率）这一新参数，由rs来间接估计得到ra。</p>
 <p>rs的数学定义如下:</p>
-<img src="/http://localhost:4000//11/22/cobb/rs.png" class title="图片描述">
-
-
-
+<p><img src="/http://localhost:4000//Blog\my-blog\source_posts\cobb\rs.png" alt="rs"></p>
 <p><strong>为什么不选择ra而是选择新引入一个rs变量?</strong></p>
 <p>如果真的就用四维hbb+ra的组合  那么仅仅靠面积比来计算和恢复obb框是一个很复杂的事情，复杂的计算的过程很容易导致精度的损失。然而rs不仅很好计算，而且与ra再数学上有着严格的递增关系，所以rs即保留了连续性理论的证明，又可以简化运算</p>
 <h2 id="解码模糊性问题"><a href="#解码模糊性问题" class="headerlink" title="解码模糊性问题"></a>解码模糊性问题</h2><p>我们现在已经敲定用rs  那么就是（x,y,w,h,rs)五维来表示。但是同样的参数组合，我们其实是可以得到四种完全不同的obb框的。这就是我们说的解码模糊性，同一套编码对应着不同的答案，模型在训练的过程中就不知道该走向哪个答案，因为四个答案都是对的。 为确保答案的唯一性，我们由引入了四个变量来解决DA（编码模糊性）的问题。</p>
-<img src="/http://localhost:4000//11/22/cobb/DA.png" class title="解码模糊性">
-
-
-
+<p><img src="/http://localhost:4000//Blog\my-blog\source_posts\cobb\DA.png" alt="DA"></p>
 <p>随后我们就得到了cobb编码的最终形态</p>
 <h3 id="xc-yc-w-h-rs-s0-s1-s2-s3"><a href="#xc-yc-w-h-rs-s0-s1-s2-s3" class="headerlink" title="(xc, yc, w, h, rs, s0, s1, s2, s3)"></a>(xc, yc, w, h, rs, s0, s1, s2, s3)</h3>
       

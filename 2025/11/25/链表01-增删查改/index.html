@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhisheng0506.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="移除链表元素如何移除链表的节点我这里不再过多赘述，之所以要特意为此写一篇博客是想重新认识一下虚拟头节点的作用  在没有虚拟头节点的情况下，删除链表中的元素有两种情况  删除头节点 删除非头节点  12345# 删除头节点head&#x3D;head.next#删除非头节点current.next&#x3D;current.next.next  其实主要的原因就是  我们链表删除一个节点通常是通过修改上一个节点的指针对">
+<meta property="og:type" content="article">
+<meta property="og:title" content="链表01-增删查改">
+<meta property="og:url" content="https://zhisheng0506.github.io/2025/11/25/%E9%93%BE%E8%A1%A801-%E5%A2%9E%E5%88%A0%E6%9F%A5%E6%94%B9/index.html">
+<meta property="og:site_name" content="Kmon Blogs">
+<meta property="og:description" content="移除链表元素如何移除链表的节点我这里不再过多赘述，之所以要特意为此写一篇博客是想重新认识一下虚拟头节点的作用  在没有虚拟头节点的情况下，删除链表中的元素有两种情况  删除头节点 删除非头节点  12345# 删除头节点head&#x3D;head.next#删除非头节点current.next&#x3D;current.next.next  其实主要的原因就是  我们链表删除一个节点通常是通过修改上一个节点的指针对">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-11-25T12:26:08.000Z">
+<meta property="article:modified_time" content="2025-11-26T12:48:30.582Z">
+<meta property="article:author" content="Kmon">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://zhisheng0506.github.io/2025/11/25/%E9%93%BE%E8%A1%A801-%E5%A2%9E%E5%88%A0%E6%9F%A5%E6%94%B9/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://zhisheng0506.github.io/2025/11/25/%E9%93%BE%E8%A1%A801-%E5%A2%9E%E5%88%A0%E6%9F%A5%E6%94%B9/","path":"2025/11/25/链表01-增删查改/","title":"链表01-增删查改"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>链表01-增删查改 | Kmon Blogs</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kmon Blogs</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0"><span class="nav-number">1.</span> <span class="nav-text">移除链表元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8"><span class="nav-number">2.</span> <span class="nav-text">设计链表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E4%B8%80%EF%BC%9Aget-index"><span class="nav-number">2.1.</span> <span class="nav-text">函数一：get(index)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E4%BA%8C%EF%BC%9AaddAtIndex-index-val"><span class="nav-number">2.2.</span> <span class="nav-text">函数二：addAtIndex(index,val)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E4%B8%89-deleteAtIndex-index"><span class="nav-number">2.3.</span> <span class="nav-text">函数三 :deleteAtIndex(index)</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kmon"
+      src="/images/photo.jpg">
+  <p class="site-author-name" itemprop="name">Kmon</p>
+  <div class="site-description" itemprop="description"></div>
+  <div class="site-intro" style="margin-top: 10px; font-size: 14px; color: #666; line-height: 1.5;">
+    <p>分享学习笔记和自己的碎碎念~</p>
+  </div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Zhisheng0506" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Zhisheng0506" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/1206300336@qq.com" title="E-Mail → 1206300336@qq.com" rel="noopener me"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/yourname" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;yourname" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://zhisheng0506.github.io/2025/11/25/%E9%93%BE%E8%A1%A801-%E5%A2%9E%E5%88%A0%E6%9F%A5%E6%94%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/photo.jpg">
+      <meta itemprop="name" content="Kmon">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="链表01-增删查改 | Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          链表01-增删查改
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-11-25 20:26:08" itemprop="dateCreated datePublished" datetime="2025-11-25T20:26:08+08:00">2025-11-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-11-26 20:48:30" itemprop="dateModified" datetime="2025-11-26T20:48:30+08:00">2025-11-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="移除链表元素"><a href="#移除链表元素" class="headerlink" title="移除链表元素"></a>移除链表元素</h2><p>如何移除链表的节点我这里不再过多赘述，之所以要特意为此写一篇博客是想重新认识一下虚拟头节点的作用</p>
+<p> 在没有虚拟头节点的情况下，删除链表中的元素有两种情况</p>
+<ul>
+<li>删除头节点</li>
+<li>删除非头节点</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 删除头节点</span></span><br><span class="line">head=head.<span class="built_in">next</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#删除非头节点</span></span><br><span class="line">current.<span class="built_in">next</span>=current.<span class="built_in">next</span>.<span class="built_in">next</span></span><br></pre></td></tr></table></figure>
+
+<p>其实主要的原因就是  我们链表删除一个节点通常是通过修改上一个节点的指针对象，而头节点本身作为第一个节点，没有上一个节点，因此需要特殊处理</p>
+<p>没有虚拟头节点的链表在删除操作中都需要进行一次头节点的特判</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">public:</span><br><span class="line">    ListNode* removeElements(ListNode* head, <span class="built_in">int</span> val) &#123;</span><br><span class="line">        // 删除头结点</span><br><span class="line">        <span class="keyword">while</span> head <span class="keyword">and</span> head.val==val:</span><br><span class="line">        	head=head.<span class="built_in">next</span></span><br><span class="line">        </span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">       		提醒一下，我一开始错误的直接对链表进行遍历</span></span><br><span class="line"><span class="string">       		然后单独判断头节点，忘记考虑target节点是允许重复出现的</span></span><br><span class="line"><span class="string">       		比如val=3   链表 3-&gt;3-&gt;3-&gt;4</span></span><br><span class="line"><span class="string">       		所以一定要删干净  不能找到一个target删了就溜之大吉</span></span><br><span class="line"><span class="string">       		下面同理</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">        // 删除非头结点</span><br><span class="line">        current=head</span><br><span class="line">        <span class="keyword">while</span> current.<span class="built_in">next</span>:</span><br><span class="line">        	<span class="keyword">if</span> current.<span class="built_in">next</span>.val==val:</span><br><span class="line">        		current.<span class="built_in">next</span>=current.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line">        	<span class="keyword">else</span>:</span><br><span class="line">        		cureent=current.<span class="built_in">next</span></span><br><span class="line">        <span class="keyword">return</span> head</span><br><span class="line">   </span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="设计链表"><a href="#设计链表" class="headerlink" title="设计链表"></a>设计链表</h2><h3 id="函数一：get-index"><a href="#函数一：get-index" class="headerlink" title="函数一：get(index)"></a>函数一：get(index)</h3><p>get(index)：获取链表中第 index 个节点的值。如果索引无效，则返回-1。</p>
+<p>需要特别注意一下的是链表的小标是<strong>从0开始的</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get</span>(<span class="params">self,index</span>):</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 养成特判的好习惯</span></span><br><span class="line">    <span class="keyword">if</span> index &lt;<span class="number">0</span> <span class="keyword">or</span> index &gt;<span class="variable language_">self</span>.size -<span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">    </span><br><span class="line">    current=dummy_head.head</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(index):</span><br><span class="line">        current=current.<span class="built_in">next</span></span><br><span class="line">   	<span class="keyword">return</span> current.val</span><br></pre></td></tr></table></figure>
+
+<h3 id="函数二：addAtIndex-index-val"><a href="#函数二：addAtIndex-index-val" class="headerlink" title="函数二：addAtIndex(index,val)"></a>函数二：addAtIndex(index,val)</h3><p>在链表中的下标为index节点之前添加值为 val 的节点。如果 index 等于链表的长度，则该节点将附加到链表的末尾。如果 index 大于链表长度，则不会插入节点。如果index小于0，则在头部插入节点</p>
+<p>只要我们使用了虚拟头节点  那么插入操作和移除操作都无需特判头节点的操作</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">addAtIndex</span>(<span class="params">index,val</span>):</span><br><span class="line">	<span class="keyword">if</span> index &lt;<span class="number">0</span> <span class="keyword">or</span> index &gt;<span class="variable language_">self</span>.size:   <span class="comment"># 注意本题特意强调了index等于链表长度的情况！</span></span><br><span class="line">        <span class="keyword">return</span> </span><br><span class="line">    </span><br><span class="line">    current=dummy_head</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(index):</span><br><span class="line">        current=current.<span class="built_in">next</span></span><br><span class="line">   	current.<span class="built_in">next</span>=ListNode(val,<span class="built_in">next</span>=current.<span class="built_in">next</span>)</span><br><span class="line">	<span class="variable language_">self</span>.size+=<span class="number">1</span> 			 <span class="comment"># 一定不要忘记 删除增加都需要对size手动修改！</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="函数三-deleteAtIndex-index"><a href="#函数三-deleteAtIndex-index" class="headerlink" title="函数三 :deleteAtIndex(index)"></a>函数三 :deleteAtIndex(index)</h3><p>在链表中删除下标为index的节点</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">deleteAtIndex</span>(<span class="params">index</span>):</span><br><span class="line">    <span class="keyword">if</span> index &lt;<span class="number">0</span> <span class="keyword">or</span> index &gt;<span class="variable language_">self</span>.size-<span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> </span><br><span class="line">    </span><br><span class="line">    current=dummy_head</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(index):</span><br><span class="line">        current=current.<span class="built_in">next</span></span><br><span class="line">    current.<span class="built_in">next</span>=current.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line">    <span class="variable language_">self</span>.size-=<span class="number">1</span></span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+
+
+<p>力扣上有原题  想复习链表的基础操作写这一题足矣</p>
+<p>[力扣 链表设计](<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/design-linked-list/description/">707. 设计链表 - 力扣（LeetCode）</a>)</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/11/25/%E9%93%BE%E8%A1%A802-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/" rel="prev" title="链表02-反转链表">
+                  <i class="fa fa-angle-left"></i> 链表02-反转链表
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Kmon</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

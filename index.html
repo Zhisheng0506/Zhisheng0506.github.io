@@ -205,7 +205,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2025-11-26 16:42:49 / Modified: 20:49:29" itemprop="dateCreated datePublished" datetime="2025-11-26T16:42:49+08:00">2025-11-26</time>
+      <time title="Created: 2025-11-26 16:42:49 / Modified: 20:56:28" itemprop="dateCreated datePublished" datetime="2025-11-26T16:42:49+08:00">2025-11-26</time>
     </span>
 
   
@@ -220,10 +220,10 @@
     <div class="post-body" itemprop="articleBody">
           <p>​	给你两个单链表的头节点 <code>headA</code> 和 <code>headB</code> ，请你找出并返回两个单链表相交的起始节点。如果两个链表没有交点，返回 <code>null</code></p>
 <p>图示两个链表在节点 <code>c1</code> 开始相交**：**</p>
-<p><img src="E:\Blog\my-blog\source\img\f7bce4b5-06cb-4f77-b2e6-eeccd038207f.png" alt="链表相交"></p>
+<p><img src="/img/f7bce4b5-06cb-4f77-b2e6-eeccd038207f.png" alt="链表相交"></p>
 <p>这个题目有很多种思路  不过labuladong的思路我感觉是最简短和易懂的</p>
 <p>把链表A和链表B单独抽离出来后，抓住相交后半段链表长度一定相同的特点，分别遍历链表A和链表B，走完一遍后接上对方的链表，继续遍历直到找到相同的节点</p>
-<p><img src="E:\Blog\my-blog\source\img\ab69dd72-2d42-4af3-b2c4-ddb5ca3627ac.png" alt="labuladong"></p>
+<p><img src="/img/ab69dd72-2d42-4af3-b2c4-ddb5ca3627ac.png" alt="labuladong"></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, x):</span></span><br><span class="line"><span class="comment">#         self.val = x</span></span><br><span class="line"><span class="comment">#         self.next = None</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">getIntersectionNode</span>(<span class="params">self, headA, headB</span>):</span><br><span class="line">        cur1=headA</span><br><span class="line">        cur2=headB</span><br><span class="line">        <span class="keyword">while</span> cur1!=cur2:</span><br><span class="line">            <span class="keyword">if</span> cur1:</span><br><span class="line">                cur1=cur1.<span class="built_in">next</span></span><br><span class="line">            <span class="keyword">else</span> :</span><br><span class="line">                cur1=headB</span><br><span class="line">            <span class="keyword">if</span> cur2:</span><br><span class="line">                cur2=cur2.<span class="built_in">next</span></span><br><span class="line">            <span class="keyword">else</span> :</span><br><span class="line">                cur2=headA</span><br><span class="line">                </span><br><span class="line">      <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">      	 有一点需要提醒一下就是当遍历完A链表后 其实指针不是立刻接上B链表的  是会存在NULL的一刻</span></span><br><span class="line"><span class="string">      	 a1-&gt;a2-&gt;None-&gt;b1-&gt;b2-&gt;b3-&gt;None</span></span><br><span class="line"><span class="string">      	 b1-&gt;b2-&gt;b3-&gt;None-&gt;a1-&gt;a2-&gt;None</span></span><br><span class="line"><span class="string">      	 </span></span><br><span class="line"><span class="string">      &quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
 
 
@@ -369,7 +369,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-11-26 20:49:12" itemprop="dateModified" datetime="2025-11-26T20:49:12+08:00">2025-11-26</time>
+      <time title="Modified: 2025-11-26 20:56:50" itemprop="dateModified" datetime="2025-11-26T20:56:50+08:00">2025-11-26</time>
     </span>
 
   
@@ -384,13 +384,10 @@
     <div class="post-body" itemprop="articleBody">
           <p>给定一个链表，两两交换其中相邻的节点，并返回交换后的链表</p>
 <p>你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。</p>
-<img src="E:\Blog\my-blog\source\img\24.png" alt="24.两两交换链表中的节点" style="zoom:67%;" />
-
-
-
+<p><img src="/img/24.png" alt="24.两两交换链表中的节点"></p>
 <p>这里的思路就很巧妙了  ，同样是遍历链表逐个交换，这里是以三个节点为一组进行交换操作</p>
 <p>就比如我们想交换1 ， 2节点。那么我们就需要cur作为1节点的前一个节点，然后完成如下操作</p>
-<p><img src="E:\Blog\my-blog\source\img\24.1.png" alt="hahah"></p>
+<p><img src="/img/24.1.png" alt="hahah"></p>
 <p>其实都是一些节点连接操作 但是有以下的细节需要处理</p>
 <ul>
 <li>cur在连接节点2后，节点1的位置就失踪了，因此要把节点1提前存储在中间变量</li>
@@ -740,7 +737,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-11-24 20:44:08" itemprop="dateModified" datetime="2025-11-24T20:44:08+08:00">2025-11-24</time>
+      <time title="Modified: 2025-11-26 20:57:07" itemprop="dateModified" datetime="2025-11-26T20:57:07+08:00">2025-11-26</time>
     </span>
 
   

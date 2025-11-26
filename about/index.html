@@ -19,31 +19,27 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"zhisheng0506.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="​	作者为了解决obb领域的不连续问题，提出了一种全新的obb表达方式，在传统的五维表示方法上修改成了九维表示 推导九维表达 (xc, yc, w, h, rs, s0, s1, s2, s3)cobb的核心思想是利用obb与外界hbb的面积之比来确定obb的唯一性。那么起初我们就可以用五个变量来确定，(x,y,w,h,ra)   其中前四个都是HBB的参数而非obb的参数，ra则代表hbb中ob">
-<meta property="og:type" content="article">
-<meta property="og:title" content="cobb编码推导">
-<meta property="og:url" content="https://zhisheng0506.github.io/2025/11/22/cobb/index.html">
+    <meta name="description" content="你好，我是 Kmon 👋欢迎来到我的博客！ 关于我我是一名热爱编程和学习的开发者，喜欢分享技术心得和学习笔记。 技能栈 编程语言: Java, Python, JavaScript 算法: 数据结构与算法 其他: 持续学习中…  联系方式 📧 邮箱: 1206300336@qq.com 🐱 GitHub: Zhisheng0506 🐦 Twitter: @ByKmon_ 📺 B站: 我的">
+<meta property="og:type" content="website">
+<meta property="og:title" content="关于我">
+<meta property="og:url" content="https://zhisheng0506.github.io/about/index.html">
 <meta property="og:site_name" content="Kmon Blogs">
-<meta property="og:description" content="​	作者为了解决obb领域的不连续问题，提出了一种全新的obb表达方式，在传统的五维表示方法上修改成了九维表示 推导九维表达 (xc, yc, w, h, rs, s0, s1, s2, s3)cobb的核心思想是利用obb与外界hbb的面积之比来确定obb的唯一性。那么起初我们就可以用五个变量来确定，(x,y,w,h,ra)   其中前四个都是HBB的参数而非obb的参数，ra则代表hbb中ob">
+<meta property="og:description" content="你好，我是 Kmon 👋欢迎来到我的博客！ 关于我我是一名热爱编程和学习的开发者，喜欢分享技术心得和学习笔记。 技能栈 编程语言: Java, Python, JavaScript 算法: 数据结构与算法 其他: 持续学习中…  联系方式 📧 邮箱: 1206300336@qq.com 🐱 GitHub: Zhisheng0506 🐦 Twitter: @ByKmon_ 📺 B站: 我的">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://zhisheng0506.github.io/img/rs.png">
-<meta property="og:image" content="https://zhisheng0506.github.io/img/DA.png">
-<meta property="article:published_time" content="2025-11-22T08:07:39.000Z">
-<meta property="article:modified_time" content="2025-11-26T12:57:07.572Z">
+<meta property="article:published_time" content="2025-11-25T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-26T14:03:18.586Z">
 <meta property="article:author" content="Kmon">
-<meta property="article:tag" content="cobb">
-<meta property="article:tag" content="obb">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://zhisheng0506.github.io/img/rs.png">
 
 
-<link rel="canonical" href="https://zhisheng0506.github.io/2025/11/22/cobb/">
+<link rel="canonical" href="https://zhisheng0506.github.io/about/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://zhisheng0506.github.io/2025/11/22/cobb/","path":"2025/11/22/cobb/","title":"cobb编码推导"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"en","comments":"","permalink":"https://zhisheng0506.github.io/about/index.html","path":"about/index.html","title":"关于我"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>cobb编码推导 | Kmon Blogs</title>
+<title>关于我 | Kmon Blogs
+</title>
   
 
 
@@ -132,7 +128,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A8%E5%AF%BC%E4%B9%9D%E7%BB%B4%E8%A1%A8%E8%BE%BE-xc-yc-w-h-rs-s0-s1-s2-s3"><span class="nav-number">1.</span> <span class="nav-text">推导九维表达 (xc, yc, w, h, rs, s0, s1, s2, s3)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E7%A0%81%E6%A8%A1%E7%B3%8A%E6%80%A7%E9%97%AE%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">解码模糊性问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#xc-yc-w-h-rs-s0-s1-s2-s3"><span class="nav-number">2.1.</span> <span class="nav-text">(xc, yc, w, h, rs, s0, s1, s2, s3)</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E6%98%AF-Kmon-%F0%9F%91%8B"><span class="nav-number">1.</span> <span class="nav-text">你好，我是 Kmon 👋</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E6%88%91"><span class="nav-number">1.1.</span> <span class="nav-text">关于我</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%80%E8%83%BD%E6%A0%88"><span class="nav-number">1.2.</span> <span class="nav-text">技能栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%81%94%E7%B3%BB%E6%96%B9%E5%BC%8F"><span class="nav-number">1.3.</span> <span class="nav-text">联系方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E8%BF%99%E4%B8%AA%E5%8D%9A%E5%AE%A2"><span class="nav-number">1.4.</span> <span class="nav-text">关于这个博客</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -186,110 +182,58 @@
 
     </div>
 
-    <div class="main-inner post posts-expand">
+    <div class="main-inner page posts-expand">
 
 
-  
+    
+    
+    
+    <div class="post-block" lang="en"><header class="post-header">
 
+<h1 class="post-title" itemprop="name headline">关于我
+</h1>
 
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://zhisheng0506.github.io/2025/11/22/cobb/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/photo.jpg">
-      <meta itemprop="name" content="Kmon">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kmon Blogs">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="cobb编码推导 | Kmon Blogs">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          cobb编码推导
-        </h1>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2025-11-22 16:07:39" itemprop="dateCreated datePublished" datetime="2025-11-22T16:07:39+08:00">2025-11-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-11-26 20:57:07" itemprop="dateModified" datetime="2025-11-26T20:57:07+08:00">2025-11-26</time>
-    </span>
-
-  
+<div class="post-meta-container">
 </div>
 
-        </div>
-      </header>
+</header>
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody"><p>​	作者为了解决obb领域的不连续问题，提出了一种全新的obb表达方式，在传统的五维表示方法上修改成了九维表示</p>
-<h2 id="推导九维表达-xc-yc-w-h-rs-s0-s1-s2-s3"><a href="#推导九维表达-xc-yc-w-h-rs-s0-s1-s2-s3" class="headerlink" title="推导九维表达 (xc, yc, w, h, rs, s0, s1, s2, s3)"></a>推导九维表达 (xc, yc, w, h, rs, s0, s1, s2, s3)</h2><p>cobb的核心思想是利用obb与外界hbb的面积之比来确定obb的唯一性。那么起初我们就可以用五个变量来确定，(x,y,w,h,ra)   其中前四个都是HBB的参数而非obb的参数，ra则代表hbb中obb所占的面积之比。</p>
-<p>但是问题也很显而易见，单纯靠这五个参数是无法固定唯一的obb的，同时解码回到obb也是个复杂的事情。</p>
-<p>为此，作者又一次引入了rs（滑动比率）这一新参数，由rs来间接估计得到ra。</p>
-<p>rs的数学定义如下:</p>
-<p><img src="/img/rs.png" alt="res"></p>
-<p><strong>为什么不选择ra而是选择新引入一个rs变量?</strong></p>
-<p>如果真的就用四维hbb+ra的组合  那么仅仅靠面积比来计算和恢复obb框是一个很复杂的事情，复杂的计算的过程很容易导致精度的损失。然而rs不仅很好计算，而且与ra再数学上有着严格的递增关系，所以rs即保留了连续性理论的证明，又可以简化运算</p>
-<h2 id="解码模糊性问题"><a href="#解码模糊性问题" class="headerlink" title="解码模糊性问题"></a>解码模糊性问题</h2><p>我们现在已经敲定用rs  那么就是（x,y,w,h,rs)五维来表示。但是同样的参数组合，我们其实是可以得到四种完全不同的obb框的。这就是我们说的解码模糊性，同一套编码对应着不同的答案，模型在训练的过程中就不知道该走向哪个答案，因为四个答案都是对的。 为确保答案的唯一性，我们由引入了四个变量来解决DA（编码模糊性）的问题。</p>
-<p><img src="/img/DA.png" alt="DA"></p>
-<p>随后我们就得到了cobb编码的最终形态</p>
-<h3 id="xc-yc-w-h-rs-s0-s1-s2-s3"><a href="#xc-yc-w-h-rs-s0-s1-s2-s3" class="headerlink" title="(xc, yc, w, h, rs, s0, s1, s2, s3)"></a>(xc, yc, w, h, rs, s0, s1, s2, s3)</h3>
+      
+      
+      
+      <div class="post-body">
+          <h2 id="你好，我是-Kmon-👋"><a href="#你好，我是-Kmon-👋" class="headerlink" title="你好，我是 Kmon 👋"></a>你好，我是 Kmon 👋</h2><p>欢迎来到我的博客！</p>
+<h3 id="关于我"><a href="#关于我" class="headerlink" title="关于我"></a>关于我</h3><p>我是一名热爱编程和学习的开发者，喜欢分享技术心得和学习笔记。</p>
+<h3 id="技能栈"><a href="#技能栈" class="headerlink" title="技能栈"></a>技能栈</h3><ul>
+<li><strong>编程语言</strong>: Java, Python, JavaScript</li>
+<li><strong>算法</strong>: 数据结构与算法</li>
+<li><strong>其他</strong>: 持续学习中…</li>
+</ul>
+<h3 id="联系方式"><a href="#联系方式" class="headerlink" title="联系方式"></a>联系方式</h3><ul>
+<li>📧 邮箱: <a href="mailto:&#49;&#x32;&#48;&#54;&#51;&#48;&#48;&#x33;&#x33;&#54;&#64;&#113;&#113;&#46;&#99;&#111;&#x6d;">1206300336@qq.com</a></li>
+<li>🐱 GitHub: <a target="_blank" rel="noopener" href="https://github.com/Zhisheng0506">Zhisheng0506</a></li>
+<li>🐦 Twitter: <a target="_blank" rel="noopener" href="https://x.com/ByKmon_">@ByKmon_</a></li>
+<li>📺 B站: <a target="_blank" rel="noopener" href="https://space.bilibili.com/1495302036">我的B站</a></li>
+</ul>
+<h3 id="关于这个博客"><a href="#关于这个博客" class="headerlink" title="关于这个博客"></a>关于这个博客</h3><p>这个博客主要记录我的学习笔记和技术分享，包括：</p>
+<ul>
+<li>算法题解</li>
+<li>编程语言学习</li>
+<li>技术心得</li>
+<li>日常碎碎念</li>
+</ul>
+<p>希望这些内容能对你有所帮助！如果有什么问题或建议，欢迎通过上面的联系方式与我交流。</p>
+<hr>
+<p><strong>Keep learning, keep coding!</strong> 🚀</p>
+
+      </div>
+      
+      
+      
     </div>
 
     
     
-    
-
-    <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/cobb/" rel="tag"># cobb</a>
-              <a href="/tags/obb/" rel="tag"># obb</a>
-          </div>
-
-        
-
-          <div class="post-nav">
-            <div class="post-nav-item">
-                <a href="/2025/11/22/OBB%E4%B8%AD%E7%9A%84%E8%BF%9E%E7%BB%AD%E6%80%A7%E9%97%AE%E9%A2%98/" rel="prev" title="OBB中的连续性问题">
-                  <i class="fa fa-angle-left"></i> OBB中的连续性问题
-                </a>
-            </div>
-            <div class="post-nav-item">
-                <a href="/2025/11/24/Java%E5%9F%BA%E7%A1%80-%E6%96%87%E6%A1%A3%E6%B3%A8%E9%87%8A/" rel="next" title="Java基础-文档注释">
-                  Java基础-文档注释 <i class="fa fa-angle-right"></i>
-                </a>
-            </div>
-          </div>
-    </footer>
-  </article>
-</div>
-
-
-
-
 
 
 </div>

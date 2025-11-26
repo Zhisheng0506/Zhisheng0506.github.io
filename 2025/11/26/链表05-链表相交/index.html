@@ -19,17 +19,17 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"zhisheng0506.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="​	给你两个单链表的头节点 headA 和 headB ，请你找出并返回两个单链表相交的起始节点。如果两个链表没有交点，返回 null 图示两个链表在节点 c1 开始相交**：**  这个题目有很多种思路  不过labuladong的思路我感觉是最简短和易懂的 把链表A和链表B单独抽离出来后，抓住相交后半段链表长度一定相同的特点，分别遍历链表A和链表B，走完一遍后接上对方的链表，继续遍历直到找到相">
+    <meta name="description" content="​	给你两个单链表的头节点 headA 和 headB ，请你找出并返回两个单链表相交的起始节点。如果两个链表没有交点，返回 null 图示两个链表在节点 c1 开始相交**：**">
 <meta property="og:type" content="article">
 <meta property="og:title" content="链表05-链表相交">
 <meta property="og:url" content="https://zhisheng0506.github.io/2025/11/26/%E9%93%BE%E8%A1%A805-%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4/index.html">
 <meta property="og:site_name" content="Kmon Blogs">
-<meta property="og:description" content="​	给你两个单链表的头节点 headA 和 headB ，请你找出并返回两个单链表相交的起始节点。如果两个链表没有交点，返回 null 图示两个链表在节点 c1 开始相交**：**  这个题目有很多种思路  不过labuladong的思路我感觉是最简短和易懂的 把链表A和链表B单独抽离出来后，抓住相交后半段链表长度一定相同的特点，分别遍历链表A和链表B，走完一遍后接上对方的链表，继续遍历直到找到相">
+<meta property="og:description" content="​	给你两个单链表的头节点 headA 和 headB ，请你找出并返回两个单链表相交的起始节点。如果两个链表没有交点，返回 null 图示两个链表在节点 c1 开始相交**：**">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://zhisheng0506.github.io/img/f7bce4b5-06cb-4f77-b2e6-eeccd038207f.png">
 <meta property="og:image" content="https://zhisheng0506.github.io/img/ab69dd72-2d42-4af3-b2c4-ddb5ca3627ac.png">
 <meta property="article:published_time" content="2025-11-26T08:42:49.000Z">
-<meta property="article:modified_time" content="2025-11-26T13:15:48.566Z">
+<meta property="article:modified_time" content="2025-11-26T13:46:41.118Z">
 <meta property="article:author" content="Kmon">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
@@ -217,7 +217,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2025-11-26 16:42:49 / Modified: 21:15:48" itemprop="dateCreated datePublished" datetime="2025-11-26T16:42:49+08:00">2025-11-26</time>
+      <time title="Created: 2025-11-26 16:42:49 / Modified: 21:46:41" itemprop="dateCreated datePublished" datetime="2025-11-26T16:42:49+08:00">2025-11-26</time>
     </span>
 
   
@@ -232,6 +232,8 @@
     <div class="post-body" itemprop="articleBody"><p>​	给你两个单链表的头节点 <code>headA</code> 和 <code>headB</code> ，请你找出并返回两个单链表相交的起始节点。如果两个链表没有交点，返回 <code>null</code></p>
 <p>图示两个链表在节点 <code>c1</code> 开始相交**：**</p>
 <p><img src="/img/f7bce4b5-06cb-4f77-b2e6-eeccd038207f.png" alt="链表相交"></p>
+<span id="more"></span>
+
 <p>这个题目有很多种思路  不过labuladong的思路我感觉是最简短和易懂的</p>
 <p>把链表A和链表B单独抽离出来后，抓住相交后半段链表长度一定相同的特点，分别遍历链表A和链表B，走完一遍后接上对方的链表，继续遍历直到找到相同的节点</p>
 <p><img src="/img/ab69dd72-2d42-4af3-b2c4-ddb5ca3627ac.png" alt="labuladong"></p>

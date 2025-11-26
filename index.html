@@ -208,7 +208,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2025-11-26 16:42:49 / Modified: 21:15:48" itemprop="dateCreated datePublished" datetime="2025-11-26T16:42:49+08:00">2025-11-26</time>
+      <time title="Created: 2025-11-26 16:42:49 / Modified: 21:46:41" itemprop="dateCreated datePublished" datetime="2025-11-26T16:42:49+08:00">2025-11-26</time>
     </span>
 
   
@@ -224,12 +224,14 @@
           <p>​	给你两个单链表的头节点 <code>headA</code> 和 <code>headB</code> ，请你找出并返回两个单链表相交的起始节点。如果两个链表没有交点，返回 <code>null</code></p>
 <p>图示两个链表在节点 <code>c1</code> 开始相交**：**</p>
 <p><img src="/img/f7bce4b5-06cb-4f77-b2e6-eeccd038207f.png" alt="链表相交"></p>
-<p>这个题目有很多种思路  不过labuladong的思路我感觉是最简短和易懂的</p>
-<p>把链表A和链表B单独抽离出来后，抓住相交后半段链表长度一定相同的特点，分别遍历链表A和链表B，走完一遍后接上对方的链表，继续遍历直到找到相同的节点</p>
-<p><img src="/img/ab69dd72-2d42-4af3-b2c4-ddb5ca3627ac.png" alt="labuladong"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, x):</span></span><br><span class="line"><span class="comment">#         self.val = x</span></span><br><span class="line"><span class="comment">#         self.next = None</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">getIntersectionNode</span>(<span class="params">self, headA, headB</span>):</span><br><span class="line">        cur1=headA</span><br><span class="line">        cur2=headB</span><br><span class="line">        <span class="keyword">while</span> cur1!=cur2:</span><br><span class="line">            <span class="keyword">if</span> cur1:</span><br><span class="line">                cur1=cur1.<span class="built_in">next</span></span><br><span class="line">            <span class="keyword">else</span> :</span><br><span class="line">                cur1=headB</span><br><span class="line">            <span class="keyword">if</span> cur2:</span><br><span class="line">                cur2=cur2.<span class="built_in">next</span></span><br><span class="line">            <span class="keyword">else</span> :</span><br><span class="line">                cur2=headA</span><br><span class="line">                </span><br><span class="line">      <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">      	 有一点需要提醒一下就是当遍历完A链表后 其实指针不是立刻接上B链表的  是会存在NULL的一刻</span></span><br><span class="line"><span class="string">      	 a1-&gt;a2-&gt;None-&gt;b1-&gt;b2-&gt;b3-&gt;None</span></span><br><span class="line"><span class="string">      	 b1-&gt;b2-&gt;b3-&gt;None-&gt;a1-&gt;a2-&gt;None</span></span><br><span class="line"><span class="string">      	 </span></span><br><span class="line"><span class="string">      &quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
-
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/11/26/%E9%93%BE%E8%A1%A805-%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -291,7 +293,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-11-26 20:49:20" itemprop="dateModified" datetime="2025-11-26T20:49:20+08:00">2025-11-26</time>
+      <time title="Modified: 2025-11-26 21:46:28" itemprop="dateModified" datetime="2025-11-26T21:46:28+08:00">2025-11-26</time>
     </span>
 
   
@@ -306,11 +308,14 @@
     <div class="post-body" itemprop="articleBody">
           <p>​	给你一个链表，删除链表的倒数第 <code>n</code> 个结点，并且返回链表的头结点，注意时间复杂度要求是O(n)</p>
 <p>我心目中最经典的快慢指针例题</p>
-<p>想要只遍历一遍链表找到倒数第n个节点，双指针的意义就在优化时间复杂度</p>
-<p>大概思路就是  先来一个快指针走n步，随后慢指针同步从头节点出发，等到快指针走出链表为空时，慢指针此时所在的位置就是我们想要找的倒数第n个节点</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">removeNthFromEnd</span>(<span class="params">self, head, n</span>):</span><br><span class="line">    	dummy=ListNode(<span class="built_in">next</span>=head)</span><br><span class="line">        fast=dummy</span><br><span class="line">        slow=dummy</span><br><span class="line">        <span class="comment"># 这里有个坑  我们是要删除倒数第n个节点 而不是找到倒数第n个节点</span></span><br><span class="line">        <span class="comment"># 而我们前面提到删除节点是需要知道前一个节点  这里我们找倒数第n+1个节点就完美解决问题</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n+<span class="number">1</span>):</span><br><span class="line">            fast=fast.<span class="built_in">next</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        	所有有关删除增加节点的链表操作 全部使用虚拟头节点！！！！</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">while</span> fast:   <span class="comment"># 这里是fast 不是fast.next   遍历链表的操作不熟悉！</span></span><br><span class="line">            fast=fast.<span class="built_in">next</span></span><br><span class="line">            slow=slow.<span class="built_in">next</span></span><br><span class="line">       	slow.<span class="built_in">next</span>=slow.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line">        <span class="keyword">return</span> dummy.<span class="built_in">next</span></span><br><span class="line">        </span><br></pre></td></tr></table></figure>
-
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/11/25/%E9%93%BE%E8%A1%A804-%E5%88%A0%E9%99%A4%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E8%8A%82%E7%82%B9/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -372,7 +377,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-11-26 21:15:59" itemprop="dateModified" datetime="2025-11-26T21:15:59+08:00">2025-11-26</time>
+      <time title="Modified: 2025-11-26 21:44:23" itemprop="dateModified" datetime="2025-11-26T21:44:23+08:00">2025-11-26</time>
     </span>
 
   
@@ -388,22 +393,14 @@
           <p>给定一个链表，两两交换其中相邻的节点，并返回交换后的链表</p>
 <p>你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。</p>
 <p><img src="/img/24.png" alt="24.两两交换链表中的节点"></p>
-<p>这里的思路就很巧妙了  ，同样是遍历链表逐个交换，这里是以三个节点为一组进行交换操作</p>
-<p>就比如我们想交换1 ， 2节点。那么我们就需要cur作为1节点的前一个节点，然后完成如下操作</p>
-<p><img src="/img/24.1.png" alt="hahah"></p>
-<p>其实都是一些节点连接操作 但是有以下的细节需要处理</p>
-<ul>
-<li>cur在连接节点2后，节点1的位置就失踪了，因此要把节点1提前存储在中间变量</li>
-<li>在节点2连接节点1之后，节点3的位置也失踪了，同理要提前存储好</li>
-<li>cur在完成节点1和节点2的两两交换之后，cur的位置需要前进到节点1，随后处理同样的操作处理节点3和节点4</li>
-</ul>
-<p><em>为什么cur要到节点1？</em></p>
-<p>因为你完成一轮操作后的节点位置其实是cur -&gt;节点2-&gt;节点1-&gt;节点3-&gt;节点4  </p>
-<p>所以为了处理节点3和节点4  cur是要跳到节点1的位置</p>
-<p><strong>完整代码</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">swapPairs</span>(<span class="params">self, head</span>):</span><br><span class="line">        dummy=ListNode(<span class="built_in">next</span>=head)</span><br><span class="line">        </span><br><span class="line">        cur=dummy</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> cur.<span class="built_in">next</span> <span class="keyword">and</span> cur.<span class="built_in">next</span>.<span class="built_in">next</span>:</span><br><span class="line">            </span><br><span class="line">            <span class="comment">#养成好习惯  连接节点前考虑节点的备份</span></span><br><span class="line">            temp1=cur.<span class="built_in">next</span></span><br><span class="line">            temp2=cur.<span class="built_in">next</span>.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line">            </span><br><span class="line">            cur.<span class="built_in">next</span>=cur.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line">            cur.<span class="built_in">next</span>.<span class="built_in">next</span>=temp1</span><br><span class="line">            temp1.<span class="built_in">next</span>=temp2</span><br><span class="line">            cur=cur.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line">            </span><br><span class="line">         <span class="keyword">return</span> dummy.<span class="built_in">next</span></span><br><span class="line">        </span><br><span class="line">        </span><br></pre></td></tr></table></figure>
-
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/11/25/%E9%93%BE%E8%A1%A803-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -465,7 +462,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-11-26 20:48:30" itemprop="dateModified" datetime="2025-11-26T20:48:30+08:00">2025-11-26</time>
+      <time title="Modified: 2025-11-26 21:45:47" itemprop="dateModified" datetime="2025-11-26T21:45:47+08:00">2025-11-26</time>
     </span>
 
   
@@ -487,27 +484,14 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 删除头节点</span></span><br><span class="line">head=head.<span class="built_in">next</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#删除非头节点</span></span><br><span class="line">current.<span class="built_in">next</span>=current.<span class="built_in">next</span>.<span class="built_in">next</span></span><br></pre></td></tr></table></figure>
 
 <p>其实主要的原因就是  我们链表删除一个节点通常是通过修改上一个节点的指针对象，而头节点本身作为第一个节点，没有上一个节点，因此需要特殊处理</p>
-<p>没有虚拟头节点的链表在删除操作中都需要进行一次头节点的特判</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">public:</span><br><span class="line">    ListNode* removeElements(ListNode* head, <span class="built_in">int</span> val) &#123;</span><br><span class="line">        // 删除头结点</span><br><span class="line">        <span class="keyword">while</span> head <span class="keyword">and</span> head.val==val:</span><br><span class="line">        	head=head.<span class="built_in">next</span></span><br><span class="line">        </span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">       		提醒一下，我一开始错误的直接对链表进行遍历</span></span><br><span class="line"><span class="string">       		然后单独判断头节点，忘记考虑target节点是允许重复出现的</span></span><br><span class="line"><span class="string">       		比如val=3   链表 3-&gt;3-&gt;3-&gt;4</span></span><br><span class="line"><span class="string">       		所以一定要删干净  不能找到一个target删了就溜之大吉</span></span><br><span class="line"><span class="string">       		下面同理</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">        // 删除非头结点</span><br><span class="line">        current=head</span><br><span class="line">        <span class="keyword">while</span> current.<span class="built_in">next</span>:</span><br><span class="line">        	<span class="keyword">if</span> current.<span class="built_in">next</span>.val==val:</span><br><span class="line">        		current.<span class="built_in">next</span>=current.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line">        	<span class="keyword">else</span>:</span><br><span class="line">        		cureent=current.<span class="built_in">next</span></span><br><span class="line">        <span class="keyword">return</span> head</span><br><span class="line">   </span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="设计链表"><a href="#设计链表" class="headerlink" title="设计链表"></a>设计链表</h2><h3 id="函数一：get-index"><a href="#函数一：get-index" class="headerlink" title="函数一：get(index)"></a>函数一：get(index)</h3><p>get(index)：获取链表中第 index 个节点的值。如果索引无效，则返回-1。</p>
-<p>需要特别注意一下的是链表的小标是<strong>从0开始的</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get</span>(<span class="params">self,index</span>):</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 养成特判的好习惯</span></span><br><span class="line">    <span class="keyword">if</span> index &lt;<span class="number">0</span> <span class="keyword">or</span> index &gt;<span class="variable language_">self</span>.size -<span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">    </span><br><span class="line">    current=dummy_head.head</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(index):</span><br><span class="line">        current=current.<span class="built_in">next</span></span><br><span class="line">   	<span class="keyword">return</span> current.val</span><br></pre></td></tr></table></figure>
-
-<h3 id="函数二：addAtIndex-index-val"><a href="#函数二：addAtIndex-index-val" class="headerlink" title="函数二：addAtIndex(index,val)"></a>函数二：addAtIndex(index,val)</h3><p>在链表中的下标为index节点之前添加值为 val 的节点。如果 index 等于链表的长度，则该节点将附加到链表的末尾。如果 index 大于链表长度，则不会插入节点。如果index小于0，则在头部插入节点</p>
-<p>只要我们使用了虚拟头节点  那么插入操作和移除操作都无需特判头节点的操作</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">addAtIndex</span>(<span class="params">index,val</span>):</span><br><span class="line">	<span class="keyword">if</span> index &lt;<span class="number">0</span> <span class="keyword">or</span> index &gt;<span class="variable language_">self</span>.size:   <span class="comment"># 注意本题特意强调了index等于链表长度的情况！</span></span><br><span class="line">        <span class="keyword">return</span> </span><br><span class="line">    </span><br><span class="line">    current=dummy_head</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(index):</span><br><span class="line">        current=current.<span class="built_in">next</span></span><br><span class="line">   	current.<span class="built_in">next</span>=ListNode(val,<span class="built_in">next</span>=current.<span class="built_in">next</span>)</span><br><span class="line">	<span class="variable language_">self</span>.size+=<span class="number">1</span> 			 <span class="comment"># 一定不要忘记 删除增加都需要对size手动修改！</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="函数三-deleteAtIndex-index"><a href="#函数三-deleteAtIndex-index" class="headerlink" title="函数三 :deleteAtIndex(index)"></a>函数三 :deleteAtIndex(index)</h3><p>在链表中删除下标为index的节点</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">deleteAtIndex</span>(<span class="params">index</span>):</span><br><span class="line">    <span class="keyword">if</span> index &lt;<span class="number">0</span> <span class="keyword">or</span> index &gt;<span class="variable language_">self</span>.size-<span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> </span><br><span class="line">    </span><br><span class="line">    current=dummy_head</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(index):</span><br><span class="line">        current=current.<span class="built_in">next</span></span><br><span class="line">    current.<span class="built_in">next</span>=current.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line">    <span class="variable language_">self</span>.size-=<span class="number">1</span></span><br><span class="line">    </span><br></pre></td></tr></table></figure>
-
-
-
-<p>力扣上有原题  想复习链表的基础操作写这一题足矣</p>
-<p>[力扣 链表设计](<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/design-linked-list/description/">707. 设计链表 - 力扣（LeetCode）</a>)</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/11/25/%E9%93%BE%E8%A1%A801-%E5%A2%9E%E5%88%A0%E6%9F%A5%E6%94%B9/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -569,7 +553,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-11-26 20:48:35" itemprop="dateModified" datetime="2025-11-26T20:48:35+08:00">2025-11-26</time>
+      <time title="Modified: 2025-11-26 21:46:01" itemprop="dateModified" datetime="2025-11-26T21:46:01+08:00">2025-11-26</time>
     </span>
 
   
@@ -586,14 +570,14 @@
 <p>例子 ： 1-&gt;2-&gt;3-&gt;4   反转后  4-&gt;3-&gt;2-&gt;1</p>
 <p>这题的重点就是用一个快慢指针，两个指针一前一后将相邻节点改变指向。</p>
 <p>稍微需要注意的事情就是  <strong>翻转过程中指针传递的先后顺序和引入中间变量temp</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reverseList</span>(<span class="params">self, head</span>):</span><br><span class="line">        pre=<span class="literal">None</span>  <span class="comment"># 慢指针</span></span><br><span class="line">        current=head    <span class="comment"># 快指针</span></span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        	代码块也没什么讲的 都是细节的问题</span></span><br><span class="line"><span class="string">        	脑子里快慢指针的操作要清晰</span></span><br><span class="line"><span class="string">        	其实就是cur连pre 然后两个指针走一步 继续连 直到结束</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> current:</span><br><span class="line">            temp=current.<span class="built_in">next</span>  <span class="comment"># 设置中间变量方便cur继续前进</span></span><br><span class="line">            current.<span class="built_in">next</span>=pre</span><br><span class="line">            pre=current</span><br><span class="line">            current=temp</span><br><span class="line">        <span class="keyword">return</span> pre</span><br><span class="line">        </span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="翻转链表——递归解法"><a href="#翻转链表——递归解法" class="headerlink" title="翻转链表——递归解法"></a>翻转链表——递归解法</h2><p>都说递归是算法能力的试金石  好好理解 别偷懒</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reverseList</span>(<span class="params">self, head</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.reverse(head,<span class="literal">None</span>)</span><br><span class="line">   	<span class="keyword">def</span> <span class="title function_">reverse</span>(<span class="params">self,cur,pre</span>):</span><br><span class="line">        <span class="keyword">if</span> cur==<span class="literal">None</span>: </span><br><span class="line">            <span class="keyword">return</span> pre</span><br><span class="line">        temp=cur.<span class="built_in">next</span></span><br><span class="line">        cur.<span class="built_in">next</span>=pre</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.reverse(temp,cur)</span><br><span class="line">        </span><br></pre></td></tr></table></figure>
-
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/11/25/%E9%93%BE%E8%A1%A802-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -647,9 +631,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2025-11-24 16:35:25 / Modified: 19:05:35" itemprop="dateCreated datePublished" datetime="2025-11-24T16:35:25+08:00">2025-11-24</time>
+      <time title="Created: 2025-11-24 16:35:25" itemprop="dateCreated datePublished" datetime="2025-11-24T16:35:25+08:00">2025-11-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-11-26 21:45:10" itemprop="dateModified" datetime="2025-11-26T21:45:10+08:00">2025-11-26</time>
     </span>
 
   
@@ -667,18 +657,14 @@
 
 <p>java中还有一种注释方法名为  <strong>文档注释</strong></p>
 <p>文档注释的定义 ：  由JDK所提供的一种工具  注释内容可以由javadoc所解析  生成一套以网页文件形式体现的程序说明文档。</p>
-<p>其编译的基本形式为</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javadoc -d 目的文件夹名 -xx -yy 目标java文件</span><br></pre></td></tr></table></figure>
-
-<p>其中 xx  yy 为文档注释中的javadoc标签</p>
-<p>以下代码块为实例</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	* <span class="doctag">@author</span> Kmon</span></span><br><span class="line"><span class="comment">	* <span class="doctag">@version</span> 1.0</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">main</span>()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String []args)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 这是一段程序</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>我们可以发现  文档注释和多行注释的区别在于  它是以&#x2F;** 开头  并且标签是由官方规定的 我们不能随便乱取</p>
-<p>并且文档注释通常是放在一个类里面</p>
-<p>常用的文档标签如下</p>
-<p><img src="/img/1.png" alt="标签"></p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/11/24/Java%E5%9F%BA%E7%A1%80-%E6%96%87%E6%A1%A3%E6%B3%A8%E9%87%8A/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -818,9 +804,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2025-11-22 14:02:57 / Modified: 19:04:09" itemprop="dateCreated datePublished" datetime="2025-11-22T14:02:57+08:00">2025-11-22</time>
+      <time title="Created: 2025-11-22 14:02:57" itemprop="dateCreated datePublished" datetime="2025-11-22T14:02:57+08:00">2025-11-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-11-26 21:45:28" itemprop="dateModified" datetime="2025-11-26T21:45:28+08:00">2025-11-26</time>
     </span>
 
   
@@ -836,12 +828,14 @@
           <p>首先，我们要明白为什么obb检测中不连续问题会一直无法得到根本解决。</p>
 <p>在传统的obb表示方法中，由五个变量来确定一个正确的obb框，即（x，y，w，h，θ）</p>
 <p>而obb的不连续性就来源于<strong>角度的周期性</strong>和<strong>边长的交换性</strong></p>
-<h3 id="角度的周期性"><a href="#角度的周期性" class="headerlink" title="角度的周期性"></a>角度的周期性</h3><p>我们定义角度的范围是-90~90°之间，当一个obb框的角度从-90旋转到1°时，我们肉眼来看两个obb框其实是没有任何区别的，也就是说可以认为这两个框是一样的。但是在我们的编码中，θ确产生了很大的变化。角度由-90°到1°之间跨越了一个周期，在损失函数中，神经网络会认为第二个框产生了相当大的误差，从而对第二个框进行剧烈的惩罚，但实际上两个框就是紧挨着的，完全可以认为是正确的框。 </p>
-<h3 id="边长的交换性"><a href="#边长的交换性" class="headerlink" title="边长的交换性"></a>边长的交换性</h3><p><strong>先介绍计算机中为什么需要边长的交换性</strong> </p>
-<p>在我们人类的几何知识中，一个矩形的长和宽是固定不动的。宽就是短的边，高就是长的边。但是在计算机的定义中，我们表示一个矩阵是由宽高和角度来定义的。假定一个细长的矩阵里在水平面上，我们通常就可以用w ，h ，θ&#x3D;0°来对这个矩阵来定义。如果这个矩阵旋转到水平状态，如果依然保持原来的宽高来定义，那么此时的θ就会来到90°。但是在opencv的定义中，你的角度都是有范围的，比如-90<del>90 甚者0</del>90 。为了保证你的θ不超过这个范围，计算机就会自动交换宽高的定义。宽变高，高变宽，θ也就从90降到了0，规避了角度超出范围的风险。</p>
-<p><strong>然后是为什么边长交换性会带来不连续性问题</strong></p>
-<p>​		正是因为这个特性，当一个矩阵在旋转过程中触发了旋转交换性，w h sigema三个数的数值都会发生很大的变化，和角度周期性一致，明明两个矩阵只是旋转了一点点，但是俩者表示的编码却相差极大，如果这个时候依然使用传统的L1loss，那么就会对矩阵产生很大的惩罚，不利于模型的训练。</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/11/22/OBB%E4%B8%AD%E7%9A%84%E8%BF%9E%E7%BB%AD%E6%80%A7%E9%97%AE%E9%A2%98/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 

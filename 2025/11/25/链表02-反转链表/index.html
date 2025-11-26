@@ -19,15 +19,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"zhisheng0506.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="翻转链表——双指针解法给你单链表的头节点 head ，请你反转链表，并返回反转后的链表。 例子 ： 1-&gt;2-&gt;3-&gt;4   反转后  4-&gt;3-&gt;2-&gt;1 这题的重点就是用一个快慢指针，两个指针一前一后将相邻节点改变指向。 稍微需要注意的事情就是  翻转过程中指针传递的先后顺序和引入中间变量temp 123456789101112131415161718192">
+    <meta name="description" content="翻转链表——双指针解法给你单链表的头节点 head ，请你反转链表，并返回反转后的链表。 例子 ： 1-&gt;2-&gt;3-&gt;4   反转后  4-&gt;3-&gt;2-&gt;1 这题的重点就是用一个快慢指针，两个指针一前一后将相邻节点改变指向。 稍微需要注意的事情就是  翻转过程中指针传递的先后顺序和引入中间变量temp">
 <meta property="og:type" content="article">
 <meta property="og:title" content="链表02-反转链表">
 <meta property="og:url" content="https://zhisheng0506.github.io/2025/11/25/%E9%93%BE%E8%A1%A802-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/index.html">
 <meta property="og:site_name" content="Kmon Blogs">
-<meta property="og:description" content="翻转链表——双指针解法给你单链表的头节点 head ，请你反转链表，并返回反转后的链表。 例子 ： 1-&gt;2-&gt;3-&gt;4   反转后  4-&gt;3-&gt;2-&gt;1 这题的重点就是用一个快慢指针，两个指针一前一后将相邻节点改变指向。 稍微需要注意的事情就是  翻转过程中指针传递的先后顺序和引入中间变量temp 123456789101112131415161718192">
+<meta property="og:description" content="翻转链表——双指针解法给你单链表的头节点 head ，请你反转链表，并返回反转后的链表。 例子 ： 1-&gt;2-&gt;3-&gt;4   反转后  4-&gt;3-&gt;2-&gt;1 这题的重点就是用一个快慢指针，两个指针一前一后将相邻节点改变指向。 稍微需要注意的事情就是  翻转过程中指针传递的先后顺序和引入中间变量temp">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-11-25T12:26:08.000Z">
-<meta property="article:modified_time" content="2025-11-26T12:48:35.161Z">
+<meta property="article:modified_time" content="2025-11-26T13:46:01.161Z">
 <meta property="article:author" content="Kmon">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
@@ -221,7 +221,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-11-26 20:48:35" itemprop="dateModified" datetime="2025-11-26T20:48:35+08:00">2025-11-26</time>
+      <time title="Modified: 2025-11-26 21:46:01" itemprop="dateModified" datetime="2025-11-26T21:46:01+08:00">2025-11-26</time>
     </span>
 
   
@@ -237,6 +237,8 @@
 <p>例子 ： 1-&gt;2-&gt;3-&gt;4   反转后  4-&gt;3-&gt;2-&gt;1</p>
 <p>这题的重点就是用一个快慢指针，两个指针一前一后将相邻节点改变指向。</p>
 <p>稍微需要注意的事情就是  <strong>翻转过程中指针传递的先后顺序和引入中间变量temp</strong></p>
+<span id="more"></span>
+
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reverseList</span>(<span class="params">self, head</span>):</span><br><span class="line">        pre=<span class="literal">None</span>  <span class="comment"># 慢指针</span></span><br><span class="line">        current=head    <span class="comment"># 快指针</span></span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        	代码块也没什么讲的 都是细节的问题</span></span><br><span class="line"><span class="string">        	脑子里快慢指针的操作要清晰</span></span><br><span class="line"><span class="string">        	其实就是cur连pre 然后两个指针走一步 继续连 直到结束</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> current:</span><br><span class="line">            temp=current.<span class="built_in">next</span>  <span class="comment"># 设置中间变量方便cur继续前进</span></span><br><span class="line">            current.<span class="built_in">next</span>=pre</span><br><span class="line">            pre=current</span><br><span class="line">            current=temp</span><br><span class="line">        <span class="keyword">return</span> pre</span><br><span class="line">        </span><br></pre></td></tr></table></figure>
 
 

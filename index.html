@@ -140,13 +140,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -186,6 +186,74 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://zhisheng0506.github.io/2025/12/28/Java-ArrayList%E9%9B%86%E5%90%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/photo.jpg">
+      <meta itemprop="name" content="Kmon">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/12/28/Java-ArrayList%E9%9B%86%E5%90%88/" class="post-title-link" itemprop="url">Java-ArrayList集合</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-12-28 13:27:18" itemprop="dateCreated datePublished" datetime="2025-12-28T13:27:18+08:00">2025-12-28</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://zhisheng0506.github.io/2025/12/26/Java-String%E7%B1%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -204,7 +272,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/12/26/Java-String%E7%B1%BB/" class="post-title-link" itemprop="url">Untitled</a>
+          <a href="/2025/12/26/Java-String%E7%B1%BB/" class="post-title-link" itemprop="url">Java-String类</a>
         </h2>
 
         <div class="post-meta-container">
@@ -222,7 +290,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-12-28 13:16:26" itemprop="dateModified" datetime="2025-12-28T13:16:26+08:00">2025-12-28</time>
+      <time title="Modified: 2025-12-28 13:26:46" itemprop="dateModified" datetime="2025-12-28T13:26:46+08:00">2025-12-28</time>
     </span>
 
   
@@ -235,68 +303,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <hr>
-<p>title: Java-String类<br>date: 2025-12-26 15:20:03<br>tags: [Java,String]</p>
-<hr>
-<h2 id="String-的构造方法"><a href="#String-的构造方法" class="headerlink" title="String 的构造方法"></a>String 的构造方法</h2><p>之前在c++里面 会让我产生一种String是和int double同样等位的类型  但是实际上在Java中  String是一种引用型数据类型 也就是说 String 是一种类   是可以创造对象  调用构造函数的 </p>
-<p>String 的创建对象通常是直接给一个字符串即可  非常方便  但是也有不同的构造函数 </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String []arg)</span>&#123;</span><br><span class="line">        <span class="comment">// 直接赋值</span></span><br><span class="line">        String s=<span class="string">&quot;这是一个字符串&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创造对象后初始化</span></span><br><span class="line">        <span class="comment">// 但是其实感觉多此一举  没必要这样初始化</span></span><br><span class="line">        String s=<span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;这是一个字符串&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment">//传递一个字符数组 讲字符数组转换为字符串</span></span><br><span class="line">        <span class="comment">//此方法有很大运用  因为字符串是不能改变值的</span></span><br><span class="line">        <span class="comment">//因此可以通过先修改字符数组后  再转换成字符串</span></span><br><span class="line">        <span class="type">char</span> [] chs=&#123;<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>&#125;</span><br><span class="line">        String s=<span class="keyword">new</span> <span class="title class_">String</span>(chs)</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//传递一个字节数组</span></span><br><span class="line">        <span class="comment">// 文件 图片传输都是以字节流的形式  因此这种方法很重要</span></span><br><span class="line">        <span class="type">byte</span> [] byt=&#123;<span class="number">97</span>,<span class="number">98</span>,<span class="number">99</span>&#125;</span><br><span class="line">        String s=<span class="keyword">new</span> <span class="title class_">String</span>(byt)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
-
-<h2 id="字符串常量池"><a href="#字符串常量池" class="headerlink" title="字符串常量池"></a>字符串常量池</h2><p>字符串常量池中内的字符串一定是直接赋值的字符串   JDK7后的字符串常量池在堆内存中</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String s1=<span class="string">&quot;abc&quot;</span></span><br><span class="line">String s2=<span class="string">&quot;abc&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>当双引号直接赋值的时候  系统会检查字符串池中是否有“abc”  如果有直接吧地址给你  没有则新建<br>所以s1 和 s2 两个字符串其实指向的是同一个位置的abc</p>
-<p>但是如果s1 和 s2不是由引号直接赋值  则不会出现这种情况 比如你分别new String(abc)</p>
-<h2 id="字符串的比较"><a href="#字符串的比较" class="headerlink" title="字符串的比较"></a>字符串的比较</h2><p> 为什么第三段代码的结果是false？</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">String a=<span class="string">&quot;123&quot;</span></span><br><span class="line">String b=<span class="string">&quot;123&quot;</span></span><br><span class="line">a==b  <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line">String a=<span class="string">&quot;123&quot;</span></span><br><span class="line">String b=<span class="string">&quot;345&quot;</span></span><br><span class="line">a==b   <span class="comment">//false</span></span><br><span class="line"></span><br><span class="line">String a=<span class="string">&#x27;123&#x27;</span></span><br><span class="line">String b=<span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;123&quot;</span>)</span><br><span class="line">a==b   <span class="comment">// false    为什么？</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>&#x3D;&#x3D;号比较比的到底是什么？</strong></p>
-<ul>
-<li>对于基本数据类型  比较的是数据值</li>
-<li>对于引用数据类型  比较的是地址值</li>
-</ul>
-<p>对于只想比较字符串内容  我们是要用equals方法</p>
-<p>所以 对于键盘输入的字符串  你肯定不能用&#x3D;&#x3D;去比较    输入的字符串本质还是new 一个新的String </p>
-<p>假想我们做用户登录见面     用户输入账户名  你要是用&#x3D;&#x3D;来比较正确性  怎么都不可能true</p>
-<h2 id="遍历字符串"><a href="#遍历字符串" class="headerlink" title="遍历字符串"></a>遍历字符串</h2><p>首先是一个很重要的函数   java里不像c++ 可以直接s[0]来访问字符串里面的字符</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String s=<span class="string">&quot;123&quot;</span>;</span><br><span class="line">s.charAt(<span class="number">0</span>)  <span class="comment">//索引为0的字符</span></span><br></pre></td></tr></table></figure>
-
-<p>而charAt方法就可以实现这一功能</p>
-<h2 id="截取字符串"><a href="#截取字符串" class="headerlink" title="截取字符串"></a>截取字符串</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String <span class="title function_">substring</span><span class="params">(<span class="type">int</span> begindex,<span class="type">int</span> endindex)</span></span><br><span class="line"><span class="comment">//包头不包尾巴  也就是我们常说的左闭右开区间  并且返回的是新字符串</span></span><br><span class="line">String <span class="title function_">substring</span><span class="params">(<span class="type">int</span> begindex)</span></span><br><span class="line"><span class="comment">//重载方法  从begindex 到末尾的字符串</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="字符串替换"><a href="#字符串替换" class="headerlink" title="字符串替换"></a>字符串替换</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String <span class="title function_">replace</span><span class="params">(旧值,新值)</span> 替换</span><br><span class="line"><span class="comment">// 只有返回值才是替换后的结果  如果不存在  就不替换</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="StringBuilder"><a href="#StringBuilder" class="headerlink" title="StringBuilder"></a>StringBuilder</h2><p>StringBuilder可以看作一个容器  创建之后的内容是可以发生改变的</p>
-<p>作用是为了提高字符串的操作效率</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String s1=<span class="string">&quot;aa&quot;</span></span><br><span class="line">String s2=<span class="string">&quot;bb&quot;</span></span><br><span class="line">String s3=<span class="string">&quot;cc&quot;</span></span><br><span class="line">String s4=<span class="string">&quot;dd&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>上面的字符串拼接  如果采用<code>s1+s2+s3+S4</code>的形式  由于String是不能改变内容的 所以s1+s2会产生新的字符串 后面依次类推  所以相加的效率就很低  产生很多没有必要的缓冲字符串</p>
-<p><strong>而StringBulider从始至终只有初始的对象 没有产生新的内存空间  节约时间和资源</strong></p>
-<h3 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="title function_">StringBulider</span><span class="params">()</span>   <span class="comment">//空参构造</span></span><br><span class="line"><span class="keyword">public</span> <span class="title function_">StringBulider</span><span class="params">(String s)</span> <span class="comment">// 实参构造</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> StringBulider <span class="title function_">append</span><span class="params">(任意类型)</span>  <span class="comment">//添加数据 并返回对象本身</span></span><br><span class="line"><span class="keyword">public</span> StringBulider <span class="title function_">reverse</span><span class="params">()</span>			<span class="comment">// 反转容器内容</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">length</span><span class="params">()</span>					<span class="comment">//返回长度</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span>			<span class="comment">// 把StringBulider 转换成 String类</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>Java的String真的很幽默   区分出String 和StringBulider两类   两套函数还不能公用  拼接翻转操作一定要用StringBulider  最后再转换成String 去使用replace charAt subString等方法   真麻烦</strong></p>
-<p>使用<strong>StringBulider</strong>的两个场景：</p>
-<ul>
-<li>字符串的拼接 快速高效</li>
-<li>字符串的反转</li>
-</ul>
-<h2 id="StringJoiner"><a href="#StringJoiner" class="headerlink" title="StringJoiner"></a>StringJoiner</h2><p>StringJoiner 和StringBulider 一样 都可以看成是一个容器</p>
-<p>作用是为了提高字符串的操作效率</p>
-<h3 id="构造方法-1"><a href="#构造方法-1" class="headerlink" title="构造方法"></a>构造方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="title function_">StringJoiner</span><span class="params">(间隔符号)</span></span><br><span class="line"><span class="comment">// 创建 一个对象  指定拼接时的间隔符号</span></span><br><span class="line"><span class="keyword">public</span> <span class="title function_">StringJoiner</span><span class="params">(间隔符号,开始符号,结束符号)</span></span><br><span class="line"><span class="comment">// 指定开始和结束符号</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="常用方法-1"><a href="#常用方法-1" class="headerlink" title="常用方法"></a>常用方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> StringJonier <span class="title function_">add</span><span class="params">(添加的内容)</span></span><br><span class="line"><span class="comment">//添加数据 并返回对象本身  不同于StringBulider的append</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">length</span><span class="params">()</span>  </span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span></span><br></pre></td></tr></table></figure>
+          <h2 id="String-的构造方法"><a href="#String-的构造方法" class="headerlink" title="String 的构造方法"></a>String 的构造方法</h2><p>之前在c++里面 会让我产生一种String是和int double同样等位的类型  但是实际上在Java中  String是一种引用型数据类型 也就是说 String 是一种类   是可以创造对象  调用构造函数的 </p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/12/26/Java-String%E7%B1%BB/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -934,85 +949,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/12/05/%E6%95%B0%E7%BB%8402-%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://zhisheng0506.github.io/2025/11/27/%E6%95%B0%E7%BB%8401-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/photo.jpg">
-      <meta itemprop="name" content="Kmon">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kmon Blogs">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | Kmon Blogs">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/11/27/%E6%95%B0%E7%BB%8401-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" class="post-title-link" itemprop="url">数组01-二分查找</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2025-11-27 21:15:09 / Modified: 22:16:22" itemprop="dateCreated datePublished" datetime="2025-11-27T21:15:09+08:00">2025-11-27</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>二分作为大一就没有搞懂的硬骨头,模糊的主要原因是区分不了<strong>二分查找</strong>和<strong>二分答案</strong></p>
-<p>而且网上的二分答案模板实在是太多太多了  自己刷的题目数量也没跟上,导致模板总是忘</p>
-<p>借着这个博客,彻底搞懂二分!!😡</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/11/27/%E6%95%B0%E7%BB%8401-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>

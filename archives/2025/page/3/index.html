@@ -19,27 +19,22 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"zhisheng0506.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="其实这里的内容也不是很多   这篇博客也就是为了温习this的运用 以前都学过">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Java-就近原则和this关键字">
-<meta property="og:url" content="https://zhisheng0506.github.io/2025/12/24/Java-%E5%B0%B1%E8%BF%91%E5%8E%9F%E5%88%99%E5%92%8Cthis%E5%85%B3%E9%94%AE%E5%AD%97/index.html">
+    <meta property="og:type" content="website">
+<meta property="og:title" content="Kmon Blogs">
+<meta property="og:url" content="https://zhisheng0506.github.io/archives/2025/page/3/index.html">
 <meta property="og:site_name" content="Kmon Blogs">
-<meta property="og:description" content="其实这里的内容也不是很多   这篇博客也就是为了温习this的运用 以前都学过">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-12-24T14:50:39.000Z">
-<meta property="article:modified_time" content="2025-12-24T15:00:24.816Z">
 <meta property="article:author" content="Kmon">
-<meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://zhisheng0506.github.io/2025/12/24/Java-%E5%B0%B1%E8%BF%91%E5%8E%9F%E5%88%99%E5%92%8Cthis%E5%85%B3%E9%94%AE%E5%AD%97/">
+<link rel="canonical" href="https://zhisheng0506.github.io/archives/2025/page/3/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://zhisheng0506.github.io/2025/12/24/Java-%E5%B0%B1%E8%BF%91%E5%8E%9F%E5%88%99%E5%92%8Cthis%E5%85%B3%E9%94%AE%E5%AD%97/","path":"2025/12/24/Java-就近原则和this关键字/","title":"Java-就近原则和this关键字"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"en","comments":"","permalink":"","path":"archives/2025/page/3/index.html","title":""}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Java-就近原则和this关键字 | Kmon Blogs</title>
+<title>Archive | Kmon Blogs</title>
   
 
 
@@ -89,7 +84,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <p class="site-title">Kmon Blogs</p>
+      <h1 class="site-title">Kmon Blogs</h1>
       <i class="logo-line"></i>
     </a>
   </div>
@@ -115,7 +110,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+    <div class="sidebar-inner sidebar-overview-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -128,7 +123,6 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#tips%EF%BC%9Athis%E5%85%B3%E9%94%AE%E5%AD%97%E5%8F%AF%E4%BB%A5%E7%94%A8%E6%9D%A5%E5%8C%BA%E5%88%86%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F%E5%92%8C%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F"><span class="nav-number">1.</span> <span class="nav-text">tips：this关键字可以用来区分成员变量和局部变量</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -182,107 +176,52 @@
 
     </div>
 
-    <div class="main-inner post posts-expand">
+    <div class="main-inner archive posts-collapse">
 
 
   
-
-
-<div class="post-block">
   
   
+  <div class="post-block">
+    <div class="post-content">
+      <div class="collection-title">
+        <span class="collection-header">Um..! 21 posts in total. Keep on posting.</span>
+      </div>
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://zhisheng0506.github.io/2025/12/24/Java-%E5%B0%B1%E8%BF%91%E5%8E%9F%E5%88%99%E5%92%8Cthis%E5%85%B3%E9%94%AE%E5%AD%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/photo.jpg">
-      <meta itemprop="name" content="Kmon">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kmon Blogs">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Java-就近原则和this关键字 | Kmon Blogs">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          Java-就近原则和this关键字
-        </h1>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
       
-
-      <time title="Created: 2025-12-24 22:50:39 / Modified: 23:00:24" itemprop="dateCreated datePublished" datetime="2025-12-24T22:50:39+08:00">2025-12-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody"><p>其实这里的内容也不是很多   这篇博客也就是为了温习this的运用 以前都学过</p>
-<span id="more"></span>
-
-<p>一个类中  在方法外部的变量我们称之为成员变量  方法内部的变量我们称之为局部变量</p>
-<p>那么就会出现这样的问题  如果成员变量和局部变量名相同  那么编译器优先调用谁呢？</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GirlFriend</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> age;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">method</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">int</span> age=<span class="number">10</span>;</span><br><span class="line">        System.out.print(age) # 注意 此时调用的是局部变量</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上述代码的输出结果为10      这就是我们所说的<strong>就近原则</strong></p>
-<p>局部变量靠着输出代码更近  所以优先调用局部变量</p>
-<p>但是如果我们就是想用成员变量呢  这个时候就要考虑使用<strong>this关键字</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">GirlFriend</span> &#123;</span><br><span class="line">   	String name;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">SetName</span><span class="params">(String name)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.name=name;    # <span class="built_in">this</span>关键字的常用情景   在类方法中初始化 </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="tips：this关键字可以用来区分成员变量和局部变量"><a href="#tips：this关键字可以用来区分成员变量和局部变量" class="headerlink" title="tips：this关键字可以用来区分成员变量和局部变量"></a>tips：this关键字可以用来区分成员变量和局部变量</h3>
+    <div class="collection-year">
+      <span class="collection-header">2025<span class="collection-year-count">21</span></span>
     </div>
 
-    
-    
-    
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2025-11-21T16:23:57+08:00"
+              content="2025-11-21">
+          11-21
+        </time>
+      </div>
 
-    <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/Java/" rel="tag"># Java</a>
-          </div>
+      <div class="post-title">
+          <a class="post-title-link" href="/2025/11/21/%E7%BD%91%E7%AB%99%E7%9A%84%E7%AC%AC%E4%B8%80%E5%A4%A9%EF%BC%81/" itemprop="url">
+            <span itemprop="name">网站的第一天 初来乍到 请多指教！</span>
+          </a>
+      </div>
 
-        
-
-          <div class="post-nav">
-            <div class="post-nav-item">
-                <a href="/2025/12/20/%E4%BA%8C%E5%8F%89%E6%A0%91-%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86/" rel="prev" title="二叉树-层序遍历">
-                  <i class="fa fa-angle-left"></i> 二叉树-层序遍历
-                </a>
-            </div>
-            <div class="post-nav-item">
-                <a href="/2025/12/26/Java-String%E7%B1%BB/" rel="next" title="">
-                   <i class="fa fa-angle-right"></i>
-                </a>
-            </div>
-          </div>
-    </footer>
+      
+    </header>
   </article>
-</div>
 
 
-
-
-
+    </div>
+  </div>
+  
+  
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/archives/2025/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/2025/">1</a><a class="page-number" href="/archives/2025/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
 
 </div>
   </main>

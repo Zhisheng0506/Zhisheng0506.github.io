@@ -27,7 +27,7 @@
 <meta property="og:description" content="题干： 返回二叉树的前中后序结果  同时写出递归和非递归的写法 递归的写法还是很好想的  简单而且容易理解但是用栈来实现二叉树的非递归遍历写法就不是那么好理解特别是中序遍历">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-12-19T12:36:14.000Z">
-<meta property="article:modified_time" content="2025-12-19T14:03:50.425Z">
+<meta property="article:modified_time" content="2025-12-30T08:16:02.296Z">
 <meta property="article:author" content="Kmon">
 <meta property="article:tag" content="栈，二叉树">
 <meta name="twitter:card" content="summary">
@@ -146,7 +146,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -221,9 +221,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2025-12-19 20:36:14 / Modified: 22:03:50" itemprop="dateCreated datePublished" datetime="2025-12-19T20:36:14+08:00">2025-12-19</time>
+      <time title="Created: 2025-12-19 20:36:14" itemprop="dateCreated datePublished" datetime="2025-12-19T20:36:14+08:00">2025-12-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-12-30 16:16:02" itemprop="dateModified" datetime="2025-12-30T16:16:02+08:00">2025-12-30</time>
     </span>
 
   
@@ -241,7 +247,7 @@
 
 <h3 id="先讨论递归的写法"><a href="#先讨论递归的写法" class="headerlink" title="先讨论递归的写法"></a>先讨论递归的写法</h3><hr>
 <p>前中后序的递归的写法不同点就是交换那三条语句的顺序 很简单</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, left=None, right=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.left = left</span></span><br><span class="line"><span class="comment">#         self.right = right</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">preorderTraversal</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        res=[]</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">dfs</span>(<span class="params">node</span>):</span><br><span class="line">            <span class="keyword">if</span> node == <span class="literal">None</span>:</span><br><span class="line">                <span class="keyword">return</span> </span><br><span class="line">           	res.append(node.val)  <span class="comment"># 中</span></span><br><span class="line">        dfs(node.left)        <span class="comment"># 左</span></span><br><span class="line">        dfs(node,right)       <span class="comment"># 右</span></span><br><span class="line">        dfs(root)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, left=None, right=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.left = left</span></span><br><span class="line"><span class="comment">#         self.right = right</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">preorderTraversal</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        res=[]</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">dfs</span>(<span class="params">node</span>):</span><br><span class="line">            <span class="keyword">if</span> node == <span class="literal">None</span>:</span><br><span class="line">                <span class="keyword">return</span> </span><br><span class="line">           	res.append(node.val)  <span class="comment"># 中</span></span><br><span class="line">       		dfs(node.left)        <span class="comment"># 左</span></span><br><span class="line">        	dfs(node,right)       <span class="comment"># 右</span></span><br><span class="line">        dfs(root)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
 
 
 

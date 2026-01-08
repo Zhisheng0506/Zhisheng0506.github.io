@@ -27,7 +27,7 @@
 <meta property="og:description" content="在以前   对多态的理解就只停留在 重载 和 重写    其实多态还有很多方面的知识我们先举一个多态的最典型的运用 1234&#x2F;&#x2F; 假设我们有一个父类person   两个子类student teacherPerson a&#x3D;new Student();Person b&#x3D;new Teacher();  上面两个对象的创建都是正确的    但是a 和 b  和正常的子类又有一些不同 多态有什么典型的运用">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-01-02T15:38:59.000Z">
-<meta property="article:modified_time" content="2026-01-02T16:37:04.805Z">
+<meta property="article:modified_time" content="2026-01-08T06:44:11.007Z">
 <meta property="article:author" content="Kmon">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
@@ -146,7 +146,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -229,7 +229,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-01-03 00:37:04" itemprop="dateModified" datetime="2026-01-03T00:37:04+08:00">2026-01-03</time>
+      <time title="Modified: 2026-01-08 14:44:11" itemprop="dateModified" datetime="2026-01-08T14:44:11+08:00">2026-01-08</time>
     </span>
 
   
@@ -251,7 +251,7 @@
 <p>那么我们的注册函数传入的对象参数填什么呢？  Stuent？ Teacher？  Admin？  这个时候没有多态的话，我们就要单独创建出三个注册函数  分别传三个对象   但是有了多态就可以用父类作为参数</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="title function_">register</span><span class="params">(Person p)</span>&#123;</span><br><span class="line">    <span class="comment">//注册函数</span></span><br><span class="line">    <span class="comment">//此时调用函数时  参数无论时学生老师还是管理员都可以成功调用</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
+<span id="more"></span>
 
 <h3 id="什么是多态？"><a href="#什么是多态？" class="headerlink" title="什么是多态？"></a>什么是多态？</h3><hr>
 <p>同类型的对象 表现出的不同形态</p>
@@ -321,6 +321,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2026/01/03/Java-%E5%8C%85%E5%92%8Cfinal/" rel="next" title="Java-包和final">
+                  Java-包和final <i class="fa fa-angle-right"></i>
+                </a>
             </div>
           </div>
     </footer>

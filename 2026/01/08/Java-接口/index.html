@@ -19,28 +19,27 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"zhisheng0506.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="题意：给你一个按 非递减顺序 排序的整数数组 nums，返回 每个数字的平方 组成的新数组，要求也按 非递减顺序 排序 暴力解法是把数组的每个元素取平方后，用各种排序算法来排序  时间复杂度为O(nlogn)    双指针可以直接把时间复杂度降到O(n)">
+    <meta name="description" content="接口的定义和使用  接口的用关键字interface来定义 接口和类之间是实现而非继承   通过implement关键字来表示 接口的子类   要么重写接口中的所有抽象方法  要么是抽象类  注意事项 接口和类的实现关系  可以单实现 也可以多实现   一个类实现多个接口 子类在继承父类的同时也可以实现多个接口">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数组03-有序数组的平方">
-<meta property="og:url" content="https://zhisheng0506.github.io/2025/12/05/%E6%95%B0%E7%BB%8403-%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E5%B9%B3%E6%96%B9/index.html">
+<meta property="og:title" content="Java-接口">
+<meta property="og:url" content="https://zhisheng0506.github.io/2026/01/08/Java-%E6%8E%A5%E5%8F%A3/index.html">
 <meta property="og:site_name" content="Kmon Blogs">
-<meta property="og:description" content="题意：给你一个按 非递减顺序 排序的整数数组 nums，返回 每个数字的平方 组成的新数组，要求也按 非递减顺序 排序 暴力解法是把数组的每个元素取平方后，用各种排序算法来排序  时间复杂度为O(nlogn)    双指针可以直接把时间复杂度降到O(n)">
+<meta property="og:description" content="接口的定义和使用  接口的用关键字interface来定义 接口和类之间是实现而非继承   通过implement关键字来表示 接口的子类   要么重写接口中的所有抽象方法  要么是抽象类  注意事项 接口和类的实现关系  可以单实现 也可以多实现   一个类实现多个接口 子类在继承父类的同时也可以实现多个接口">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-12-05T12:57:09.000Z">
-<meta property="article:modified_time" content="2025-12-12T13:15:37.085Z">
+<meta property="article:published_time" content="2026-01-08T08:04:24.000Z">
+<meta property="article:modified_time" content="2026-01-08T09:14:05.639Z">
 <meta property="article:author" content="Kmon">
-<meta property="article:tag" content="双指针">
-<meta property="article:tag" content="数组">
+<meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://zhisheng0506.github.io/2025/12/05/%E6%95%B0%E7%BB%8403-%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E5%B9%B3%E6%96%B9/">
+<link rel="canonical" href="https://zhisheng0506.github.io/2026/01/08/Java-%E6%8E%A5%E5%8F%A3/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://zhisheng0506.github.io/2025/12/05/%E6%95%B0%E7%BB%8403-%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E5%B9%B3%E6%96%B9/","path":"2025/12/05/数组03-有序数组的平方/","title":"数组03-有序数组的平方"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://zhisheng0506.github.io/2026/01/08/Java-%E6%8E%A5%E5%8F%A3/","path":"2026/01/08/Java-接口/","title":"Java-接口"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>数组03-有序数组的平方 | Kmon Blogs</title>
+<title>Java-接口 | Kmon Blogs</title>
   
 
 
@@ -129,7 +128,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B8%E6%AF%94%E8%BF%99%E9%81%93%E9%A2%98%E6%9C%AC%E8%BA%AB%E7%9A%84%E7%AE%97%E6%B3%95-%E6%88%91%E8%A7%89%E5%BE%97%E8%BF%98%E4%B8%80%E4%B8%AA%E6%B3%A8%E6%84%8F%E7%9A%84%E6%98%AFpython%E5%88%9B%E5%BB%BA%E5%AE%9A%E9%95%BF%E6%95%B0%E7%BB%84%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">相比这道题本身的算法  我觉得还一个注意的是python创建定长数组的方法</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%AE%9A%E4%B9%89%E5%92%8C%E4%BD%BF%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">接口的定义和使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">1.1.</span> <span class="nav-text">注意事项</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E4%B8%AD%E7%9A%84%E6%88%90%E5%91%98%E7%89%B9%E7%82%B9"><span class="nav-number">2.</span> <span class="nav-text">接口中的成员特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E5%92%8C%E7%B1%BB%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">3.</span> <span class="nav-text">接口和类之间的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JDK8%E4%BB%A5%E5%90%8E%E6%96%B0%E5%A2%9E%E7%9A%84%E9%BB%98%E8%AE%A4%E6%96%B9%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">JDK8以后新增的默认方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9-1"><span class="nav-number">4.1.</span> <span class="nav-text">注意事项</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JDK8%E5%90%8E%E6%96%B0%E5%A2%9E%E7%9A%84%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95"><span class="nav-number">5.</span> <span class="nav-text">JDK8后新增的静态方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9-2"><span class="nav-number">5.1.</span> <span class="nav-text">注意事项</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JDK9%E4%BB%A5%E5%90%8E%E7%9A%84%E6%8E%A5%E5%8F%A3%E4%B8%AD%E7%9A%84%E7%A7%81%E6%9C%89%E6%96%B9%E6%B3%95"><span class="nav-number">6.</span> <span class="nav-text">JDK9以后的接口中的私有方法</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -194,7 +193,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://zhisheng0506.github.io/2025/12/05/%E6%95%B0%E7%BB%8403-%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E5%B9%B3%E6%96%B9/">
+    <link itemprop="mainEntityOfPage" href="https://zhisheng0506.github.io/2026/01/08/Java-%E6%8E%A5%E5%8F%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/photo.jpg">
@@ -207,12 +206,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="数组03-有序数组的平方 | Kmon Blogs">
+      <meta itemprop="name" content="Java-接口 | Kmon Blogs">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          数组03-有序数组的平方
+          Java-接口
         </h1>
 
         <div class="post-meta-container">
@@ -222,15 +221,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
+      
 
-      <time title="Created: 2025-12-05 20:57:09" itemprop="dateCreated datePublished" datetime="2025-12-05T20:57:09+08:00">2025-12-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-12-12 21:15:37" itemprop="dateModified" datetime="2025-12-12T21:15:37+08:00">2025-12-12</time>
+      <time title="Created: 2026-01-08 16:04:24 / Modified: 17:14:05" itemprop="dateCreated datePublished" datetime="2026-01-08T16:04:24+08:00">2026-01-08</time>
     </span>
 
   
@@ -242,15 +235,60 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>题意：给你一个按 非递减顺序 排序的整数数组 nums，返回 每个数字的平方 组成的新数组，要求也按 非递减顺序 排序</p>
-<p>暴力解法是把数组的每个元素取平方后，用各种排序算法来排序  时间复杂度为O(nlogn)    双指针可以直接把时间复杂度降到O(n)</p>
+    <div class="post-body" itemprop="articleBody"><h3 id="接口的定义和使用"><a href="#接口的定义和使用" class="headerlink" title="接口的定义和使用"></a>接口的定义和使用</h3><hr>
+<ul>
+<li>接口的用关键字<strong>interface</strong>来定义</li>
+<li>接口和类之间是实现而非继承   通过implement关键字来表示</li>
+<li>接口的子类   要么重写接口中的所有抽象方法  要么是抽象类</li>
+</ul>
+<h4 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h4><ul>
+<li>接口和类的实现关系  可以单实现 也可以多实现   一个类实现多个接口</li>
+<li>子类在继承父类的同时也可以实现多个接口</li>
+</ul>
 <span id="more"></span>
 
-<p>简单点说就是两个指针 一头一尾  同时向中间靠拢  逐个比较元素的大小   然后放到新的数组里面去  因为平方的特殊性  最大值一定是出现在数组的两端的</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">sortedSquares</span>(<span class="params">self, nums</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: List[int]</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        slow=<span class="number">0</span></span><br><span class="line">        fast=<span class="built_in">len</span>(nums)-<span class="number">1</span></span><br><span class="line">        ans=[<span class="built_in">float</span>(<span class="string">&#x27;inf&#x27;</span>)]*<span class="built_in">len</span>(nums)</span><br><span class="line">        k=<span class="built_in">len</span>(nums)-<span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> slow != fast:</span><br><span class="line">            <span class="keyword">if</span> nums[slow]*nums[slow]&lt;nums[fast]*nums[fast]:</span><br><span class="line">                ans[k]=nums[fast]*nums[fast]</span><br><span class="line">                fast-=<span class="number">1</span></span><br><span class="line">                k-=<span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                ans[k]=nums[slow]*nums[slow]</span><br><span class="line">                slow+=<span class="number">1</span></span><br><span class="line">                k-=<span class="number">1</span></span><br><span class="line">        ans[<span class="number">0</span>]=nums[slow]*nums[slow]</span><br><span class="line">        <span class="keyword">return</span> ans</span><br><span class="line">        </span><br></pre></td></tr></table></figure>
+<h3 id="接口中的成员特点"><a href="#接口中的成员特点" class="headerlink" title="接口中的成员特点"></a>接口中的成员特点</h3><hr>
+<ul>
+<li>成员变量   只能是常量   默认用public static  final修饰</li>
+<li>构造方法    接口没有构造方法</li>
+<li>成员方法   ： JDK7之前  接口中的只能定义抽象方法  交给子类去重写</li>
+</ul>
+<h3 id="接口和类之间的关系"><a href="#接口和类之间的关系" class="headerlink" title="接口和类之间的关系"></a>接口和类之间的关系</h3><hr>
+<ul>
+<li>类与类之间的关系   继承关系 只能单继承  不能多继承  但可以多层继承</li>
+<li>类和接口之间的关系  实现关系 可以单实现  也可以多实现 </li>
+<li>接口和接口之间的关系   可以单继承 也可以多继承</li>
+</ul>
+<p>对于最后一点  需要注意的就是    我们是实现最后一个子接口的时候  就需要把上面所有接口的抽象方法全部实现才行</p>
+<h3 id="JDK8以后新增的默认方法"><a href="#JDK8以后新增的默认方法" class="headerlink" title="JDK8以后新增的默认方法"></a>JDK8以后新增的默认方法</h3><hr>
+<ul>
+<li><p>允许在接口中定义默认方法  需要使用关键字default修饰</p>
+<p>用于解决接口升级中的问题</p>
+</li>
+<li><p>接口中默认方法的定义格式</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">default</span>  <span class="keyword">void</span> <span class="title function_">fun</span><span class="params">()</span>&#123;&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="注意事项-1"><a href="#注意事项-1" class="headerlink" title="注意事项"></a>注意事项</h4><hr>
+<ul>
+<li>默认方法不是抽象方法  所以不强制重写 如果被重写 重写是去掉default关键字</li>
+<li>public 可以省略  default不能省略</li>
+<li>如果实现了多个接口  多个接口中存在相同名字的默认方法 子类就必须进行重写</li>
+</ul>
+<p>所以默认方法就给实现接口的类提供了选择  之前接口中的抽象类你不实现就报错  现在默认方法你不实现也不会报错</p>
+<h3 id="JDK8后新增的静态方法"><a href="#JDK8后新增的静态方法" class="headerlink" title="JDK8后新增的静态方法"></a>JDK8后新增的静态方法</h3><hr>
+<ul>
+<li>允许在接口中定义静态方法  需要用static修饰</li>
+<li>接口中静态方法格式  （略）</li>
+</ul>
+<h4 id="注意事项-2"><a href="#注意事项-2" class="headerlink" title="注意事项"></a>注意事项</h4><ul>
+<li>静态方法只能通过接口名来实现   不能通过实现类名或者对象名来调用</li>
+<li>public 可以省略  static关键字不可以省略</li>
+</ul>
+<h3 id="JDK9以后的接口中的私有方法"><a href="#JDK9以后的接口中的私有方法" class="headerlink" title="JDK9以后的接口中的私有方法"></a>JDK9以后的接口中的私有方法</h3><hr>
+<p>定义的格式是</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span>&#123;&#125;    <span class="comment">//这种格式是为了接口中的默认方法去调用的</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span>&#123;&#125;  <span class="comment">// 这种格式是为了接口中静态方法去调用的</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="相比这道题本身的算法-我觉得还一个注意的是python创建定长数组的方法"><a href="#相比这道题本身的算法-我觉得还一个注意的是python创建定长数组的方法" class="headerlink" title="相比这道题本身的算法  我觉得还一个注意的是python创建定长数组的方法"></a>相比这道题本身的算法  我觉得还一个注意的是python创建定长数组的方法</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nums=[<span class="built_in">float</span>(<span class="string">&#x27;inf&#x27;</span>)]*<span class="number">100</span>  <span class="comment"># 创建一个长度为100  元素都是无穷大的数组</span></span><br></pre></td></tr></table></figure>
-
+<p>说白了就是让接口中也有私有方法  不允许其他人来调用 只允许接口类中自己调用</p>
 
     </div>
 
@@ -260,21 +298,20 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E6%95%B0%E7%BB%84/" rel="tag"># 数组</a>
-              <a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" rel="tag"># 双指针</a>
+              <a href="/tags/Java/" rel="tag"># Java</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2025/12/05/%E6%95%B0%E7%BB%8402-%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/" rel="prev" title="数组02-移除元素">
-                  <i class="fa fa-angle-left"></i> 数组02-移除元素
+                <a href="/2026/01/08/Java-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8A%BD%E8%B1%A1%E6%96%B9%E6%B3%95/" rel="prev" title="Java-抽象类和抽象方法">
+                  <i class="fa fa-angle-left"></i> Java-抽象类和抽象方法
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2025/12/12/%E6%95%B0%E7%BB%8404-%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/" rel="next" title="数组04-长度最小的子数组">
-                  数组04-长度最小的子数组 <i class="fa fa-angle-right"></i>
+                <a href="/2026/01/08/Java-%E5%86%85%E9%83%A8%E7%B1%BB/" rel="next" title="Java-内部类">
+                  Java-内部类 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>

@@ -27,7 +27,7 @@
 <meta property="og:description" content="继承作为java的特色之一  Object就是java中每一个类的父亲  Object类的常用方法 记住  object内的方法通常是不可用的  都是需要我们在自定义类中进行重写  毕竟是所有类的父亲   里面的方法肯定不会特别有实际作用 1.toString() 方法 Object父类中toString 默认是打印对象的地址  但是这个通常无法反映对象的属性特征 因此我们在子类中重写toStri">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-01-10T14:53:19.000Z">
-<meta property="article:modified_time" content="2026-01-10T15:12:39.104Z">
+<meta property="article:modified_time" content="2026-01-10T15:22:51.407Z">
 <meta property="article:author" content="Kmon">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
@@ -128,7 +128,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Object%E7%B1%BB%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">Object类的常用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-toString-%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">1.toString() 方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-equals-%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">2.equals()方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-clone"><span class="nav-number">1.3.</span> <span class="nav-text">3.clone()</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Object%E7%B1%BB%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">Object类的常用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-toString-%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">1.toString() 方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-equals-%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">2.equals()方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-clone"><span class="nav-number">1.3.</span> <span class="nav-text">3.clone()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Objects%E7%B1%BB"><span class="nav-number">2.</span> <span class="nav-text">Objects类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-equals%E6%96%B9%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">1.equals方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-isNull%E6%96%B9%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">2.isNull方法</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -223,7 +223,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2026-01-10 22:53:19 / Modified: 23:12:39" itemprop="dateCreated datePublished" datetime="2026-01-10T22:53:19+08:00">2026-01-10</time>
+      <time title="Created: 2026-01-10 22:53:19 / Modified: 23:22:51" itemprop="dateCreated datePublished" datetime="2026-01-10T22:53:19+08:00">2026-01-10</time>
     </span>
 
   
@@ -260,6 +260,13 @@
 <p>浅克隆 中的   引用数据类型  比如数组   它是和原对象共享同一个数组地址  所以原对象的数组发生改变  它本身的数组也会发生改变 这就是浅克隆</p>
 <p>那么深克隆就重新创建一个新的数组  那两个数组就是独立的个体  互不干扰</p>
 <p>Object中默认的clone就是浅克隆  如果想实现深克隆 要么自己重写 要么使用第三方工具代码</p>
+<h3 id="Objects类"><a href="#Objects类" class="headerlink" title="Objects类"></a>Objects类</h3><hr>
+<p>它和Object类有些不同  Objects类是一个工具类   提供一些方法去完成某些功能</p>
+<h4 id="1-equals方法"><a href="#1-equals方法" class="headerlink" title="1.equals方法"></a>1.equals方法</h4><p>Objects类中的equals方法就是多了一个非空判断而已</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">equals</span><span class="params">(Object a, Object b)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> (a == b) || (a != <span class="literal">null</span> &amp;&amp; a.equals(b));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>实际上还是会去调用a的equals方法  我们还是要重写</p>
+<h4 id="2-isNull方法"><a href="#2-isNull方法" class="headerlink" title="2.isNull方法"></a>2.isNull方法</h4><p>没什么好说的 就是判断对象是否为空的一个方法</p>
 
     </div>
 

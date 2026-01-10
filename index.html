@@ -140,7 +140,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -177,6 +177,100 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://zhisheng0506.github.io/2026/01/10/Java-Object%E7%88%B6%E7%B1%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/photo.jpg">
+      <meta itemprop="name" content="Kmon">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/01/10/Java-Object%E7%88%B6%E7%B1%BB/" class="post-title-link" itemprop="url">Java-Object父类</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2026-01-10 22:53:19 / Modified: 23:12:39" itemprop="dateCreated datePublished" datetime="2026-01-10T22:53:19+08:00">2026-01-10</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>继承作为java的特色之一  Object就是java中每一个类的父亲 </p>
+<h3 id="Object类的常用方法"><a href="#Object类的常用方法" class="headerlink" title="Object类的常用方法"></a>Object类的常用方法</h3><hr>
+<p>记住  object内的方法通常是不可用的  都是需要我们在自定义类中进行重写  毕竟是所有类的父亲   里面的方法肯定不会特别有实际作用</p>
+<h4 id="1-toString-方法"><a href="#1-toString-方法" class="headerlink" title="1.toString() 方法"></a>1.toString() 方法</h4><hr>
+<p>Object父类中toString 默认是打印对象的地址  但是这个通常无法反映对象的属性特征</p>
+<p>因此我们在子类中重写toString的时候    会单独的返回出子类的成员变量等特征 说白了就是自己想打印什么就写什么而已</p>
+<p>然后值得一提的是   sout（对象名） 直接调用的就是toString方法   其它也就没什么强调的了</p>
+<h4 id="2-equals-方法"><a href="#2-equals-方法" class="headerlink" title="2.equals()方法"></a>2.equals()方法</h4><hr>
+<p>这个方法很有必要好好学习  大厂的面试题里面会出现</p>
+<p>首先Object的中的equals方法是直接比较两个对象的地址值  也就是说   一定要是同一个对象 才会返回true  假如你仅仅是对象的成员变量相同  但是是两个不同的对象  那也是false</p>
+<p>这显然不是我们想要看到的   所以Object的equals方法不好用  我们得自己重写来比较</p>
+<p>但是呢 Java中常见类都已经帮我们重写好了equals方法  就比如 String  ArrayList  这些方法使用起来都说很顺手的  就比如比较字符串内容  String.equals()  就不会出现只比较字符串地址的情况</p>
+<p>但是这里还是有道大厂面试题</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String s1= <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;123&quot;</span>)</span><br><span class="line">StringBuilder s2=<span class="keyword">new</span> <span class="title class_">StringBuilder</span>(<span class="string">&quot;123&quot;</span>)</span><br><span class="line">sout(s1.equals(s2))</span><br><span class="line">sout(s2.equals(s1))</span><br></pre></td></tr></table></figure>
+
+<p>两个输出的语句的结果都是false</p>
+<p>因为在String类中重写的equals方法中  它是先比较对象的地址  如果不同  那就判断是否是String 对象然后在去比较字符串的内容   但是这里的StringBuilder并不是String类  所以返回false</p>
+<p>而StringBuilder这个类甚至都没有重写equals方法  用的甚至是Object类中的方法  那更是只比较两个对象的地址值  所以返回false</p>
+<h4 id="3-clone"><a href="#3-clone" class="headerlink" title="3.clone()"></a>3.clone()</h4><hr>
+<p>很好理解  就是将一个对象的值复制给另一个对象 </p>
+<p>但是这里就是需要搞清楚 <strong>浅克隆</strong>和<strong>深克隆</strong>的区别</p>
+<p>其实很好懂    </p>
+<p>浅克隆 中的   引用数据类型  比如数组   它是和原对象共享同一个数组地址  所以原对象的数组发生改变  它本身的数组也会发生改变 这就是浅克隆</p>
+<p>那么深克隆就重新创建一个新的数组  那两个数组就是独立的个体  互不干扰</p>
+<p>Object中默认的clone就是浅克隆  如果想实现深克隆 要么自己重写 要么使用第三方工具代码</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -937,83 +1031,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/12/26/Java-String%E7%B1%BB/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://zhisheng0506.github.io/2025/12/24/Java-%E5%B0%B1%E8%BF%91%E5%8E%9F%E5%88%99%E5%92%8Cthis%E5%85%B3%E9%94%AE%E5%AD%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/photo.jpg">
-      <meta itemprop="name" content="Kmon">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kmon Blogs">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | Kmon Blogs">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/12/24/Java-%E5%B0%B1%E8%BF%91%E5%8E%9F%E5%88%99%E5%92%8Cthis%E5%85%B3%E9%94%AE%E5%AD%97/" class="post-title-link" itemprop="url">Java-就近原则和this关键字</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2025-12-24 22:50:39 / Modified: 23:00:24" itemprop="dateCreated datePublished" datetime="2025-12-24T22:50:39+08:00">2025-12-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>其实这里的内容也不是很多   这篇博客也就是为了温习this的运用 以前都学过</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/12/24/Java-%E5%B0%B1%E8%BF%91%E5%8E%9F%E5%88%99%E5%92%8Cthis%E5%85%B3%E9%94%AE%E5%AD%97/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>

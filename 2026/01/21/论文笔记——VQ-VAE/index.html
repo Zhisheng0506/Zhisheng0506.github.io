@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhisheng0506.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="VQ-VAE和传统VAE模型的不同点  the encoder network outputs discrete, rather than continuous, codes and the prior is learnt rather than static.  1. 什么是“先验”（Prior）？在生成模型（比如 AI 画图）里，“先验”可以简单理解为 AI 对数据的“预判”或“模版”。 当你">
+<meta property="og:type" content="article">
+<meta property="og:title" content="论文笔记——VQ-VAE">
+<meta property="og:url" content="https://zhisheng0506.github.io/2026/01/21/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94VQ-VAE/index.html">
+<meta property="og:site_name" content="Kmon Blogs">
+<meta property="og:description" content="VQ-VAE和传统VAE模型的不同点  the encoder network outputs discrete, rather than continuous, codes and the prior is learnt rather than static.  1. 什么是“先验”（Prior）？在生成模型（比如 AI 画图）里，“先验”可以简单理解为 AI 对数据的“预判”或“模版”。 当你">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-01-21T06:22:30.000Z">
+<meta property="article:modified_time" content="2026-01-21T13:01:08.816Z">
+<meta property="article:author" content="Kmon">
+<meta property="article:tag" content="论文">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://zhisheng0506.github.io/2026/01/21/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94VQ-VAE/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://zhisheng0506.github.io/2026/01/21/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94VQ-VAE/","path":"2026/01/21/论文笔记——VQ-VAE/","title":"论文笔记——VQ-VAE"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>论文笔记——VQ-VAE | Kmon Blogs</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kmon Blogs</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#VQ-VAE%E5%92%8C%E4%BC%A0%E7%BB%9FVAE%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%B8%8D%E5%90%8C%E7%82%B9"><span class="nav-number">1.</span> <span class="nav-text">VQ-VAE和传统VAE模型的不同点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AF%E2%80%9C%E5%85%88%E9%AA%8C%E2%80%9D%EF%BC%88Prior%EF%BC%89%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">1. 什么是“先验”（Prior）？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E4%BB%80%E4%B9%88%E6%98%AFstatic%E5%92%8Clearnt%EF%BC%9F"><span class="nav-number">1.2.</span> <span class="nav-text">2.什么是static和learnt？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%87%E7%94%A8%E4%BA%86%E7%A6%BB%E6%95%A3%E5%8C%96%E4%BF%A1%E6%81%AF%E8%A7%A3%E5%86%B3%E5%90%8E%E9%AA%8C%E5%B4%A9%E6%BA%83"><span class="nav-number">2.</span> <span class="nav-text">采用了离散化信息解决后验崩溃</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AF%E5%90%8E%E9%AA%8C%E5%B4%A9%E6%BA%83"><span class="nav-number">2.1.</span> <span class="nav-text">1.什么是后验崩溃</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E4%B8%BA%E4%BB%80%E4%B9%88%E7%A6%BB%E6%95%A3%E4%BF%A1%E6%81%AF%E5%8F%AF%E4%BB%A5%E8%A7%A3%E5%86%B3%E5%90%8E%E9%AA%8C%E5%B4%A9%E6%BA%83%E9%97%AE%E9%A2%98"><span class="nav-number">2.2.</span> <span class="nav-text">2.为什么离散信息可以解决后验崩溃问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Method%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">Method方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Discrete-Latent-variables%EF%BC%88%E6%8E%A8%E7%90%86%E9%98%B6%E6%AE%B5"><span class="nav-number">3.1.</span> <span class="nav-text">1.Discrete Latent variables（推理阶段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Learning%EF%BC%88%E8%AE%AD%E7%BB%83%E9%98%B6%E6%AE%B5"><span class="nav-number">3.2.</span> <span class="nav-text">2.Learning（训练阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E6%A0%B8%E5%BF%83%E9%9A%BE%E9%A2%98-%E4%B8%AD%E9%97%B4%E4%BC%A0%E6%92%AD%E6%96%AD%E5%BC%80%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3"><span class="nav-number">3.2.1.</span> <span class="nav-text">1.核心难题 中间传播断开如何解决</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E4%B8%89%E5%A4%A7%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E4%BF%9D%E8%AF%81%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83"><span class="nav-number">3.2.2.</span> <span class="nav-text">2.三大损失函数保证模型训练</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kmon"
+      src="/images/photo.jpg">
+  <p class="site-author-name" itemprop="name">Kmon</p>
+  <div class="site-description" itemprop="description"></div>
+  <div class="site-intro" style="margin-top: 10px; font-size: 14px; color: #666; line-height: 1.5;">
+    <p>分享学习笔记和自己的碎碎念~</p>
+  </div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Zhisheng0506" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Zhisheng0506" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1206300336@qq.com" title="E-Mail → mailto:1206300336@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/1495302036" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;1495302036" rel="noopener me" target="_blank"><i class="fab fa-bilibili fa-fw"></i>Bilibili</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://x.com/ByKmon_" title="Twitter → https:&#x2F;&#x2F;x.com&#x2F;ByKmon_" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://zhisheng0506.github.io/2026/01/21/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94VQ-VAE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/photo.jpg">
+      <meta itemprop="name" content="Kmon">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="论文笔记——VQ-VAE | Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          论文笔记——VQ-VAE
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2026-01-21 14:22:30 / Modified: 21:01:08" itemprop="dateCreated datePublished" datetime="2026-01-21T14:22:30+08:00">2026-01-21</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h3 id="VQ-VAE和传统VAE模型的不同点"><a href="#VQ-VAE和传统VAE模型的不同点" class="headerlink" title="VQ-VAE和传统VAE模型的不同点"></a>VQ-VAE和传统VAE模型的不同点</h3><hr>
+<ul>
+<li>the encoder network outputs discrete, rather than continuous, codes</li>
+<li>and the prior is learnt rather than static.</li>
+</ul>
+<h4 id="1-什么是“先验”（Prior）？"><a href="#1-什么是“先验”（Prior）？" class="headerlink" title="1. 什么是“先验”（Prior）？"></a>1. 什么是“先验”（Prior）？</h4><p>在生成模型（比如 AI 画图）里，“先验”可以简单理解为 <strong>AI 对数据的“预判”或“模版”</strong>。</p>
+<p>当你让 AI 生成一张新图时，它需要先从一个“概率池”里随机抓取一些灵感（随机数），这个“池子”的形状和规则就是<strong>先验</strong>。</p>
+<h4 id="2-什么是static和learnt？"><a href="#2-什么是static和learnt？" class="headerlink" title="2.什么是static和learnt？"></a>2.什么是static和learnt？</h4><p>在传统的模型先验中   往往都是一些固定的模板  也就是老师提供给一个固定的模板  生产的图片特征必须塞到这个模板中去  去拟合模板</p>
+<p>而在新模型中  我们鼓励模型自己去学会数据当中的规律   而不是死板的照抄某个模板</p>
+<h3 id="采用了离散化信息解决后验崩溃"><a href="#采用了离散化信息解决后验崩溃" class="headerlink" title="采用了离散化信息解决后验崩溃"></a>采用了离散化信息解决后验崩溃</h3><hr>
+<blockquote>
+<p>In order to learn a discrete latent representation, we incorporate ideas from vector quantisation (VQ). Using the VQ method allows the model to circumvent issues of “posterior collapse” -— where the latents are ignored when they are paired with a powerful autoregressive decoder -— typically observed in the VAE framework.</p>
+</blockquote>
+<h4 id="1-什么是后验崩溃"><a href="#1-什么是后验崩溃" class="headerlink" title="1.什么是后验崩溃"></a>1.什么是后验崩溃</h4><p>在传统模型中 解码器通常会给编码器一些模糊的灵感  但是解码器他自己就可以通过连续的像素值来自己预测下一个像素   也就是他自己就可以有模有样的画出他想要的结果  外加这些模糊灵感它大概率是看不懂的  所以选择“摆烂”  不听解码器的建议   模型并没有真正学会压缩和提取特征  我们称这个为后验崩溃</p>
+<h4 id="2-为什么离散信息可以解决后验崩溃问题"><a href="#2-为什么离散信息可以解决后验崩溃问题" class="headerlink" title="2.为什么离散信息可以解决后验崩溃问题"></a>2.为什么离散信息可以解决后验崩溃问题</h4><p>VQ-VAE改变了传递信息的形式  不再发送模糊信息，而是在标准字典中选取一个确定的编号（这就是离散化信息VQ）传递给学生  并要求学生严格按照这个信息来还原图像</p>
+<p>正是因为离散化的信息  学生不能像之前那样不再听老师的话 相反离散化的信息非常密集切准确 学生不得不从这些离散化信息中学习  解决了模型偷懒不学习的特点</p>
+<h3 id="Method方法"><a href="#Method方法" class="headerlink" title="Method方法"></a>Method方法</h3><hr>
+<h4 id="1-Discrete-Latent-variables（推理阶段"><a href="#1-Discrete-Latent-variables（推理阶段" class="headerlink" title="1.Discrete Latent variables（推理阶段"></a>1.Discrete Latent variables（推理阶段</h4><ul>
+<li>准备阶段 ：造一个有k个标准积木的仓库</li>
+<li>草绘阶段 ： 编码器吧图片变成一张抽象的草图</li>
+<li>匹配阶段 ： 在仓库中找到一个和草图最像的标准积木 拿它的编号</li>
+<li>替换 阶段： 把草图丢了 用标准积木替换它</li>
+<li>还原阶段 ： 解码器根据标准积木把图片重新拼出来</li>
+</ul>
+<h4 id="2-Learning（训练阶段"><a href="#2-Learning（训练阶段" class="headerlink" title="2.Learning（训练阶段"></a>2.Learning（训练阶段</h4><h5 id="1-核心难题-中间传播断开如何解决"><a href="#1-核心难题-中间传播断开如何解决" class="headerlink" title="1.核心难题 中间传播断开如何解决"></a>1.核心难题 中间传播断开如何解决</h5><p>在推理阶段   我们是根据查字典来获取积木编号  但是反向传播的时候这是个不可导的过程</p>
+<p>解决办法（直通估算器）</p>
+<ul>
+<li>先前传播 （推理 ：老老实实查字典 变成离散的编号</li>
+<li>向后传播  （训练 ： 假装没有查字典的的过程 直接把梯度信息跳过查字典过程 直接给到解码器 让解码器在下次解码自动修正</li>
+</ul>
+<h5 id="2-三大损失函数保证模型训练"><a href="#2-三大损失函数保证模型训练" class="headerlink" title="2.三大损失函数保证模型训练"></a>2.三大损失函数保证模型训练</h5><ol>
+<li>重构损失 ：让生成的图片和原图片越来越像</li>
+<li>字典学习：让字典的标准零件主动去靠近编码器画出的草图</li>
+<li>承诺损失：让编码器老老实实用指定零件去输出草图</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%BA%E6%96%87/" rel="tag"># 论文</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/01/19/Java-lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="prev" title="Java-lambda表达式">
+                  <i class="fa fa-angle-left"></i> Java-lambda表达式
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/01/23/CPR%E7%9A%84%E6%9C%80%E9%82%BB%E5%9B%BE%E7%89%87%E6%90%9C%E7%B4%A2/" rel="next" title="CPR的最邻图片搜索">
+                  CPR的最邻图片搜索 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Kmon</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

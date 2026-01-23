@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhisheng0506.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="CPR找相似图片的核心思想一句话概括：把每张图片的特征转换成一个”条形统计图”，然后对比统计图的形状，形状越像，图片就越相似。 此博客是由ai整理得到 并非本人手写！仅做临时复习使用！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CPR的最邻图片搜索">
+<meta property="og:url" content="https://zhisheng0506.github.io/2026/01/23/CPR%E7%9A%84%E6%9C%80%E9%82%BB%E5%9B%BE%E7%89%87%E6%90%9C%E7%B4%A2/index.html">
+<meta property="og:site_name" content="Kmon Blogs">
+<meta property="og:description" content="CPR找相似图片的核心思想一句话概括：把每张图片的特征转换成一个”条形统计图”，然后对比统计图的形状，形状越像，图片就越相似。 此博客是由ai整理得到 并非本人手写！仅做临时复习使用！">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-01-23T10:36:51.000Z">
+<meta property="article:modified_time" content="2026-01-23T10:40:48.700Z">
+<meta property="article:author" content="Kmon">
+<meta property="article:tag" content="cpr">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://zhisheng0506.github.io/2026/01/23/CPR%E7%9A%84%E6%9C%80%E9%82%BB%E5%9B%BE%E7%89%87%E6%90%9C%E7%B4%A2/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://zhisheng0506.github.io/2026/01/23/CPR%E7%9A%84%E6%9C%80%E9%82%BB%E5%9B%BE%E7%89%87%E6%90%9C%E7%B4%A2/","path":"2026/01/23/CPR的最邻图片搜索/","title":"CPR的最邻图片搜索"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>CPR的最邻图片搜索 | Kmon Blogs</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kmon Blogs</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CPR%E6%89%BE%E7%9B%B8%E4%BC%BC%E5%9B%BE%E7%89%87%E7%9A%84%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3"><span class="nav-number">1.</span> <span class="nav-text">CPR找相似图片的核心思想</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A4%E5%8D%9A%E5%AE%A2%E6%98%AF%E7%94%B1ai%E6%95%B4%E7%90%86%E5%BE%97%E5%88%B0-%E5%B9%B6%E9%9D%9E%E6%9C%AC%E4%BA%BA%E6%89%8B%E5%86%99%EF%BC%81%E4%BB%85%E5%81%9A%E4%B8%B4%E6%97%B6%E5%A4%8D%E4%B9%A0%E4%BD%BF%E7%94%A8%EF%BC%81"><span class="nav-number">1.1.</span> <span class="nav-text">此博客是由ai整理得到 并非本人手写！仅做临时复习使用！</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E6%AD%A5%E9%AA%A4%EF%BC%88%E4%B8%89%E6%AD%A5%E8%B5%B0%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">具体步骤（三步走）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E6%8A%8A%E7%89%B9%E5%BE%81%E5%8F%98%E6%88%90%E2%80%9D%E7%AF%AE%E5%AD%90%E2%80%9D%EF%BC%88Codebook%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">第一步：把特征变成”篮子”（Codebook）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E6%8A%8A%E5%9B%BE%E7%89%87%E5%88%86%E6%88%90%E5%B0%8F%E5%9D%97%EF%BC%8C%E6%AF%8F%E4%B8%AA%E5%9D%97%E7%BB%9F%E8%AE%A1%E7%AF%AE%E5%AD%90%E9%87%8C%E7%9A%84%E6%95%B0%E9%87%8F%EF%BC%88BlockWiseHistogramEncoder%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">第二步：把图片分成小块，每个块统计篮子里的数量（BlockWiseHistogramEncoder）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E5%AF%B9%E6%AF%94%E7%BB%9F%E8%AE%A1%E5%9B%BE%E6%89%BE%E7%9B%B8%E4%BC%BC%E5%9B%BE%E7%89%87%EF%BC%88%E6%A3%80%E7%B4%A2%EF%BC%89"><span class="nav-number">2.3.</span> <span class="nav-text">第三步：对比统计图找相似图片（检索）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E8%BF%99%E6%A0%B7%E5%81%9A%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">为什么要这样做？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E7%82%B91%EF%BC%9A%E6%9B%B4%E9%B2%81%E6%A3%92"><span class="nav-number">3.1.</span> <span class="nav-text">优点1：更鲁棒</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E7%82%B92%EF%BC%9A%E4%BF%9D%E7%95%99%E7%A9%BA%E9%97%B4%E4%BF%A1%E6%81%AF"><span class="nav-number">3.2.</span> <span class="nav-text">优点2：保留空间信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E7%82%B93%EF%BC%9A%E8%AE%A1%E7%AE%97%E9%AB%98%E6%95%88"><span class="nav-number">3.3.</span> <span class="nav-text">优点3：计算高效</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B4%E4%B8%AA%E6%B5%81%E7%A8%8B%E5%9B%BE%E8%A7%A3"><span class="nav-number">4.</span> <span class="nav-text">整个流程图解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E5%8F%82%E6%95%B0%E8%A7%A3%E9%87%8A"><span class="nav-number">5.</span> <span class="nav-text">关键参数解释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%92%8C%E4%BD%A0%E7%9A%84%E6%83%B3%E6%B3%95%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">6.</span> <span class="nav-text">和你的想法的关系</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kmon"
+      src="/images/photo.jpg">
+  <p class="site-author-name" itemprop="name">Kmon</p>
+  <div class="site-description" itemprop="description"></div>
+  <div class="site-intro" style="margin-top: 10px; font-size: 14px; color: #666; line-height: 1.5;">
+    <p>分享学习笔记和自己的碎碎念~</p>
+  </div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Zhisheng0506" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Zhisheng0506" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1206300336@qq.com" title="E-Mail → mailto:1206300336@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/1495302036" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;1495302036" rel="noopener me" target="_blank"><i class="fab fa-bilibili fa-fw"></i>Bilibili</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://x.com/ByKmon_" title="Twitter → https:&#x2F;&#x2F;x.com&#x2F;ByKmon_" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://zhisheng0506.github.io/2026/01/23/CPR%E7%9A%84%E6%9C%80%E9%82%BB%E5%9B%BE%E7%89%87%E6%90%9C%E7%B4%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/photo.jpg">
+      <meta itemprop="name" content="Kmon">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="CPR的最邻图片搜索 | Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CPR的最邻图片搜索
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2026-01-23 18:36:51 / Modified: 18:40:48" itemprop="dateCreated datePublished" datetime="2026-01-23T18:36:51+08:00">2026-01-23</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="CPR找相似图片的核心思想"><a href="#CPR找相似图片的核心思想" class="headerlink" title="CPR找相似图片的核心思想"></a>CPR找相似图片的核心思想</h2><p><strong>一句话概括</strong>：把每张图片的特征转换成一个”条形统计图”，然后对比统计图的形状，形状越像，图片就越相似。</p>
+<h3 id="此博客是由ai整理得到-并非本人手写！仅做临时复习使用！"><a href="#此博客是由ai整理得到-并非本人手写！仅做临时复习使用！" class="headerlink" title="此博客是由ai整理得到 并非本人手写！仅做临时复习使用！"></a>此博客是由ai整理得到 并非本人手写！仅做临时复习使用！</h3><span id="more"></span>
+
+<hr>
+<h2 id="具体步骤（三步走）"><a href="#具体步骤（三步走）" class="headerlink" title="具体步骤（三步走）"></a>具体步骤（三步走）</h2><h3 id="第一步：把特征变成”篮子”（Codebook）"><a href="#第一步：把特征变成”篮子”（Codebook）" class="headerlink" title="第一步：把特征变成”篮子”（Codebook）"></a>第一步：把特征变成”篮子”（Codebook）</h3><p>想象你有一堆水果，你想统计每种水果有多少个。但你不知道有多少种水果，所以你先准备几个”篮子”，比如100个篮子。</p>
+<ul>
+<li><strong>Codebook就是这100个篮子</strong></li>
+<li>每个篮子代表一种”特征模式”（比如某种纹理、某种形状）</li>
+<li>所有训练图片的特征会被分配到这100个篮子里，每个篮子会聚集相似的特征</li>
+</ul>
+<p><strong>类比</strong>：就像你去超市，货架上预先摆放了100类商品，所有新来的商品都要归类到这100类里。</p>
+<hr>
+<h3 id="第二步：把图片分成小块，每个块统计篮子里的数量（BlockWiseHistogramEncoder）"><a href="#第二步：把图片分成小块，每个块统计篮子里的数量（BlockWiseHistogramEncoder）" class="headerlink" title="第二步：把图片分成小块，每个块统计篮子里的数量（BlockWiseHistogramEncoder）"></a>第二步：把图片分成小块，每个块统计篮子里的数量（BlockWiseHistogramEncoder）</h3><p>现在有一张图片，你不能只看整张，要把它切成小块（比如8×8&#x3D;64块）。</p>
+<p>对每一小块：</p>
+<ol>
+<li>提取这块的特征</li>
+<li>看这个特征最像哪个篮子，就把它放进那个篮子</li>
+<li>统计这个小块里每个篮子有多少个特征</li>
+</ol>
+<p><strong>结果</strong>：每小块得到一个”条形统计图”，图上有100根柱子，每根柱子代表一个篮子的特征数量。</p>
+<p><strong>举例</strong>：</p>
+<ul>
+<li>第1小块：篮子1有5个特征，篮子2有3个特征，篮子3有0个…</li>
+<li>第2小块：篮子1有2个特征，篮子2有7个特征…</li>
+<li>…以此类推64个小块</li>
+</ul>
+<p><strong>最终</strong>：整张图片 &#x3D; 64个小块 × 100根柱子 &#x3D; 一个三维的统计图（64×100的矩阵）</p>
+<hr>
+<h3 id="第三步：对比统计图找相似图片（检索）"><a href="#第三步：对比统计图找相似图片（检索）" class="headerlink" title="第三步：对比统计图找相似图片（检索）"></a>第三步：对比统计图找相似图片（检索）</h3><p>现在你有：</p>
+<ul>
+<li>训练集里每张图片都有一个64×100的统计图</li>
+<li>新来一张测试图片，也算出它的64×100统计图</li>
+</ul>
+<p><strong>怎么找最相似的？</strong></p>
+<p>方法有两种：</p>
+<p><strong>方法1：KL散度（CPR主要用这个）</strong></p>
+<ul>
+<li>对比两个统计图的”形状差异”</li>
+<li>KL散度越小，说明两个统计图越像</li>
+<li>就像对比两张柱状图，哪个柱子高哪个柱子低，越接近就越相似</li>
+</ul>
+<p><strong>方法2：欧氏距离</strong></p>
+<ul>
+<li>简单粗暴，直接计算两个统计图上每个点的距离</li>
+<li>距离越近，越相似</li>
+</ul>
+<p><strong>CPR的小技巧</strong>：</p>
+<ul>
+<li>不是所有64个块都用来对比，只对比其中80%最相似的块（l_ratio&#x3D;4&#x2F;5）</li>
+<li>这样可以忽略掉那些差异太大的块，避免噪声干扰</li>
+</ul>
+<hr>
+<h2 id="为什么要这样做？"><a href="#为什么要这样做？" class="headerlink" title="为什么要这样做？"></a>为什么要这样做？</h2><h3 id="优点1：更鲁棒"><a href="#优点1：更鲁棒" class="headerlink" title="优点1：更鲁棒"></a>优点1：更鲁棒</h3><ul>
+<li>统计图看的是”整体分布”，不是单个特征的具体数值</li>
+<li>即使图片有点光照变化、小干扰，统计图形状也不会变太大</li>
+</ul>
+<h3 id="优点2：保留空间信息"><a href="#优点2：保留空间信息" class="headerlink" title="优点2：保留空间信息"></a>优点2：保留空间信息</h3><ul>
+<li>把图片分块，每个块单独统计</li>
+<li>所以能知道”哪一块像哪一块”，而不是整张图片混在一起</li>
+</ul>
+<h3 id="优点3：计算高效"><a href="#优点3：计算高效" class="headerlink" title="优点3：计算高效"></a>优点3：计算高效</h3><ul>
+<li>统计图（64×100）比原始特征（可能几万维）小很多</li>
+<li>对比统计图很快</li>
+</ul>
+<hr>
+<h2 id="整个流程图解"><a href="#整个流程图解" class="headerlink" title="整个流程图解"></a>整个流程图解</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">原始图片</span><br><span class="line">    ↓</span><br><span class="line">[Backbone] 提取特征（很多维）</span><br><span class="line">    ↓</span><br><span class="line">[Codebook] 把特征归类到100个篮子</span><br><span class="line">    ↓</span><br><span class="line">[分块] 切成8×8=64小块</span><br><span class="line">    ↓</span><br><span class="line">[统计] 每块算出100根柱子 → 得到64×100统计图</span><br><span class="line">    ↓</span><br><span class="line">[对比] 和训练集的统计图对比（用KL散度）</span><br><span class="line">    ↓</span><br><span class="line">[结果] 找到统计图最像的那张图片 → 就是最相似的图片</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="关键参数解释"><a href="#关键参数解释" class="headerlink" title="关键参数解释"></a>关键参数解释</h2><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>n_clusters</code></td>
+<td>篮子数量（100）</td>
+<td>决定统计图的细致程度</td>
+</tr>
+<tr>
+<td><code>S</code></td>
+<td>分块数量（8×8）</td>
+<td>决定空间信息的保留程度</td>
+</tr>
+<tr>
+<td><code>d_method</code></td>
+<td>对比方法（’kl’或’euc’）</td>
+<td>决定相似度计算方式</td>
+</tr>
+<tr>
+<td><code>l_ratio</code></td>
+<td>对比比例（4&#x2F;5）</td>
+<td>过滤掉不相似的块</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="和你的想法的关系"><a href="#和你的想法的关系" class="headerlink" title="和你的想法的关系"></a>和你的想法的关系</h2><p>你的想法是”找最相似的整张图片”，CPR做的就是这件事，只是它<strong>用统计图来表示整张图片</strong>，而不是直接用原始特征。</p>
+<p><strong>区别</strong>：</p>
+<ul>
+<li><strong>简单方法</strong>：直接用特征向量对比（比如用FAISS）</li>
+<li><strong>CPR方法</strong>：用统计图对比（更鲁棒，但复杂一点）</li>
+</ul>
+<p><strong>如果你用CPR的方法，你需要：</strong></p>
+<ol>
+<li>先用训练集训练出Codebook（聚类中心）</li>
+<li>为每张训练图片算出统计图，存起来</li>
+<li>测试时，算出测试图片的统计图，和训练集的统计图对比</li>
+</ol>
+<p>这样理解清楚了吗？还有哪一步想让我再详细解释？</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/cpr/" rel="tag"># cpr</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/01/21/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94VQ-VAE/" rel="prev" title="论文笔记——VQ-VAE">
+                  <i class="fa fa-angle-left"></i> 论文笔记——VQ-VAE
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Kmon</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

@@ -381,9 +381,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2026-01-21 14:22:30 / Modified: 21:01:08" itemprop="dateCreated datePublished" datetime="2026-01-21T14:22:30+08:00">2026-01-21</time>
+      <time title="Created: 2026-01-21 14:22:30" itemprop="dateCreated datePublished" datetime="2026-01-21T14:22:30+08:00">2026-01-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-03-10 17:41:15" itemprop="dateModified" datetime="2026-03-10T17:41:15+08:00">2026-03-10</time>
     </span>
 
   
@@ -401,37 +407,14 @@
 <li>the encoder network outputs discrete, rather than continuous, codes</li>
 <li>and the prior is learnt rather than static.</li>
 </ul>
-<h4 id="1-什么是“先验”（Prior）？"><a href="#1-什么是“先验”（Prior）？" class="headerlink" title="1. 什么是“先验”（Prior）？"></a>1. 什么是“先验”（Prior）？</h4><p>在生成模型（比如 AI 画图）里，“先验”可以简单理解为 <strong>AI 对数据的“预判”或“模版”</strong>。</p>
-<p>当你让 AI 生成一张新图时，它需要先从一个“概率池”里随机抓取一些灵感（随机数），这个“池子”的形状和规则就是<strong>先验</strong>。</p>
-<h4 id="2-什么是static和learnt？"><a href="#2-什么是static和learnt？" class="headerlink" title="2.什么是static和learnt？"></a>2.什么是static和learnt？</h4><p>在传统的模型先验中   往往都是一些固定的模板  也就是老师提供给一个固定的模板  生产的图片特征必须塞到这个模板中去  去拟合模板</p>
-<p>而在新模型中  我们鼓励模型自己去学会数据当中的规律   而不是死板的照抄某个模板</p>
-<h3 id="采用了离散化信息解决后验崩溃"><a href="#采用了离散化信息解决后验崩溃" class="headerlink" title="采用了离散化信息解决后验崩溃"></a>采用了离散化信息解决后验崩溃</h3><hr>
-<blockquote>
-<p>In order to learn a discrete latent representation, we incorporate ideas from vector quantisation (VQ). Using the VQ method allows the model to circumvent issues of “posterior collapse” -— where the latents are ignored when they are paired with a powerful autoregressive decoder -— typically observed in the VAE framework.</p>
-</blockquote>
-<h4 id="1-什么是后验崩溃"><a href="#1-什么是后验崩溃" class="headerlink" title="1.什么是后验崩溃"></a>1.什么是后验崩溃</h4><p>在传统模型中 解码器通常会给编码器一些模糊的灵感  但是解码器他自己就可以通过连续的像素值来自己预测下一个像素   也就是他自己就可以有模有样的画出他想要的结果  外加这些模糊灵感它大概率是看不懂的  所以选择“摆烂”  不听解码器的建议   模型并没有真正学会压缩和提取特征  我们称这个为后验崩溃</p>
-<h4 id="2-为什么离散信息可以解决后验崩溃问题"><a href="#2-为什么离散信息可以解决后验崩溃问题" class="headerlink" title="2.为什么离散信息可以解决后验崩溃问题"></a>2.为什么离散信息可以解决后验崩溃问题</h4><p>VQ-VAE改变了传递信息的形式  不再发送模糊信息，而是在标准字典中选取一个确定的编号（这就是离散化信息VQ）传递给学生  并要求学生严格按照这个信息来还原图像</p>
-<p>正是因为离散化的信息  学生不能像之前那样不再听老师的话 相反离散化的信息非常密集切准确 学生不得不从这些离散化信息中学习  解决了模型偷懒不学习的特点</p>
-<h3 id="Method方法"><a href="#Method方法" class="headerlink" title="Method方法"></a>Method方法</h3><hr>
-<h4 id="1-Discrete-Latent-variables（推理阶段"><a href="#1-Discrete-Latent-variables（推理阶段" class="headerlink" title="1.Discrete Latent variables（推理阶段"></a>1.Discrete Latent variables（推理阶段</h4><ul>
-<li>准备阶段 ：造一个有k个标准积木的仓库</li>
-<li>草绘阶段 ： 编码器吧图片变成一张抽象的草图</li>
-<li>匹配阶段 ： 在仓库中找到一个和草图最像的标准积木 拿它的编号</li>
-<li>替换 阶段： 把草图丢了 用标准积木替换它</li>
-<li>还原阶段 ： 解码器根据标准积木把图片重新拼出来</li>
-</ul>
-<h4 id="2-Learning（训练阶段"><a href="#2-Learning（训练阶段" class="headerlink" title="2.Learning（训练阶段"></a>2.Learning（训练阶段</h4><h5 id="1-核心难题-中间传播断开如何解决"><a href="#1-核心难题-中间传播断开如何解决" class="headerlink" title="1.核心难题 中间传播断开如何解决"></a>1.核心难题 中间传播断开如何解决</h5><p>在推理阶段   我们是根据查字典来获取积木编号  但是反向传播的时候这是个不可导的过程</p>
-<p>解决办法（直通估算器）</p>
-<ul>
-<li>先前传播 （推理 ：老老实实查字典 变成离散的编号</li>
-<li>向后传播  （训练 ： 假装没有查字典的的过程 直接把梯度信息跳过查字典过程 直接给到解码器 让解码器在下次解码自动修正</li>
-</ul>
-<h5 id="2-三大损失函数保证模型训练"><a href="#2-三大损失函数保证模型训练" class="headerlink" title="2.三大损失函数保证模型训练"></a>2.三大损失函数保证模型训练</h5><ol>
-<li>重构损失 ：让生成的图片和原图片越来越像</li>
-<li>字典学习：让字典的标准零件主动去靠近编码器画出的草图</li>
-<li>承诺损失：让编码器老老实实用指定零件去输出草图</li>
-</ol>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/01/21/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94VQ-VAE/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 

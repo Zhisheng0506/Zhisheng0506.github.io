@@ -19,15 +19,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"zhisheng0506.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="VQ-VAE和传统VAE模型的不同点  the encoder network outputs discrete, rather than continuous, codes and the prior is learnt rather than static.  1. 什么是“先验”（Prior）？在生成模型（比如 AI 画图）里，“先验”可以简单理解为 AI 对数据的“预判”或“模版”。 当你">
+    <meta name="description" content="VQ-VAE和传统VAE模型的不同点  the encoder network outputs discrete, rather than continuous, codes and the prior is learnt rather than static.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="论文笔记——VQ-VAE">
 <meta property="og:url" content="https://zhisheng0506.github.io/2026/01/21/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94VQ-VAE/index.html">
 <meta property="og:site_name" content="Kmon Blogs">
-<meta property="og:description" content="VQ-VAE和传统VAE模型的不同点  the encoder network outputs discrete, rather than continuous, codes and the prior is learnt rather than static.  1. 什么是“先验”（Prior）？在生成模型（比如 AI 画图）里，“先验”可以简单理解为 AI 对数据的“预判”或“模版”。 当你">
+<meta property="og:description" content="VQ-VAE和传统VAE模型的不同点  the encoder network outputs discrete, rather than continuous, codes and the prior is learnt rather than static.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-01-21T06:22:30.000Z">
-<meta property="article:modified_time" content="2026-01-21T13:01:08.816Z">
+<meta property="article:modified_time" content="2026-03-10T09:41:15.413Z">
 <meta property="article:author" content="Kmon">
 <meta property="article:tag" content="论文">
 <meta name="twitter:card" content="summary">
@@ -221,9 +221,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2026-01-21 14:22:30 / Modified: 21:01:08" itemprop="dateCreated datePublished" datetime="2026-01-21T14:22:30+08:00">2026-01-21</time>
+      <time title="Created: 2026-01-21 14:22:30" itemprop="dateCreated datePublished" datetime="2026-01-21T14:22:30+08:00">2026-01-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-03-10 17:41:15" itemprop="dateModified" datetime="2026-03-10T17:41:15+08:00">2026-03-10</time>
     </span>
 
   
@@ -240,6 +246,8 @@
 <li>the encoder network outputs discrete, rather than continuous, codes</li>
 <li>and the prior is learnt rather than static.</li>
 </ul>
+<span id="more"></span>
+
 <h4 id="1-什么是“先验”（Prior）？"><a href="#1-什么是“先验”（Prior）？" class="headerlink" title="1. 什么是“先验”（Prior）？"></a>1. 什么是“先验”（Prior）？</h4><p>在生成模型（比如 AI 画图）里，“先验”可以简单理解为 <strong>AI 对数据的“预判”或“模版”</strong>。</p>
 <p>当你让 AI 生成一张新图时，它需要先从一个“概率池”里随机抓取一些灵感（随机数），这个“池子”的形状和规则就是<strong>先验</strong>。</p>
 <h4 id="2-什么是static和learnt？"><a href="#2-什么是static和learnt？" class="headerlink" title="2.什么是static和learnt？"></a>2.什么是static和learnt？</h4><p>在传统的模型先验中   往往都是一些固定的模板  也就是老师提供给一个固定的模板  生产的图片特征必须塞到这个模板中去  去拟合模板</p>

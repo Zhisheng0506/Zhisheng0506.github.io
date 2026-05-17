@@ -41,3 +41,43 @@ tags: [tag1, tag2]
 3. Use `<!--more-->` to split excerpt from full content on the index page.
 4. If a post needs images, create a folder with the **exact same name** as the post file, and place images inside it. Reference them with the folder name as prefix, e.g. `![img](post-title/image.png)`.
 5. `source/images/` and `source/img/` are available for global/shared images.
+
+## Writing a New Post (Algorithm / Exam Notes)
+
+This is the primary workflow. Posts are targeted at **考研复试机试** (grad school interview coding exams). The user will provide their own code; the article must wrap around their code in their style.
+
+### User Code Style
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+// compact formatting, minimal spaces
+// prefers long long, short variable names (m, n, s, B, ss, A)
+// uses vector for big-number storage
+// lowercase letters for 10-35 in base conversion output
+```
+
+### Post Structure
+
+1. **题目描述** — the exam problem statement
+2. **核心思路** — the key idea / approach
+3. **Step-by-step breakdown** — each phase explained with code snippets
+4. **⚠️ Key pitfalls** — highlight the user's own mistakes/lessons
+5. **完整代码模板** — the user's full code as a complete template
+6. **总结** — summary table of methods, formulas, and pitfalls
+
+### Rules
+
+- **题目链接** — every algorithm/exam note post must include a link to the original problem page (e.g., N诺/DreamJudge). Place it at the top of the 题目描述 section.
+- **Must use the user's code** — do not invent your own implementation. Fit explanations around it.
+- **Emphasize pitfalls** — especially ones the user encountered personally (add comments like `// ⚠️ 这里容易错`).
+- **Math formulas** — if the post uses LaTeX math, add `mathjax: true` to frontmatter. Theme already has `mathjax.enable: true`.
+- **Tags** — use specific tags (算法, 数据结构, 进制转换, 上机考试, etc.).
+
+### Publish Workflow
+
+1. Write the post → show to user for review
+2. After user approves → commit to `hexo-source` branch
+3. Push source to GitHub: `git push origin hexo-source`
+4. Deploy static site: `npm run deploy`
+5. The blog will be live at `https://Zhisheng0506.github.io/YYYY/MM/DD/<title>/`

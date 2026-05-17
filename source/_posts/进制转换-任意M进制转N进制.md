@@ -7,6 +7,8 @@ mathjax: true
 
 ## 题目描述（清华大学上机题）
 
+> 题目链接：[N诺/DreamJudge 1422](https://noobdream.com/DreamJudge/Issue/page/1422/)
+
 > 输入的第一行包括两个整数：**M** 和 **N** (2 ≤ M, N ≤ 36)。
 > 下面的一行输入一个数 **X**，X 是 M 进制的数，要求你将 M 进制的数 X 转换成 N 进制的数输出。
 

@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhisheng0506.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="题目描述 题目链接：N诺&#x2F;DreamJudge 1285  在 N×M 矩阵中，找出所有元素和不小于 K 的面积最小的子矩阵。若不存在则输出 -1。 暴力枚举子矩阵是 $O(N^2 M^2)$，四个循环必超时。正确做法是枚举行范围 + 列前缀和压缩 + 一维滑动窗口，复杂度 $O(N^2 M)$。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="最小面积子矩阵-二维前缀和与滑动窗口">
+<meta property="og:url" content="https://zhisheng0506.github.io/2026/05/23/%E6%9C%80%E5%B0%8F%E9%9D%A2%E7%A7%AF%E5%AD%90%E7%9F%A9%E9%98%B5-%E4%BA%8C%E7%BB%B4%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/index.html">
+<meta property="og:site_name" content="Kmon Blogs">
+<meta property="og:description" content="题目描述 题目链接：N诺&#x2F;DreamJudge 1285  在 N×M 矩阵中，找出所有元素和不小于 K 的面积最小的子矩阵。若不存在则输出 -1。 暴力枚举子矩阵是 $O(N^2 M^2)$，四个循环必超时。正确做法是枚举行范围 + 列前缀和压缩 + 一维滑动窗口，复杂度 $O(N^2 M)$。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-05-23T10:00:00.000Z">
+<meta property="article:modified_time" content="2026-05-23T12:48:28.633Z">
+<meta property="article:author" content="Kmon">
+<meta property="article:tag" content="上机考试">
+<meta property="article:tag" content="前缀和">
+<meta property="article:tag" content="滑动窗口">
+<meta property="article:tag" content="矩阵">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://zhisheng0506.github.io/2026/05/23/%E6%9C%80%E5%B0%8F%E9%9D%A2%E7%A7%AF%E5%AD%90%E7%9F%A9%E9%98%B5-%E4%BA%8C%E7%BB%B4%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://zhisheng0506.github.io/2026/05/23/%E6%9C%80%E5%B0%8F%E9%9D%A2%E7%A7%AF%E5%AD%90%E7%9F%A9%E9%98%B5-%E4%BA%8C%E7%BB%B4%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/","path":"2026/05/23/最小面积子矩阵-二维前缀和与滑动窗口/","title":"最小面积子矩阵-二维前缀和与滑动窗口"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>最小面积子矩阵-二维前缀和与滑动窗口 | Kmon Blogs</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kmon Blogs</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B4%E4%BD%93%E6%80%9D%E8%B7%AF"><span class="nav-number">2.</span> <span class="nav-text">整体思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E5%88%97%E5%89%8D%E7%BC%80%E5%92%8C"><span class="nav-number">3.</span> <span class="nav-text">第一步：列前缀和</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%9A%A0%EF%B8%8F-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BB%8E-1-%E5%BC%80%E5%A7%8B"><span class="nav-number">3.1.</span> <span class="nav-text">⚠️ 为什么要从 1 开始</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E6%9E%9A%E4%B8%BE%E8%A1%8C%E8%8C%83%E5%9B%B4%EF%BC%8C%E5%8E%8B%E6%88%90%E4%B8%80%E7%BB%B4"><span class="nav-number">4.</span> <span class="nav-text">第二步：枚举行范围，压成一维</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E4%B8%80%E7%BB%B4%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3"><span class="nav-number">5.</span> <span class="nav-text">第三步：一维滑动窗口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%A8%A1%E6%9D%BF%E5%A4%8D%E7%9B%98"><span class="nav-number">5.1.</span> <span class="nav-text">滑动窗口模板复盘</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%9A%A0%EF%B8%8F-INT-MAX-%E4%B8%8E-INT-MIN-%E7%9A%84%E7%94%A8%E6%B3%95"><span class="nav-number">6.</span> <span class="nav-text">⚠️ INT_MAX 与 INT_MIN 的用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#INT-MAX-%E2%80%94-%E6%B1%82%E6%9C%80%E5%B0%8F%E5%80%BC%E6%97%B6%E7%9A%84%E5%93%A8%E5%85%B5"><span class="nav-number">6.1.</span> <span class="nav-text">INT_MAX — 求最小值时的哨兵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#INT-MIN-%E2%80%94-%E6%B1%82%E6%9C%80%E5%A4%A7%E5%80%BC%E6%97%B6%E7%9A%84%E5%93%A8%E5%85%B5"><span class="nav-number">6.2.</span> <span class="nav-text">INT_MIN — 求最大值时的哨兵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E7%94%A8%E5%AE%83%E4%BB%AC"><span class="nav-number">6.3.</span> <span class="nav-text">什么时候用它们</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%9A%A0%EF%B8%8F-%E5%AE%B9%E6%98%93%E5%86%99%E9%94%99"><span class="nav-number">6.4.</span> <span class="nav-text">⚠️ 容易写错</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81%E6%A8%A1%E6%9D%BF"><span class="nav-number">7.</span> <span class="nav-text">完整代码模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">8.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kmon"
+      src="/images/photo.jpg">
+  <p class="site-author-name" itemprop="name">Kmon</p>
+  <div class="site-description" itemprop="description"></div>
+  <div class="site-intro" style="margin-top: 10px; font-size: 14px; color: #666; line-height: 1.5;">
+    <p>分享学习笔记和自己的碎碎念~</p>
+  </div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Zhisheng0506" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Zhisheng0506" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1206300336@qq.com" title="E-Mail → mailto:1206300336@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/1495302036" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;1495302036" rel="noopener me" target="_blank"><i class="fab fa-bilibili fa-fw"></i>Bilibili</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://x.com/ByKmon_" title="Twitter → https:&#x2F;&#x2F;x.com&#x2F;ByKmon_" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://zhisheng0506.github.io/2026/05/23/%E6%9C%80%E5%B0%8F%E9%9D%A2%E7%A7%AF%E5%AD%90%E7%9F%A9%E9%98%B5-%E4%BA%8C%E7%BB%B4%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/photo.jpg">
+      <meta itemprop="name" content="Kmon">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="最小面积子矩阵-二维前缀和与滑动窗口 | Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          最小面积子矩阵-二维前缀和与滑动窗口
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2026-05-23 18:00:00 / Modified: 20:48:28" itemprop="dateCreated datePublished" datetime="2026-05-23T18:00:00+08:00">2026-05-23</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><blockquote>
+<p>题目链接：<a target="_blank" rel="noopener" href="https://noobdream.com/DreamJudge/Issue/page/1285/">N诺&#x2F;DreamJudge 1285</a></p>
+</blockquote>
+<p>在 N×M 矩阵中，找出所有元素和不小于 K 的<strong>面积最小的子矩阵</strong>。若不存在则输出 -1。</p>
+<p>暴力枚举子矩阵是 $O(N^2 M^2)$，四个循环必超时。正确做法是<strong>枚举行范围 + 列前缀和压缩 + 一维滑动窗口</strong>，复杂度 $O(N^2 M)$。</p>
+<span id="more"></span>
+
+<h2 id="整体思路"><a href="#整体思路" class="headerlink" title="整体思路"></a>整体思路</h2><p>分三步：</p>
+<ol>
+<li><strong>枚举行的上下边界</strong>（i, j），确定子矩阵的高度</li>
+<li><strong>列前缀和压缩</strong>：把 i~j 行之间每一列压成一个数，变成一维数组</li>
+<li><strong>一维滑动窗口</strong>：在压缩后的一维数组上，找满足和 ≥ K 的最短子数组</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">原始 2D 矩阵               压缩为 1D 数组（每列压成一个数）</span><br><span class="line">┌───────────┐             ┌───────┐</span><br><span class="line">│ 1  2  3  4│             │ s1│s2│s3│s4│</span><br><span class="line">│ 5  6  7  8│  →  行 i~j 列和拆成 (s1, s2, s3, s4)</span><br><span class="line">│ 9 10 11 12│</span><br><span class="line">│13 14 15 16│             然后滑动窗口找和 ≥ K 的最短子数组</span><br><span class="line">└───────────┘</span><br></pre></td></tr></table></figure>
+
+<h2 id="第一步：列前缀和"><a href="#第一步：列前缀和" class="headerlink" title="第一步：列前缀和"></a>第一步：列前缀和</h2><p>对每一列单独做前缀和，<code>colsum[i][j]</code> 表示第 j 列从第 1 行到第 i 行的和：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">mtx</span>(n + <span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(m + <span class="number">1</span>));</span><br><span class="line">vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">colsum</span>(n + <span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(m + <span class="number">1</span>));</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; j++) &#123;</span><br><span class="line">        cin &gt;&gt; mtx[i][j];</span><br><span class="line">        colsum[i][j] = colsum[i - <span class="number">1</span>][j] + mtx[i][j];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="⚠️-为什么要从-1-开始"><a href="#⚠️-为什么要从-1-开始" class="headerlink" title="⚠️ 为什么要从 1 开始"></a>⚠️ 为什么要从 1 开始</h3><p>前缀和的核心操作是 <code>colsum[i][j] = colsum[i-1][j] + mtx[i][j]</code>。如果 i&#x3D;0，<code>colsum[-1][j]</code> 就越界了。</p>
+<p>从 1 开始的好处：</p>
+<ul>
+<li><code>colsum[0][j]</code> 天然为 0，无需特判</li>
+<li>任意区间和 &#x3D; <code>colsum[j][k] - colsum[i-1][k]</code>，公式统一</li>
+</ul>
+<p><strong>机试中只要涉及前缀和，一律从下标 1 开始，省去无数边界特判。</strong></p>
+<h2 id="第二步：枚举行范围，压成一维"><a href="#第二步：枚举行范围，压成一维" class="headerlink" title="第二步：枚举行范围，压成一维"></a>第二步：枚举行范围，压成一维</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;           <span class="comment">// 上边界</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = i; j &lt;= n; j++) &#123;        <span class="comment">// 下边界</span></span><br><span class="line">        <span class="type">int</span> height = j - i + <span class="number">1</span>;           <span class="comment">// 当前子矩阵高度</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 把 i~j 行的每一列压成一个数</span></span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">colsumInrange</span><span class="params">(m + <span class="number">1</span>)</span></span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">1</span>; k &lt;= m; k++) &#123;</span><br><span class="line">            colsumInrange[k] = colsum[j][k] - colsum[i - <span class="number">1</span>][k];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 现在问题变成：在 colsumInrange 这个一维数组中，</span></span><br><span class="line">        <span class="comment">// 找满足和 ≥ K 的最短子数组</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>这是整个算法最关键的一步</strong>：用前缀和的差，把二维子矩阵的行方向压缩掉，每一列变成一个数，问题降维。</p>
+<h2 id="第三步：一维滑动窗口"><a href="#第三步：一维滑动窗口" class="headerlink" title="第三步：一维滑动窗口"></a>第三步：一维滑动窗口</h2><p>现在 <code>colsumInrange</code> 是一个长度为 m 的数组，要求其中<strong>和 ≥ K 的最短连续子数组</strong>。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> currentsum = <span class="number">0</span>, left = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> right = <span class="number">1</span>; right &lt;= m; right++) &#123;</span><br><span class="line">    currentsum += colsumInrange[right];   <span class="comment">// 右指针扩展窗口</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (currentsum &gt;= k &amp;&amp; left &lt;= right) &#123;</span><br><span class="line">        <span class="type">int</span> width = right - left + <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> area = height * width;</span><br><span class="line">        minarea = <span class="built_in">min</span>(minarea, area);</span><br><span class="line"></span><br><span class="line">        currentsum -= colsumInrange[left];</span><br><span class="line">        left++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="滑动窗口模板复盘"><a href="#滑动窗口模板复盘" class="headerlink" title="滑动窗口模板复盘"></a>滑动窗口模板复盘</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">模板：</span><br><span class="line">for (right = 0; right &lt; n; right++) &#123;</span><br><span class="line">    加入 right 元素</span><br><span class="line">    while (窗口满足条件) &#123;</span><br><span class="line">        更新答案</span><br><span class="line">        移出 left 元素</span><br><span class="line">        left++</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>关键点：</p>
+<ul>
+<li><strong>右指针不断扩展</strong>，每次循环前进一格</li>
+<li><strong>左指针只在满足条件时收缩</strong>，<code>while</code> 保证收缩到底</li>
+<li>每次满足条件时更新答案（求最短用 <code>min</code>）</li>
+</ul>
+<p>本题中窗口内是 <code>colsumInrange</code> 连续一段，窗口和 &#x3D; 子矩阵所有元素的和。行已固定，列方向用滑动窗口找最短满足条件的宽度。</p>
+<h2 id="⚠️-INT-MAX-与-INT-MIN-的用法"><a href="#⚠️-INT-MAX-与-INT-MIN-的用法" class="headerlink" title="⚠️ INT_MAX 与 INT_MIN 的用法"></a>⚠️ INT_MAX 与 INT_MIN 的用法</h2><h3 id="INT-MAX-—-求最小值时的哨兵"><a href="#INT-MAX-—-求最小值时的哨兵" class="headerlink" title="INT_MAX — 求最小值时的哨兵"></a>INT_MAX — 求最小值时的哨兵</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> minarea = INT_MAX;  <span class="comment">// 初始化为最大值</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 滑动窗口过程中更新</span></span><br><span class="line">minarea = <span class="built_in">min</span>(minarea, area);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 最后判断</span></span><br><span class="line"><span class="keyword">if</span> (minarea == INT_MAX) &#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;-1&quot;</span> &lt;&lt; endl;  <span class="comment">// 从未更新过 → 无解</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>INT_MAX</code>（2147483647）作为”最小值”的初始哨兵值，天然保证任何有效面积都比它小。无解时它保持原样，方便判断。</p>
+<h3 id="INT-MIN-—-求最大值时的哨兵"><a href="#INT-MIN-—-求最大值时的哨兵" class="headerlink" title="INT_MIN — 求最大值时的哨兵"></a>INT_MIN — 求最大值时的哨兵</h3><p>对称地，如果要找<strong>最大值</strong>，初始化为 <code>INT_MIN</code>（-2147483648）：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> maxval = INT_MIN;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (...) &#123;</span><br><span class="line">    maxval = <span class="built_in">max</span>(maxval, current);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (maxval == INT_MIN) &#123;</span><br><span class="line">    <span class="comment">// 从未更新过，无解</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>典型场景：找数组中最大的子数组和、最大的满足某条件的值。</p>
+<h3 id="什么时候用它们"><a href="#什么时候用它们" class="headerlink" title="什么时候用它们"></a>什么时候用它们</h3><table>
+<thead>
+<tr>
+<th>场景</th>
+<th>初始值</th>
+<th>判断无解</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>求<strong>最小</strong>值</td>
+<td><code>INT_MAX</code></td>
+<td><code>== INT_MAX</code></td>
+</tr>
+<tr>
+<td>求<strong>最大</strong>值</td>
+<td><code>INT_MIN</code></td>
+<td><code>== INT_MIN</code></td>
+</tr>
+</tbody></table>
+<p>核心原则：<strong>用和求解方向相反的极值做哨兵</strong>——求最小就用最大初始化，求最大就用最小初始化。</p>
+<h3 id="⚠️-容易写错"><a href="#⚠️-容易写错" class="headerlink" title="⚠️ 容易写错"></a>⚠️ 容易写错</h3><ul>
+<li>求最小值却用 0 初始化 → 负数答案会被漏掉</li>
+<li>求最大值却用 -1 初始化 → 元素全是负数时错判</li>
+<li>无解判断如果用 <code>&gt; 某个数</code> 而不是 <code>== 极值</code> → 可能漏判</li>
+</ul>
+<p>一句话：<strong>用 <code>INT_MAX</code> &#x2F; <code>INT_MIN</code> 永远不会和真实值混淆。</strong></p>
+<hr>
+<h2 id="完整代码模板"><a href="#完整代码模板" class="headerlink" title="完整代码模板"></a>完整代码模板</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> n, m, k;</span><br><span class="line">    <span class="keyword">while</span> (cin &gt;&gt; n &gt;&gt; m &gt;&gt; k) &#123;</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">mtx</span>(n + <span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(m + <span class="number">1</span>));</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; j++) &#123;</span><br><span class="line">                cin &gt;&gt; mtx[i][j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">colsum</span>(n + <span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(m + <span class="number">1</span>));</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; j++) &#123;</span><br><span class="line">                colsum[i][j] = colsum[i - <span class="number">1</span>][j] + mtx[i][j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> minarea = INT_MAX;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = i; j &lt;= n; j++) &#123;</span><br><span class="line">                <span class="type">int</span> height = j - i + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">                <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">colsumInrange</span><span class="params">(m + <span class="number">1</span>)</span></span>;</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">1</span>; k &lt;= m; k++) &#123;</span><br><span class="line">                    colsumInrange[k] = colsum[j][k] - colsum[i - <span class="number">1</span>][k];</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="type">int</span> currentsum = <span class="number">0</span>, left = <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> right = <span class="number">1</span>; right &lt;= m; right++) &#123;</span><br><span class="line">                    currentsum += colsumInrange[right];</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">while</span> (currentsum &gt;= k &amp;&amp; left &lt;= right) &#123;</span><br><span class="line">                        <span class="type">int</span> width = right - left + <span class="number">1</span>;</span><br><span class="line">                        <span class="type">int</span> area = height * width;</span><br><span class="line">                        minarea = <span class="built_in">min</span>(minarea, area);</span><br><span class="line"></span><br><span class="line">                        currentsum -= colsumInrange[left];</span><br><span class="line">                        left++;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (minarea == INT_MAX) &#123;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;-1&quot;</span> &lt;&lt; endl;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            cout &lt;&lt; minarea &lt;&lt; endl;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><table>
+<thead>
+<tr>
+<th>要点</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>前缀和下标</td>
+<td>从 1 开始，省去边界特判</td>
+</tr>
+<tr>
+<td>列前缀和</td>
+<td><code>colsum[i][j] = colsum[i-1][j] + mtx[i][j]</code></td>
+</tr>
+<tr>
+<td>压缩公式</td>
+<td><code>colsumInrange[k] = colsum[j][k] - colsum[i-1][k]</code></td>
+</tr>
+<tr>
+<td>滑动窗口模板</td>
+<td>右指针扩展 + while 满足时收缩左指针</td>
+</tr>
+<tr>
+<td>复杂度</td>
+<td>$O(N^2 M)$，枚举行 $O(N^2)$ × 滑动窗口 $O(M)$</td>
+</tr>
+<tr>
+<td>min 哨兵</td>
+<td><code>INT_MAX</code> 初始化，无解时保持原值</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+              <a href="/tags/%E7%9F%A9%E9%98%B5/" rel="tag"># 矩阵</a>
+              <a href="/tags/%E4%B8%8A%E6%9C%BA%E8%80%83%E8%AF%95/" rel="tag"># 上机考试</a>
+              <a href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/" rel="tag"># 滑动窗口</a>
+              <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" rel="tag"># 前缀和</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/05/23/%E5%AF%B9%E7%A7%B0%E7%9F%A9%E9%98%B5-%E5%B5%8C%E5%A5%97%E5%BE%AA%E7%8E%AF%E8%B7%B3%E5%87%BA%E6%8A%80%E5%B7%A7/" rel="prev" title="对称矩阵-判断与嵌套循环跳出技巧">
+                  <i class="fa fa-angle-left"></i> 对称矩阵-判断与嵌套循环跳出技巧
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Kmon</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

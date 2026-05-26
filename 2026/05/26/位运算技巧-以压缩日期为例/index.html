@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhisheng0506.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="题目描述 题目链接：N诺&#x2F;DreamJudge 1473  给定三个数，分别代表年、月、日，将其压缩为一个 16bit 的 short 型整数：  取年的后两位，放到前 7 位 日放到中间 5 位 月放到后 4 位  如果输入的日期超过当月最大天数，输出当月最大日期。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="位运算技巧-以压缩日期为例">
+<meta property="og:url" content="https://zhisheng0506.github.io/2026/05/26/%E4%BD%8D%E8%BF%90%E7%AE%97%E6%8A%80%E5%B7%A7-%E4%BB%A5%E5%8E%8B%E7%BC%A9%E6%97%A5%E6%9C%9F%E4%B8%BA%E4%BE%8B/index.html">
+<meta property="og:site_name" content="Kmon Blogs">
+<meta property="og:description" content="题目描述 题目链接：N诺&#x2F;DreamJudge 1473  给定三个数，分别代表年、月、日，将其压缩为一个 16bit 的 short 型整数：  取年的后两位，放到前 7 位 日放到中间 5 位 月放到后 4 位  如果输入的日期超过当月最大天数，输出当月最大日期。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-05-26T02:00:00.000Z">
+<meta property="article:modified_time" content="2026-05-26T13:10:13.642Z">
+<meta property="article:author" content="Kmon">
+<meta property="article:tag" content="上机考试">
+<meta property="article:tag" content="位运算">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://zhisheng0506.github.io/2026/05/26/%E4%BD%8D%E8%BF%90%E7%AE%97%E6%8A%80%E5%B7%A7-%E4%BB%A5%E5%8E%8B%E7%BC%A9%E6%97%A5%E6%9C%9F%E4%B8%BA%E4%BE%8B/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://zhisheng0506.github.io/2026/05/26/%E4%BD%8D%E8%BF%90%E7%AE%97%E6%8A%80%E5%B7%A7-%E4%BB%A5%E5%8E%8B%E7%BC%A9%E6%97%A5%E6%9C%9F%E4%B8%BA%E4%BE%8B/","path":"2026/05/26/位运算技巧-以压缩日期为例/","title":"位运算技巧-以压缩日期为例"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>位运算技巧-以压缩日期为例 | Kmon Blogs</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kmon Blogs</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%8D%E5%B8%83%E5%B1%80"><span class="nav-number">2.</span> <span class="nav-text">位布局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%8D%E8%BF%90%E7%AE%97%E5%9F%BA%E7%A1%80"><span class="nav-number">3.</span> <span class="nav-text">位运算基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%B7%A6%E7%A7%BB"><span class="nav-number">3.1.</span> <span class="nav-text">1. 左移 &lt;&lt; — 在低位”腾出空间”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%8F%B3%E7%A7%BB-%E2%80%94-%E4%B8%A2%E5%BC%83%E4%BD%8E%E4%BD%8D%EF%BC%8C%E6%8F%90%E5%8F%96%E9%AB%98%E4%BD%8D"><span class="nav-number">3.2.</span> <span class="nav-text">2. 右移 &gt;&gt; — 丢弃低位，提取高位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%8C%89%E4%BD%8D%E4%B8%8E-%E2%80%94-%E6%8F%90%E5%8F%96%E7%89%B9%E5%AE%9A%E4%BD%8D%EF%BC%88%E6%8E%A9%E7%A0%81%E6%93%8D%E4%BD%9C%EF%BC%89"><span class="nav-number">3.3.</span> <span class="nav-text">3. 按位与 &amp; — 提取特定位（掩码操作）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%8C%89%E4%BD%8D%E6%88%96-%E2%80%94-%E6%8B%BC%E6%8E%A5%E5%A4%9A%E4%B8%AA%E5%AD%97%E6%AE%B5"><span class="nav-number">3.4.</span> <span class="nav-text">4. 按位或 | — 拼接多个字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%BC%82%E6%88%96-%E2%80%94-%E7%9B%B8%E5%90%8C%E5%BE%97-0%EF%BC%8C%E4%B8%8D%E5%90%8C%E5%BE%97-1"><span class="nav-number">3.5.</span> <span class="nav-text">5. 异或 ^ — 相同得 0，不同得 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E5%8F%96%E5%8F%8D-%E2%80%94-%E5%B0%8F%E5%BF%83%E8%A1%A5%E7%A0%81"><span class="nav-number">3.6.</span> <span class="nav-text">6. 取反 ~ — 小心补码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E8%BF%9B%E5%88%B6%E4%B8%8E%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%9A%84%E4%BD%8D%E8%BF%90%E7%AE%97%E8%BD%AC%E6%8D%A2"><span class="nav-number">4.</span> <span class="nav-text">十进制与二进制的位运算转换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%81%E8%BF%9B%E5%88%B6-%E2%86%92-%E4%BA%8C%E8%BF%9B%E5%88%B6%EF%BC%88%E9%80%90%E4%BD%8D%E6%8F%90%E5%8F%96%E6%B3%95%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">十进制 → 二进制（逐位提取法）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E8%BF%9B%E5%88%B6-%E2%86%92-%E5%8D%81%E8%BF%9B%E5%88%B6%EF%BC%88%E9%80%90%E4%BD%8D%E7%BB%84%E5%90%88%E6%B3%95%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">二进制 → 十进制（逐位组合法）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E9%A2%98%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90"><span class="nav-number">5.</span> <span class="nav-text">本题代码解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E6%AE%B5%E6%8B%86%E8%A7%A3"><span class="nav-number">5.1.</span> <span class="nav-text">逐段拆解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E4%BB%8E%E5%8E%8B%E7%BC%A9%E5%80%BC%E4%B8%AD%E8%A7%A3%E5%8C%85"><span class="nav-number">5.2.</span> <span class="nav-text">如何从压缩值中解包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%9A%A0%EF%B8%8F-%E7%A7%BB%E4%BD%8D%E4%BC%98%E5%85%88%E7%BA%A7%E7%9A%84%E5%9D%91"><span class="nav-number">5.3.</span> <span class="nav-text">⚠️ 移位优先级的坑</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%8D%E8%BF%90%E7%AE%97%E5%B8%B8%E8%A7%81%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">6.</span> <span class="nav-text">位运算常见使用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%9A%A0%EF%B8%8F-%E5%85%B3%E9%94%AE%E5%9D%91%E7%82%B9"><span class="nav-number">7.</span> <span class="nav-text">⚠️ 关键坑点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81%E6%A8%A1%E6%9D%BF"><span class="nav-number">8.</span> <span class="nav-text">完整代码模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">9.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kmon"
+      src="/images/photo.jpg">
+  <p class="site-author-name" itemprop="name">Kmon</p>
+  <div class="site-description" itemprop="description"></div>
+  <div class="site-intro" style="margin-top: 10px; font-size: 14px; color: #666; line-height: 1.5;">
+    <p>分享学习笔记和自己的碎碎念~</p>
+  </div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Zhisheng0506" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Zhisheng0506" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1206300336@qq.com" title="E-Mail → mailto:1206300336@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/1495302036" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;1495302036" rel="noopener me" target="_blank"><i class="fab fa-bilibili fa-fw"></i>Bilibili</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://x.com/ByKmon_" title="Twitter → https:&#x2F;&#x2F;x.com&#x2F;ByKmon_" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://zhisheng0506.github.io/2026/05/26/%E4%BD%8D%E8%BF%90%E7%AE%97%E6%8A%80%E5%B7%A7-%E4%BB%A5%E5%8E%8B%E7%BC%A9%E6%97%A5%E6%9C%9F%E4%B8%BA%E4%BE%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/photo.jpg">
+      <meta itemprop="name" content="Kmon">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="位运算技巧-以压缩日期为例 | Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          位运算技巧-以压缩日期为例
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2026-05-26 10:00:00 / Modified: 21:10:13" itemprop="dateCreated datePublished" datetime="2026-05-26T10:00:00+08:00">2026-05-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><blockquote>
+<p>题目链接：<a target="_blank" rel="noopener" href="https://noobdream.com/DreamJudge/Issue/page/1473/">N诺&#x2F;DreamJudge 1473</a></p>
+</blockquote>
+<p>给定三个数，分别代表年、月、日，将其压缩为一个 16bit 的 short 型整数：</p>
+<ul>
+<li>取年的后两位，放到前 7 位</li>
+<li>日放到中间 5 位</li>
+<li>月放到后 4 位</li>
+</ul>
+<p>如果输入的日期超过当月最大天数，输出当月最大日期。</p>
+<span id="more"></span>
+
+<h2 id="位布局"><a href="#位布局" class="headerlink" title="位布局"></a>位布局</h2><p>题目要求的 16 bit 布局：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bit: 15 14 13 12 11 10  9  8  7  6  5  4  3  2  1  0</span><br><span class="line">     ├────────~year~─────┤├──~day~──┤├──~month~──┤</span><br><span class="line">     占 7 位              占 5 位     占 4 位</span><br></pre></td></tr></table></figure>
+
+<p>为什么这样分配？看数据范围：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>最大值</th>
+<th>需要的最少 bit 数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>年后两位</td>
+<td>99</td>
+<td>7 位（0~127）</td>
+</tr>
+<tr>
+<td>日</td>
+<td>31</td>
+<td>5 位（0~31）</td>
+</tr>
+<tr>
+<td>月</td>
+<td>12</td>
+<td>4 位（0~15）</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="位运算基础"><a href="#位运算基础" class="headerlink" title="位运算基础"></a>位运算基础</h2><p>位运算是在<strong>二进制位</strong>上直接操作，比算术运算快得多。C++ 提供了 6 种位运算符：</p>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>名称</th>
+<th>作用</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&amp;</code></td>
+<td>按位与</td>
+<td>两位都为 1 才得 1</td>
+<td><code>5 &amp; 3</code> &#x3D; <code>0101 &amp; 0011</code> &#x3D; <code>0001</code> &#x3D; 1</td>
+</tr>
+<tr>
+<td><code>|</code></td>
+<td>按位或</td>
+<td>任意一位为 1 就得 1</td>
+<td><code>5 | 3</code> &#x3D; <code>0101 | 0011</code> &#x3D; <code>0111</code> &#x3D; 7</td>
+</tr>
+<tr>
+<td><code>^</code></td>
+<td>按位异或</td>
+<td>两位不同得 1</td>
+<td><code>5 ^ 3</code> &#x3D; <code>0101 ^ 0011</code> &#x3D; <code>0110</code> &#x3D; 6</td>
+</tr>
+<tr>
+<td><code>~</code></td>
+<td>按位取反</td>
+<td>0 变 1，1 变 0</td>
+<td><code>~5</code> &#x3D; <code>~0101</code> &#x3D; <code>...1010</code>（补码）</td>
+</tr>
+<tr>
+<td><code>&lt;&lt;</code></td>
+<td>左移</td>
+<td>所有位向左移动，低位补 0</td>
+<td><code>5 &lt;&lt; 1</code> &#x3D; <code>1010</code> &#x3D; 10</td>
+</tr>
+<tr>
+<td><code>&gt;&gt;</code></td>
+<td>右移</td>
+<td>所有位向右移动，高位补 0（无符号）或符号位（有符号）</td>
+<td><code>5 &gt;&gt; 1</code> &#x3D; <code>0010</code> &#x3D; 2</td>
+</tr>
+</tbody></table>
+<h3 id="1-左移"><a href="#1-左移" class="headerlink" title="1. 左移 &lt;&lt; — 在低位”腾出空间”"></a>1. 左移 <code>&lt;&lt;</code> — 在低位”腾出空间”</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> x = <span class="number">3</span>;        <span class="comment">// 二进制: 0000 0011</span></span><br><span class="line"><span class="type">int</span> y = x &lt;&lt; <span class="number">2</span>;   <span class="comment">// 二进制: 0000 1100  = 12</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>左移 n 位 &#x3D; 乘以 2^n</strong>。<code>3 &lt;&lt; 2</code> &#x3D; <code>3 × 4</code> &#x3D; 12。</p>
+<p>在位打包中，左移用来给其他字段”腾位置”。比如 <code>year2 &lt;&lt; 9</code>，就是把年后两位推到高 7 位。</p>
+<h3 id="2-右移-—-丢弃低位，提取高位"><a href="#2-右移-—-丢弃低位，提取高位" class="headerlink" title="2. 右移 &gt;&gt; — 丢弃低位，提取高位"></a>2. 右移 <code>&gt;&gt;</code> — 丢弃低位，提取高位</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> x = <span class="number">48</span>;       <span class="comment">// 二进制: 0011 0000</span></span><br><span class="line"><span class="type">int</span> y = x &gt;&gt; <span class="number">2</span>;   <span class="comment">// 二进制: 0000 1100  = 12</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>右移 n 位 &#x3D; 除以 2^n（向下取整）</strong>。<code>48 &gt;&gt; 2</code> &#x3D; <code>48 / 4</code> &#x3D; 12。</p>
+<p>在位解包中，右移用来把高位字段”拉”到低处，再配合 <code>&amp;</code> 掩码提取。</p>
+<h3 id="3-按位与-—-提取特定位（掩码操作）"><a href="#3-按位与-—-提取特定位（掩码操作）" class="headerlink" title="3. 按位与 &amp; — 提取特定位（掩码操作）"></a>3. 按位与 <code>&amp;</code> — 提取特定位（掩码操作）</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> x = <span class="number">0b10101100</span>;        <span class="comment">// 二进制: 1010 1100</span></span><br><span class="line"><span class="type">int</span> low4 = x &amp; <span class="number">0b1111</span>;     <span class="comment">// 提取低 4 位 → 1100 = 12</span></span><br><span class="line"><span class="type">int</span> bit2 = x &amp; (<span class="number">1</span> &lt;&lt; <span class="number">2</span>);   <span class="comment">// 检测第 2 位是否为 1</span></span><br></pre></td></tr></table></figure>
+
+<p><code>&amp;</code> 最常见的用途：</p>
+<ul>
+<li><strong>提取低 n 位</strong>：<code>x &amp; ((1 &lt;&lt; n) - 1)</code></li>
+<li><strong>检测某一位</strong>：<code>x &amp; (1 &lt;&lt; k)</code> 非 0 则该位为 1</li>
+</ul>
+<h3 id="4-按位或-—-拼接多个字段"><a href="#4-按位或-—-拼接多个字段" class="headerlink" title="4. 按位或 | — 拼接多个字段"></a>4. 按位或 <code>|</code> — 拼接多个字段</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">0b00110000</span>;   <span class="comment">// 段 A</span></span><br><span class="line"><span class="type">int</span> b = <span class="number">0b00001100</span>;   <span class="comment">// 段 B</span></span><br><span class="line"><span class="type">int</span> c = <span class="number">0b00000011</span>;   <span class="comment">// 段 C</span></span><br><span class="line"><span class="type">int</span> result = a | b | c;   <span class="comment">// 00111111</span></span><br></pre></td></tr></table></figure>
+
+<p><code>|</code> 在位打包中用来把多个左移好的字段”拼”到一起。本题的 <code>(year2 &lt;&lt; 9) | (day &lt;&lt; 4) | month</code> 就是这样。</p>
+<h3 id="5-异或-—-相同得-0，不同得-1"><a href="#5-异或-—-相同得-0，不同得-1" class="headerlink" title="5. 异或 ^ — 相同得 0，不同得 1"></a>5. 异或 <code>^</code> — 相同得 0，不同得 1</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 交换两数，不用临时变量</span></span><br><span class="line">a = a ^ b;</span><br><span class="line">b = a ^ b;  <span class="comment">// b = (a^b)^b = a</span></span><br><span class="line">a = a ^ b;  <span class="comment">// a = (a^b)^a = b</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 找数组中唯一出现一次的数（其余都出现两次）</span></span><br><span class="line"><span class="type">int</span> single = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> x : arr) single ^= x;  <span class="comment">// 相同的异或抵消为 0</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="6-取反-—-小心补码"><a href="#6-取反-—-小心补码" class="headerlink" title="6. 取反 ~ — 小心补码"></a>6. 取反 <code>~</code> — 小心补码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> x = <span class="number">5</span>;      <span class="comment">// 0000...0101</span></span><br><span class="line"><span class="type">int</span> y = ~x;     <span class="comment">// 1111...1010 = -6（补码表示）</span></span><br></pre></td></tr></table></figure>
+
+<p>取反很少单独用，通常和 <code>&amp;</code> 配合做”清零某几位”的操作。</p>
+<hr>
+<h2 id="十进制与二进制的位运算转换"><a href="#十进制与二进制的位运算转换" class="headerlink" title="十进制与二进制的位运算转换"></a>十进制与二进制的位运算转换</h2><h3 id="十进制-→-二进制（逐位提取法）"><a href="#十进制-→-二进制（逐位提取法）" class="headerlink" title="十进制 → 二进制（逐位提取法）"></a>十进制 → 二进制（逐位提取法）</h3><p>之前用字符串模拟：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ❌ 旧方法：字符串模拟，每次 %2 /2</span></span><br><span class="line">string s = <span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="keyword">while</span> (n) &#123;</span><br><span class="line">    s += (n % <span class="number">2</span>) + <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">    n /= <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">reverse</span>(s.<span class="built_in">begin</span>(), s.<span class="built_in">end</span>());</span><br></pre></td></tr></table></figure>
+
+<p>位运算可以不用字符串：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ✅ 位运算：用 &gt;&gt; 和 &amp; 逐位读</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">31</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">    cout &lt;&lt; ((n &gt;&gt; i) &amp; <span class="number">1</span>);  <span class="comment">// 从高到低输出每一位</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>(n &gt;&gt; i) &amp; 1</code> 是位运算中最常用模式之一：把第 i 位移到最低位，再用 <code>&amp; 1</code> 取出。不需要任何字符串操作。</p>
+<h3 id="二进制-→-十进制（逐位组合法）"><a href="#二进制-→-十进制（逐位组合法）" class="headerlink" title="二进制 → 十进制（逐位组合法）"></a>二进制 → 十进制（逐位组合法）</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ❌ 旧方法：字符串然后 stoi + 逐位加权</span></span><br><span class="line"><span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">char</span> c : s) ans = ans * <span class="number">2</span> + (c - <span class="string">&#x27;0&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ✅ 位运算：从高位逐位&quot;读入&quot;</span></span><br><span class="line"><span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">    ans = (ans &lt;&lt; <span class="number">1</span>) | bit[i];  <span class="comment">// 左移腾空 + 或入新位</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>ans = (ans &lt;&lt; 1) | bit</code> 的含义：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">假设 ans 当前是 101，要加入下一位 1：</span><br><span class="line"></span><br><span class="line">ans &lt;&lt; 1   →   1010     (左移一位，末尾空出)</span><br><span class="line">    |   1   →   1011     (把新位放到最末尾)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="本题代码解析"><a href="#本题代码解析" class="headerlink" title="本题代码解析"></a>本题代码解析</h2><p>核心就一行位运算：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> ans = (year2 &lt;&lt; <span class="number">9</span>) | (day &lt;&lt; <span class="number">4</span>) | month;</span><br></pre></td></tr></table></figure>
+
+<h3 id="逐段拆解"><a href="#逐段拆解" class="headerlink" title="逐段拆解"></a>逐段拆解</h3><p>三个字段的二进制（以 2026&#x2F;5&#x2F;25 为例）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">year2 = 26  →  00 0011 0           （7 位）</span><br><span class="line">day   = 25  →  1 1001              （5 位）</span><br><span class="line">month = 5   →  0101                （4 位）</span><br></pre></td></tr></table></figure>
+
+<p><strong>第一步：<code>year2 &lt;&lt; 9</code></strong> — 把 year2 推到前 7 位</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">year2:            00000000 00011010   (26)</span><br><span class="line">year2 &lt;&lt; 9:       00110100 00000000   (13312)</span><br></pre></td></tr></table></figure>
+
+<p><strong>第二步：<code>day &lt;&lt; 4</code></strong> — 把 day 推到中间 5 位</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">day:              00000000 00011001   (25)</span><br><span class="line">day &lt;&lt; 4:         00000001 10010000   (400)</span><br></pre></td></tr></table></figure>
+
+<p><strong>第三步：<code>|</code> 拼接</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">year2 &lt;&lt; 9:       00110100 00000000</span><br><span class="line">day &lt;&lt; 4:         00000001 10010000</span><br><span class="line">month:            00000000 00000101</span><br><span class="line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span><br><span class="line">ans = | 结果:      00110101 10010101   = 13717</span><br><span class="line"></span><br><span class="line">验证:</span><br><span class="line">  ans &gt;&gt; 9 &amp; 0x7F   = 26   ← year2</span><br><span class="line">  ans &gt;&gt; 4 &amp; 0x1F   = 25   ← day</span><br><span class="line">  ans &amp; 0xF         = 5    ← month</span><br></pre></td></tr></table></figure>
+
+<h3 id="如何从压缩值中解包"><a href="#如何从压缩值中解包" class="headerlink" title="如何从压缩值中解包"></a>如何从压缩值中解包</h3><p>解包就是反过来，用右移 <code>&gt;&gt;</code> 和掩码 <code>&amp;</code>：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> ans = <span class="number">13717</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> month_extract  = ans &amp; <span class="number">0xF</span>;           <span class="comment">// 低 4 位</span></span><br><span class="line"><span class="type">int</span> day_extract    = (ans &gt;&gt; <span class="number">4</span>) &amp; <span class="number">0x1F</span>;   <span class="comment">// 中间 5 位</span></span><br><span class="line"><span class="type">int</span> year2_extract  = (ans &gt;&gt; <span class="number">9</span>) &amp; <span class="number">0x7F</span>;   <span class="comment">// 高 7 位</span></span><br></pre></td></tr></table></figure>
+
+<p>掩码的含义：</p>
+<table>
+<thead>
+<tr>
+<th>掩码</th>
+<th>二进制</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>0x0F</code></td>
+<td><code>0000 1111</code></td>
+<td>保留低 4 位</td>
+</tr>
+<tr>
+<td><code>0x1F</code></td>
+<td><code>0001 1111</code></td>
+<td>保留低 5 位</td>
+</tr>
+<tr>
+<td><code>0x7F</code></td>
+<td><code>0111 1111</code></td>
+<td>保留低 7 位</td>
+</tr>
+</tbody></table>
+<p><strong>掩码的通用公式</strong>：要保留低 n 位，掩码 &#x3D; <code>(1 &lt;&lt; n) - 1</code>。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="number">1</span> &lt;&lt; <span class="number">4</span>) - <span class="number">1</span> = <span class="number">16</span> - <span class="number">1</span> = <span class="number">15</span>  = <span class="number">0x0F</span></span><br><span class="line">(<span class="number">1</span> &lt;&lt; <span class="number">5</span>) - <span class="number">1</span> = <span class="number">32</span> - <span class="number">1</span> = <span class="number">31</span>  = <span class="number">0x1F</span></span><br><span class="line">(<span class="number">1</span> &lt;&lt; <span class="number">7</span>) - <span class="number">1</span> = <span class="number">128</span> - <span class="number">1</span> = <span class="number">127</span> = <span class="number">0x7F</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="⚠️-移位优先级的坑"><a href="#⚠️-移位优先级的坑" class="headerlink" title="⚠️ 移位优先级的坑"></a>⚠️ 移位优先级的坑</h3><p>位运算符的优先级很反直觉：<code>&lt;&lt;</code> 和 <code>&gt;&gt;</code> 低于 <code>+</code> <code>-</code>，但高于比较运算符。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ❌ 错误：1 &lt;&lt; 2 + 1 被解析为 1 &lt;&lt; (2 + 1) = 1 &lt;&lt; 3 = 8</span></span><br><span class="line"><span class="type">int</span> x = <span class="number">1</span> &lt;&lt; <span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ✅ 正确：加括号</span></span><br><span class="line"><span class="type">int</span> x = (<span class="number">1</span> &lt;&lt; <span class="number">2</span>) + <span class="number">1</span>;  <span class="comment">// = 4 + 1 = 5</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>位运算一律加括号</strong>，别靠记忆优先级。</p>
+<hr>
+<h2 id="位运算常见使用场景"><a href="#位运算常见使用场景" class="headerlink" title="位运算常见使用场景"></a>位运算常见使用场景</h2><table>
+<thead>
+<tr>
+<th>场景</th>
+<th>位运算</th>
+<th>等价于</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>乘 2 的幂</td>
+<td><code>x &lt;&lt; n</code></td>
+<td><code>x * 2^n</code></td>
+</tr>
+<tr>
+<td>除以 2 的幂</td>
+<td><code>x &gt;&gt; n</code></td>
+<td><code>x / 2^n</code></td>
+</tr>
+<tr>
+<td>判断奇偶</td>
+<td><code>x &amp; 1</code></td>
+<td><code>x % 2</code>（1&#x3D;奇，0&#x3D;偶）</td>
+</tr>
+<tr>
+<td>取低 n 位</td>
+<td><code>x &amp; ((1 &lt;&lt; n) - 1)</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>检测第 k 位</td>
+<td><code>(x &gt;&gt; k) &amp; 1</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>将第 k 位置 1</td>
+<td><code>x | (1 &lt;&lt; k)</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>将第 k 位置 0</td>
+<td><code>x &amp; ~(1 &lt;&lt; k)</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>翻转第 k 位</td>
+<td><code>x ^ (1 &lt;&lt; k)</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>判断 2 的幂</td>
+<td><code>x &gt; 0 &amp;&amp; (x &amp; (x-1)) == 0</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>绝对值（32bit）</td>
+<td><code>(x ^ (x &gt;&gt; 31)) - (x &gt;&gt; 31)</code></td>
+<td><code>abs(x)</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="⚠️-关键坑点"><a href="#⚠️-关键坑点" class="headerlink" title="⚠️ 关键坑点"></a>⚠️ 关键坑点</h2><ol>
+<li><strong>移位越界</strong> — 移位数 ≥ 类型宽度时是未定义行为（如 <code>1 &lt;&lt; 32</code>），确保 <code>shift &lt; sizeof(type) * 8</code></li>
+<li><strong>右移的符号扩展</strong> — 有符号整数右移时高位补符号位（算术右移），用 <code>unsigned</code> 可确保逻辑右移（高位补 0）</li>
+<li><strong>掩码位数要正确</strong> — 本题 year 占 7 位，掩码是 <code>0x7F</code> 而不是 <code>0xFF</code>；掩码少写了会丢数据</li>
+<li><strong><code>&amp;</code> 和 <code>==</code> 的运算符优先级</strong> — <code>x &amp; mask == val</code> 会先算 <code>==</code> 再算 <code>&amp;</code>，应该写成 <code>(x &amp; mask) == val</code></li>
+<li><strong>位运算一律加括号</strong> — <code>&lt;&lt;</code> <code>&gt;&gt;</code> <code>&amp;</code> <code>|</code> <code>^</code> 的优先级都不同且不直观，加括号不费事但省 debug 时间</li>
+</ol>
+<hr>
+<h2 id="完整代码模板"><a href="#完整代码模板" class="headerlink" title="完整代码模板"></a>完整代码模板</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">isLeapYear</span><span class="params">(<span class="type">int</span> y)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (y % <span class="number">400</span> == <span class="number">0</span> || (y % <span class="number">4</span> == <span class="number">0</span> &amp;&amp; y % <span class="number">100</span> != <span class="number">0</span>)) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> maxDay[<span class="number">2</span>][<span class="number">13</span>] = &#123;</span><br><span class="line">    &#123;<span class="number">0</span>, <span class="number">31</span>, <span class="number">28</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>&#125;,</span><br><span class="line">    &#123;<span class="number">0</span>, <span class="number">31</span>, <span class="number">29</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> year, month, day;</span><br><span class="line">    <span class="keyword">while</span> (cin &gt;&gt; year &gt;&gt; month &gt;&gt; day) &#123;</span><br><span class="line">        <span class="type">int</span> leap = <span class="built_in">isLeapYear</span>(year);</span><br><span class="line">        <span class="keyword">if</span> (day &gt; maxDay[leap][month]) &#123;</span><br><span class="line">            cout &lt;&lt; maxDay[leap][month] &lt;&lt; endl;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> year2 = year % <span class="number">100</span>;</span><br><span class="line">        <span class="type">int</span> ans = (year2 &lt;&lt; <span class="number">9</span>) | (day &lt;&lt; <span class="number">4</span>) | month;</span><br><span class="line">        cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><table>
+<thead>
+<tr>
+<th>要点</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>位打包</td>
+<td><code>(A &lt;&lt; shiftA) | (B &lt;&lt; shiftB) | C</code></td>
+</tr>
+<tr>
+<td>位解包</td>
+<td><code>(val &gt;&gt; shift) &amp; mask</code></td>
+</tr>
+<tr>
+<td>掩码公式</td>
+<td>低 n 位掩码 &#x3D; <code>(1 &lt;&lt; n) - 1</code></td>
+</tr>
+<tr>
+<td>逐位读二进制</td>
+<td><code>(n &gt;&gt; i) &amp; 1</code>，从高位到低位</td>
+</tr>
+<tr>
+<td>位运算拼二进制</td>
+<td><code>ans = (ans &lt;&lt; 1) | bit</code></td>
+</tr>
+<tr>
+<td>优先级</td>
+<td>位运算一律加括号，别靠记忆</td>
+</tr>
+<tr>
+<td>复杂度</td>
+<td>所有位运算都是 O(1)，比字符串模拟快得多</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+              <a href="/tags/%E4%B8%8A%E6%9C%BA%E8%80%83%E8%AF%95/" rel="tag"># 上机考试</a>
+              <a href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/" rel="tag"># 位运算</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/05/25/%E6%97%A5%E6%9C%9F%E7%B1%BB%E9%97%AE%E9%A2%98-%E5%B8%B8%E7%94%A8%E6%8A%80%E5%B7%A7%E6%B1%87%E6%80%BB/" rel="prev" title="日期类问题-常用技巧汇总">
+                  <i class="fa fa-angle-left"></i> 日期类问题-常用技巧汇总
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Kmon</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

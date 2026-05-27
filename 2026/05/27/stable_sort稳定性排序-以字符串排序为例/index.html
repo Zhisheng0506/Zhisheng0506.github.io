@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhisheng0506.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="题目描述 题目链接：N诺&#x2F;DreamJudge 1255  对输入字符串中的字符按以下规则排序：  规则 1：英文字母从 A 到 Z 排列，不区分大小写 规则 2：同一个英文字母的大小写同时存在时，按照输入顺序排列 规则 3：非英文字母的其它字符保持原来的位置  12345输入: BabA输出: aABb    ← 不区分大小写排序，但大小写保持输入顺序输入: By?e输出: Be?y">
+<meta property="og:type" content="article">
+<meta property="og:title" content="stable_sort稳定性排序-以字符串排序为例">
+<meta property="og:url" content="https://zhisheng0506.github.io/2026/05/27/stable_sort%E7%A8%B3%E5%AE%9A%E6%80%A7%E6%8E%92%E5%BA%8F-%E4%BB%A5%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8E%92%E5%BA%8F%E4%B8%BA%E4%BE%8B/index.html">
+<meta property="og:site_name" content="Kmon Blogs">
+<meta property="og:description" content="题目描述 题目链接：N诺&#x2F;DreamJudge 1255  对输入字符串中的字符按以下规则排序：  规则 1：英文字母从 A 到 Z 排列，不区分大小写 规则 2：同一个英文字母的大小写同时存在时，按照输入顺序排列 规则 3：非英文字母的其它字符保持原来的位置  12345输入: BabA输出: aABb    ← 不区分大小写排序，但大小写保持输入顺序输入: By?e输出: Be?y">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-05-27T10:00:00.000Z">
+<meta property="article:modified_time" content="2026-05-27T13:52:38.777Z">
+<meta property="article:author" content="Kmon">
+<meta property="article:tag" content="stable_sort">
+<meta property="article:tag" content="上机考试">
+<meta property="article:tag" content="排序">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://zhisheng0506.github.io/2026/05/27/stable_sort%E7%A8%B3%E5%AE%9A%E6%80%A7%E6%8E%92%E5%BA%8F-%E4%BB%A5%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8E%92%E5%BA%8F%E4%B8%BA%E4%BE%8B/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://zhisheng0506.github.io/2026/05/27/stable_sort%E7%A8%B3%E5%AE%9A%E6%80%A7%E6%8E%92%E5%BA%8F-%E4%BB%A5%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8E%92%E5%BA%8F%E4%B8%BA%E4%BE%8B/","path":"2026/05/27/stable_sort稳定性排序-以字符串排序为例/","title":"stable_sort稳定性排序-以字符串排序为例"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>stable_sort稳定性排序-以字符串排序为例 | Kmon Blogs</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kmon Blogs</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E8%B7%AF"><span class="nav-number">2.</span> <span class="nav-text">核心思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stable-sort-%E8%AF%A6%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">stable_sort 详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sort-%E5%92%8C-stable-sort-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">3.1.</span> <span class="nav-text">sort 和 stable_sort 的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88-sort-%E4%B8%8D%E7%A8%B3%E5%AE%9A"><span class="nav-number">3.2.</span> <span class="nav-text">为什么 sort 不稳定</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%A4%E7%A7%8D-cmp-%E5%86%99%E6%B3%95%E5%AF%B9%E6%AF%94"><span class="nav-number">4.</span> <span class="nav-text">两种 cmp 写法对比</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mycmp1-%E2%80%94-%E5%8F%AA%E6%9C%89%E5%A4%A7%E5%B0%8F%E5%86%99%E6%97%A0%E5%85%B3%EF%BC%8C%E6%B2%A1%E6%9C%89%E4%BF%9D%E6%8C%81%E9%A1%BA%E5%BA%8F"><span class="nav-number">4.1.</span> <span class="nav-text">mycmp1 — 只有大小写无关，没有保持顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mycmp2-%E2%80%94-%E6%AD%A3%E7%A1%AE%E7%9A%84%E7%A8%B3%E5%AE%9A%E6%8E%92%E5%BA%8F%E5%86%99%E6%B3%95"><span class="nav-number">4.2.</span> <span class="nav-text">mycmp2 — 正确的稳定排序写法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%9A%A0%EF%B8%8F-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%94%E5%9B%9E-false-%E8%80%8C%E4%B8%8D%E6%98%AF-true"><span class="nav-number">4.3.</span> <span class="nav-text">⚠️ 为什么返回 false 而不是 true</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%A4%E7%A7%8D-cmp-%E7%9A%84%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">4.4.</span> <span class="nav-text">两种 cmp 的适用场景</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E%E5%AD%97%E6%AF%8D%E4%B8%8D%E5%8F%82%E4%B8%8E%E6%8E%92%E5%BA%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">5.</span> <span class="nav-text">非字母不参与排序的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AF%B9%E5%BA%94"><span class="nav-number">5.1.</span> <span class="nav-text">代码对应</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#isalpha-%E5%87%BD%E6%95%B0"><span class="nav-number">5.2.</span> <span class="nav-text">isalpha 函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%9A%A0%EF%B8%8F-%E5%85%B3%E9%94%AE%E5%9D%91%E7%82%B9"><span class="nav-number">6.</span> <span class="nav-text">⚠️ 关键坑点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-sort-%E5%92%8C-stable-sort-%E4%B8%8D%E8%83%BD%E6%B7%B7%E7%94%A8"><span class="nav-number">6.1.</span> <span class="nav-text">1. sort 和 stable_sort 不能混用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-cmp-%E8%BF%94%E5%9B%9E-false-%E4%B8%8D%E8%83%BD%E5%86%99%E6%88%90%E8%BF%94%E5%9B%9E-true"><span class="nav-number">6.2.</span> <span class="nav-text">2. cmp 返回 false 不能写成返回 true</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E4%BF%AE%E6%94%B9%E5%8E%9F%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%97%B6%E7%94%A8%E5%BC%95%E7%94%A8"><span class="nav-number">6.3.</span> <span class="nav-text">3. 修改原字符串时用引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%A4%84%E7%90%86%E5%A4%9A%E7%BB%84%E8%BE%93%E5%85%A5"><span class="nav-number">6.4.</span> <span class="nav-text">4. 处理多组输入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E7%A9%BA%E6%A0%BC%E5%92%8C%E6%A0%87%E7%82%B9%E5%8E%9F%E6%A0%B7%E4%BF%9D%E7%95%99"><span class="nav-number">6.5.</span> <span class="nav-text">5. 空格和标点原样保留</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81%E6%A8%A1%E6%9D%BF"><span class="nav-number">7.</span> <span class="nav-text">完整代码模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">8.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kmon"
+      src="/images/photo.jpg">
+  <p class="site-author-name" itemprop="name">Kmon</p>
+  <div class="site-description" itemprop="description"></div>
+  <div class="site-intro" style="margin-top: 10px; font-size: 14px; color: #666; line-height: 1.5;">
+    <p>分享学习笔记和自己的碎碎念~</p>
+  </div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Zhisheng0506" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Zhisheng0506" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1206300336@qq.com" title="E-Mail → mailto:1206300336@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/1495302036" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;1495302036" rel="noopener me" target="_blank"><i class="fab fa-bilibili fa-fw"></i>Bilibili</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://x.com/ByKmon_" title="Twitter → https:&#x2F;&#x2F;x.com&#x2F;ByKmon_" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://zhisheng0506.github.io/2026/05/27/stable_sort%E7%A8%B3%E5%AE%9A%E6%80%A7%E6%8E%92%E5%BA%8F-%E4%BB%A5%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8E%92%E5%BA%8F%E4%B8%BA%E4%BE%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/photo.jpg">
+      <meta itemprop="name" content="Kmon">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="stable_sort稳定性排序-以字符串排序为例 | Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          stable_sort稳定性排序-以字符串排序为例
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2026-05-27 18:00:00 / Modified: 21:52:38" itemprop="dateCreated datePublished" datetime="2026-05-27T18:00:00+08:00">2026-05-27</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><blockquote>
+<p>题目链接：<a target="_blank" rel="noopener" href="https://noobdream.com/DreamJudge/Issue/page/1255/">N诺&#x2F;DreamJudge 1255</a></p>
+</blockquote>
+<p>对输入字符串中的字符按以下规则排序：</p>
+<ul>
+<li><strong>规则 1</strong>：英文字母从 A 到 Z 排列，不区分大小写</li>
+<li><strong>规则 2</strong>：同一个英文字母的大小写同时存在时，按照<strong>输入顺序</strong>排列</li>
+<li><strong>规则 3</strong>：非英文字母的其它字符<strong>保持原来的位置</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入: BabA</span><br><span class="line">输出: aABb    ← 不区分大小写排序，但大小写保持输入顺序</span><br><span class="line"></span><br><span class="line">输入: By?e</span><br><span class="line">输出: Be?y    ← &#x27;?&#x27; 保持原位，字母重排</span><br></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: A Famous Saying: Much Ado About Nothing(2012/8).</span><br><span class="line">输出: A aaAAbc dFgghh : iimM nNn oooos Sttuuuy (2012/8).</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><p>这道题有两个关键点：</p>
+<ol>
+<li><strong>非字母不参与排序，保持原位</strong> — 先把所有字母提出来单独排，再塞回原位</li>
+<li><strong>不区分大小写排序，但大小写保持输入顺序</strong> — 需要 <code>stable_sort</code>，普通 <code>sort</code> 做不到</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (<span class="built_in">getline</span>(cin, s)) &#123;</span><br><span class="line">    <span class="comment">// 1. 提取所有字母</span></span><br><span class="line">    vector&lt;<span class="type">char</span>&gt; letter;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> c : s) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">isalpha</span>(c)) letter.<span class="built_in">push_back</span>(c);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2. 稳定排序</span></span><br><span class="line">    <span class="built_in">stable_sort</span>(letter.<span class="built_in">begin</span>(), letter.<span class="built_in">end</span>(), mycmp2);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3. 塞回原位</span></span><br><span class="line">    <span class="type">int</span> idx = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">char</span>&amp; c : s) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">isalpha</span>(c)) c = letter[idx++];</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; s &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="stable-sort-详解"><a href="#stable-sort-详解" class="headerlink" title="stable_sort 详解"></a>stable_sort 详解</h2><h3 id="sort-和-stable-sort-的区别"><a href="#sort-和-stable-sort-的区别" class="headerlink" title="sort 和 stable_sort 的区别"></a>sort 和 stable_sort 的区别</h3><p><code>sort</code> 和 <code>stable_sort</code> 都在 <code>&lt;algorithm&gt;</code> 中，签名几乎一样：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sort</span>(v.<span class="built_in">begin</span>(), v.<span class="built_in">end</span>(), cmp);         <span class="comment">// 不保证稳定性</span></span><br><span class="line"><span class="built_in">stable_sort</span>(v.<span class="built_in">begin</span>(), v.<span class="built_in">end</span>(), cmp);  <span class="comment">// 保证稳定性</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>稳定性的含义</strong>：当两个元素比较结果为”相等”时，排序后它们的相对顺序保持不变。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">原始: [B, a, b, A]       字母        输入序号</span><br><span class="line"></span><br><span class="line">sort (不稳定):  可能得到  a A B b    谁在前不确定</span><br><span class="line">                也可能得到  a b A B   无法预测</span><br><span class="line"></span><br><span class="line">stable_sort:    一定得到  B a b A    大小写保持输入顺序</span><br><span class="line">                          ↑ ↑ ↑ ↑</span><br><span class="line">                          B在a前，b在A前 — 和输入一致</span><br></pre></td></tr></table></figure>
+
+<p>规则 2 要求”同一个字母的大小写保持输入顺序”，这是稳定性排序的经典场景。<strong>这种题只要遇到，一定是 <code>stable_sort</code>，不能用 <code>sort</code>。</strong></p>
+<h3 id="为什么-sort-不稳定"><a href="#为什么-sort-不稳定" class="headerlink" title="为什么 sort 不稳定"></a>为什么 sort 不稳定</h3><p><code>sort</code> 底层是快速排序（introsort），交换时可能打乱等值元素的顺序。<code>stable_sort</code> 底层通常是归并排序，天然保证稳定性。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>sort</th>
+<th>stable_sort</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>稳定性</td>
+<td>不保证</td>
+<td>保证</td>
+</tr>
+<tr>
+<td>时间复杂度</td>
+<td>$O(N \log N)$</td>
+<td>$O(N \log N)$，内存不足时最高 $O(N \log^2 N)$</td>
+</tr>
+<tr>
+<td>空间</td>
+<td>$O(\log N)$</td>
+<td>$O(N)$（需要额外缓冲区）</td>
+</tr>
+<tr>
+<td>使用场景</td>
+<td>普通排序</td>
+<td>需要保持等值元素原始顺序</td>
+</tr>
+</tbody></table>
+<p>竞赛中 99% 的场景 <code>sort</code> 够用，但<strong>多关键字排序中，当比较器只比较部分字段、其余字段要保持原始顺序时，必须用 <code>stable_sort</code></strong>。</p>
+<hr>
+<h2 id="两种-cmp-写法对比"><a href="#两种-cmp-写法对比" class="headerlink" title="两种 cmp 写法对比"></a>两种 cmp 写法对比</h2><h3 id="mycmp1-—-只有大小写无关，没有保持顺序"><a href="#mycmp1-—-只有大小写无关，没有保持顺序" class="headerlink" title="mycmp1 — 只有大小写无关，没有保持顺序"></a>mycmp1 — 只有大小写无关，没有保持顺序</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">mycmp1</span><span class="params">(<span class="type">char</span> a, <span class="type">char</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">tolower</span>(a) &lt; <span class="built_in">tolower</span>(b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>逻辑：a 的小写 &lt; b 的小写 → 排前面。</p>
+<p><strong>问题：当 <code>tolower(a) == tolower(b)</code>（同一个字母的大小写），cmp 返回 false。</strong></p>
+<p>对于 <code>sort</code>：<code>a &lt; b</code> 和 <code>b &lt; a</code> 都返回 false，sort 认为 a 和 b 等价，<strong>可以任意交换它们</strong>——结果不确定，不符合规则 2。</p>
+<p>对于 <code>stable_sort</code> 配合 <code>mycmp1</code>：返回 false 虽然表示”不需要交换”，但 <code>mycmp1</code> 本身没有区分”不同字母要排序”和”同字母不排序”这两个意图。<strong>写法上不够明确，依赖 stable_sort 的稳定性来兜底</strong>——不如 mycmp2 清晰。</p>
+<h3 id="mycmp2-—-正确的稳定排序写法"><a href="#mycmp2-—-正确的稳定排序写法" class="headerlink" title="mycmp2 — 正确的稳定排序写法"></a>mycmp2 — 正确的稳定排序写法</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">mycmp2</span><span class="params">(<span class="type">char</span> a, <span class="type">char</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="type">char</span> x = <span class="built_in">tolower</span>(a);</span><br><span class="line">    <span class="type">char</span> y = <span class="built_in">tolower</span>(b);</span><br><span class="line">    <span class="keyword">if</span> (x != y) &#123;</span><br><span class="line">        <span class="keyword">return</span> x &lt; y;    <span class="comment">// 不同字母：按字母顺序排</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;        <span class="comment">// 同一字母：不排，靠 stable_sort 保持原序</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当 <code>x == y</code>（同一个字母的大小写），返回 <code>false</code>。对于 <code>stable_sort</code>，返回 false 意味着”a 不应该排在 b 前面”，结合稳定性——<strong>原本在前面的人继续保持</strong>。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 输入: BabA → 字母: [B, a, b, A]</span></span><br><span class="line"><span class="built_in">stable_sort</span>([B, a, b, A], mycmp2);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 比较 B vs a: tolower→ b vs a, b &lt; a 为 false → a 排在 B 前</span></span><br><span class="line"><span class="comment">// 比较 b vs A: tolower→ b vs a, 同，返回 false → 保持 b 在 A 前</span></span><br><span class="line"><span class="comment">// 比较 B vs b: tolower→ b vs b, 同，返回 false → 保持 B 在 b 前</span></span><br><span class="line"><span class="comment">// 结果: [B, a, b, A] — 同一字母大小写的输入顺序被完美保留</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="⚠️-为什么返回-false-而不是-true"><a href="#⚠️-为什么返回-false-而不是-true" class="headerlink" title="⚠️ 为什么返回 false 而不是 true"></a>⚠️ 为什么返回 false 而不是 true</h3><p>cmp 返回 true 表示”a 应该排在 b 前面”。当两个字符大小写忽略后相同时，不应该再做任何重排，所以统一返回 false。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ✅ 正确：同字母返回 false</span></span><br><span class="line"><span class="keyword">if</span> (x != y) <span class="keyword">return</span> x &lt; y;</span><br><span class="line"><span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ❌ 错误：同字母返回 true</span></span><br><span class="line"><span class="keyword">if</span> (x != y) <span class="keyword">return</span> x &lt; y;</span><br><span class="line"><span class="keyword">return</span> <span class="literal">true</span>;   <span class="comment">// 会强制 a 排在 b 前面，破坏稳定性</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="两种-cmp-的适用场景"><a href="#两种-cmp-的适用场景" class="headerlink" title="两种 cmp 的适用场景"></a>两种 cmp 的适用场景</h3><table>
+<thead>
+<tr>
+<th>cmp</th>
+<th>行为</th>
+<th>适用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>mycmp1</td>
+<td>不区分大小写比较，相同靠 stable_sort 兜底</td>
+<td>简单场景，但不够显式</td>
+</tr>
+<tr>
+<td>mycmp2</td>
+<td>明确分离”不同字母排序”和”同字母保持”两个逻辑</td>
+<td><strong>推荐</strong>，意图清晰</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="非字母不参与排序的实现"><a href="#非字母不参与排序的实现" class="headerlink" title="非字母不参与排序的实现"></a>非字母不参与排序的实现</h2><p>这种”只排一部分元素”的题目，通用的三步法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">原始字符串:  B y ? e</span><br><span class="line"></span><br><span class="line">第一步: 提取</span><br><span class="line">  遍历原串，isalpha 的提出来 → letter = [B, y, e]</span><br><span class="line"></span><br><span class="line">第二步: 单独排序</span><br><span class="line">  stable_sort(letter) → letter = [B, e, y]</span><br><span class="line"></span><br><span class="line">第三步: 塞回原位</span><br><span class="line">  再遍历原串，遇到字母就从 letter 里取下一个塞进去</span><br><span class="line">  非字母跳过</span><br><span class="line"></span><br><span class="line">  B y ? e</span><br><span class="line">  ↓ ↓   ↓</span><br><span class="line">  B e ? y    ← 非字母 &#x27;?&#x27; 原地不动</span><br></pre></td></tr></table></figure>
+
+<h3 id="代码对应"><a href="#代码对应" class="headerlink" title="代码对应"></a>代码对应</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一步：提取</span></span><br><span class="line">vector&lt;<span class="type">char</span>&gt; letter;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> c : s) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">isalpha</span>(c)) letter.<span class="built_in">push_back</span>(c);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 第二步：排序</span></span><br><span class="line"><span class="built_in">stable_sort</span>(letter.<span class="built_in">begin</span>(), letter.<span class="built_in">end</span>(), mycmp2);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 第三步：塞回</span></span><br><span class="line"><span class="type">int</span> idx = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">char</span>&amp; c : s) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">isalpha</span>(c)) &#123;</span><br><span class="line">        c = letter[idx++];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个模式在机试中反复出现——日志排序、成绩单排序、以及各种”跳过特定元素”的排序题，用的都是同一套<strong>提取 → 排序 → 塞回</strong>流程。</p>
+<h3 id="isalpha-函数"><a href="#isalpha-函数" class="headerlink" title="isalpha 函数"></a>isalpha 函数</h3><p><code>isalpha(c)</code> 定义在 <code>&lt;cctype&gt;</code>（<code>bits/stdc++.h</code> 已包含），判断字符是否为英文字母（大小写均返回 true）。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>判断</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>isalpha(c)</code></td>
+<td>是否为字母（A-Z, a-z）</td>
+</tr>
+<tr>
+<td><code>isdigit(c)</code></td>
+<td>是否为数字（0-9）</td>
+</tr>
+<tr>
+<td><code>isalnum(c)</code></td>
+<td>是否为字母或数字</td>
+</tr>
+<tr>
+<td><code>isspace(c)</code></td>
+<td>是否为空白字符</td>
+</tr>
+<tr>
+<td><code>tolower(c)</code></td>
+<td>转小写</td>
+</tr>
+<tr>
+<td><code>toupper(c)</code></td>
+<td>转大写</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="⚠️-关键坑点"><a href="#⚠️-关键坑点" class="headerlink" title="⚠️ 关键坑点"></a>⚠️ 关键坑点</h2><h3 id="1-sort-和-stable-sort-不能混用"><a href="#1-sort-和-stable-sort-不能混用" class="headerlink" title="1. sort 和 stable_sort 不能混用"></a>1. sort 和 stable_sort 不能混用</h3><p>规则要求保持大小写输入顺序 → 必须 <code>stable_sort</code>。用 <code>sort</code> 的代码在某些输入下能过样例、但正式数据必然出错。</p>
+<h3 id="2-cmp-返回-false-不能写成返回-true"><a href="#2-cmp-返回-false-不能写成返回-true" class="headerlink" title="2. cmp 返回 false 不能写成返回 true"></a>2. cmp 返回 false 不能写成返回 true</h3><p>同一字母时返回 false 才是”保持顺序”。返回 true 等于告诉算法”必须交换”，反而破坏了稳定性。</p>
+<h3 id="3-修改原字符串时用引用"><a href="#3-修改原字符串时用引用" class="headerlink" title="3. 修改原字符串时用引用"></a>3. 修改原字符串时用引用</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">char</span>&amp; c : s) &#123;  <span class="comment">// ⚠️ 必须是 char&amp;，不是 char</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">isalpha</span>(c)) c = letter[idx++];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>用 <code>char c</code> 不会修改原串，结果输出还是原样。必须用 <code>char&amp; c</code> 才能原地修改。</p>
+<h3 id="4-处理多组输入"><a href="#4-处理多组输入" class="headerlink" title="4. 处理多组输入"></a>4. 处理多组输入</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (<span class="built_in">getline</span>(cin, s)) &#123;  <span class="comment">// ⚠️ 用 while，不是 if</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>题目可能有空格和空行，<code>cin &gt;&gt; s</code> 会跳过空格和换行，<strong>必须用 <code>getline</code></strong>。</p>
+<h3 id="5-空格和标点原样保留"><a href="#5-空格和标点原样保留" class="headerlink" title="5. 空格和标点原样保留"></a>5. 空格和标点原样保留</h3><p><code>isalpha</code> 对空格、标点、数字等都返回 false，它们会被跳过，保留在原位。这恰好满足规则 3。</p>
+<hr>
+<h2 id="完整代码模板"><a href="#完整代码模板" class="headerlink" title="完整代码模板"></a>完整代码模板</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">mycmp2</span><span class="params">(<span class="type">char</span> a, <span class="type">char</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="type">char</span> x = <span class="built_in">tolower</span>(a);</span><br><span class="line">    <span class="type">char</span> y = <span class="built_in">tolower</span>(b);</span><br><span class="line">    <span class="keyword">if</span> (x != y) &#123;</span><br><span class="line">        <span class="keyword">return</span> x &lt; y;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    string s;</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">getline</span>(cin, s)) &#123;</span><br><span class="line">        vector&lt;<span class="type">char</span>&gt; letter;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> c : s) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">isalpha</span>(c)) &#123;</span><br><span class="line">                letter.<span class="built_in">push_back</span>(c);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">stable_sort</span>(letter.<span class="built_in">begin</span>(), letter.<span class="built_in">end</span>(), mycmp2);</span><br><span class="line">        <span class="type">int</span> idx = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">char</span>&amp; c : s) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">isalpha</span>(c)) &#123;</span><br><span class="line">                c = letter[idx++];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; s &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><table>
+<thead>
+<tr>
+<th>要点</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>stable_sort vs sort</td>
+<td>前者保持等值元素原始顺序，后者不保证</td>
+</tr>
+<tr>
+<td>何时用 stable_sort</td>
+<td>多关键字排序中，cmp 只比较部分字段、其余字段要保持原序</td>
+</tr>
+<tr>
+<td>cmp 返回 false</td>
+<td>同字母返回 false，靠 stable_sort 保持顺序</td>
+</tr>
+<tr>
+<td>mycmp1 vs mycmp2</td>
+<td>mycmp2 显式分离两个意图，更推荐</td>
+</tr>
+<tr>
+<td>部分排序模式</td>
+<td>提取 → 排序 → 塞回，三步走</td>
+</tr>
+<tr>
+<td>isalpha</td>
+<td>过滤字母，标点空格数字保留原位</td>
+</tr>
+<tr>
+<td>getline</td>
+<td>处理含空格的整行输入</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+              <a href="/tags/%E4%B8%8A%E6%9C%BA%E8%80%83%E8%AF%95/" rel="tag"># 上机考试</a>
+              <a href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag"># 排序</a>
+              <a href="/tags/stable-sort/" rel="tag"># stable_sort</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/05/27/stringstream%E5%AD%97%E7%AC%A6%E6%B5%81-%E7%AB%9E%E8%B5%9B%E4%B8%AD%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%88%A9%E5%99%A8/" rel="prev" title="stringstream字符流-竞赛中的字符串利器">
+                  <i class="fa fa-angle-left"></i> stringstream字符流-竞赛中的字符串利器
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Kmon</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

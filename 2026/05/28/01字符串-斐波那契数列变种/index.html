@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhisheng0506.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="题目描述 题目链接：N诺&#x2F;DreamJudge 1479  给你一串长度为 n 的全为 0 的字符串，你可以进行一个压缩操作：将两个相邻的 0 压缩成一个 1。请问最多会有多少种不同的组合出现？ 结果可能过大，答案对 2333333 取模。 123n &#x3D; 1:  &quot;0&quot;           → 1 种n &#x3D; 2:  &quot;00&quot; &#x2F; &quot;1&amp;q">
+<meta property="og:type" content="article">
+<meta property="og:title" content="01字符串-斐波那契数列变种">
+<meta property="og:url" content="https://zhisheng0506.github.io/2026/05/28/01%E5%AD%97%E7%AC%A6%E4%B8%B2-%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97%E5%8F%98%E7%A7%8D/index.html">
+<meta property="og:site_name" content="Kmon Blogs">
+<meta property="og:description" content="题目描述 题目链接：N诺&#x2F;DreamJudge 1479  给你一串长度为 n 的全为 0 的字符串，你可以进行一个压缩操作：将两个相邻的 0 压缩成一个 1。请问最多会有多少种不同的组合出现？ 结果可能过大，答案对 2333333 取模。 123n &#x3D; 1:  &quot;0&quot;           → 1 种n &#x3D; 2:  &quot;00&quot; &#x2F; &quot;1&amp;q">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-05-28T02:00:00.000Z">
+<meta property="article:modified_time" content="2026-05-28T06:31:49.052Z">
+<meta property="article:author" content="Kmon">
+<meta property="article:tag" content="上机考试">
+<meta property="article:tag" content="动态规划">
+<meta property="article:tag" content="斐波那契">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://zhisheng0506.github.io/2026/05/28/01%E5%AD%97%E7%AC%A6%E4%B8%B2-%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97%E5%8F%98%E7%A7%8D/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://zhisheng0506.github.io/2026/05/28/01%E5%AD%97%E7%AC%A6%E4%B8%B2-%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97%E5%8F%98%E7%A7%8D/","path":"2026/05/28/01字符串-斐波那契数列变种/","title":"01字符串-斐波那契数列变种"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>01字符串-斐波那契数列变种 | Kmon Blogs</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kmon Blogs</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E8%B7%AF"><span class="nav-number">2.</span> <span class="nav-text">核心思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%92%E6%8E%A8%E8%BF%87%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">递推过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%98%AF%E5%AF%B9%E7%9A%84"><span class="nav-number">3.1.</span> <span class="nav-text">为什么这是对的</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%9A%A0%EF%B8%8F-%E9%80%92%E5%BD%92%E7%9A%84%E8%87%B4%E5%91%BD%E9%97%AE%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">⚠️ 递归的致命问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E7%A1%AE%E5%81%9A%E6%B3%95%EF%BC%9A%E8%BF%AD%E4%BB%A3"><span class="nav-number">4.1.</span> <span class="nav-text">正确做法：迭代</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A9%BA%E9%97%B4%E4%BC%98%E5%8C%96%EF%BC%9A%E6%BB%9A%E5%8A%A8%E5%8F%98%E9%87%8F"><span class="nav-number">4.2.</span> <span class="nav-text">空间优化：滚动变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%9A%A0%EF%B8%8F-%E5%85%B3%E9%94%AE%E5%9D%91%E7%82%B9"><span class="nav-number">5.</span> <span class="nav-text">⚠️ 关键坑点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%80%92%E5%BD%92%E7%88%86%E6%A0%88"><span class="nav-number">5.1.</span> <span class="nav-text">1. 递归爆栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%BE%B9%E7%95%8C%E6%9D%A1%E4%BB%B6"><span class="nav-number">5.2.</span> <span class="nav-text">2. 边界条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%8F%96%E6%A8%A1%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="nav-number">5.3.</span> <span class="nav-text">3. 取模的位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%89%BE%E8%A7%84%E5%BE%8B%E7%9A%84%E9%80%9A%E7%94%A8%E6%8A%80%E5%B7%A7%EF%BC%9AOEIS"><span class="nav-number">5.4.</span> <span class="nav-text">4. 找规律的通用技巧：OEIS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81%E6%A8%A1%E6%9D%BF"><span class="nav-number">6.</span> <span class="nav-text">完整代码模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kmon"
+      src="/images/photo.jpg">
+  <p class="site-author-name" itemprop="name">Kmon</p>
+  <div class="site-description" itemprop="description"></div>
+  <div class="site-intro" style="margin-top: 10px; font-size: 14px; color: #666; line-height: 1.5;">
+    <p>分享学习笔记和自己的碎碎念~</p>
+  </div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Zhisheng0506" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Zhisheng0506" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1206300336@qq.com" title="E-Mail → mailto:1206300336@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/1495302036" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;1495302036" rel="noopener me" target="_blank"><i class="fab fa-bilibili fa-fw"></i>Bilibili</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://x.com/ByKmon_" title="Twitter → https:&#x2F;&#x2F;x.com&#x2F;ByKmon_" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://zhisheng0506.github.io/2026/05/28/01%E5%AD%97%E7%AC%A6%E4%B8%B2-%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97%E5%8F%98%E7%A7%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/photo.jpg">
+      <meta itemprop="name" content="Kmon">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="01字符串-斐波那契数列变种 | Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          01字符串-斐波那契数列变种
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2026-05-28 10:00:00 / Modified: 14:31:49" itemprop="dateCreated datePublished" datetime="2026-05-28T10:00:00+08:00">2026-05-28</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><blockquote>
+<p>题目链接：<a target="_blank" rel="noopener" href="https://noobdream.com/DreamJudge/Issue/page/1479/">N诺&#x2F;DreamJudge 1479</a></p>
+</blockquote>
+<p>给你一串长度为 n 的全为 <code>0</code> 的字符串，你可以进行一个压缩操作：将两个相邻的 <code>0</code> 压缩成一个 <code>1</code>。请问最多会有多少种不同的组合出现？</p>
+<p>结果可能过大，答案对 2333333 取模。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">n = 1:  &quot;0&quot;           → 1 种</span><br><span class="line">n = 2:  &quot;00&quot; / &quot;1&quot;    → 2 种</span><br><span class="line">n = 3:  &quot;000&quot; / &quot;10&quot; / &quot;01&quot; → 3 种</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: 3</span><br><span class="line">输出: 3</span><br></pre></td></tr></table></figure>
+
+<p><code>1 ≤ n ≤ 10000</code></p>
+<span id="more"></span>
+
+<h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><p>这道题的关键一步是<strong>看出它是斐波那契数列</strong>。看不出来就是硬推，看出来了就是秒杀。</p>
+<p>对于长度为 n 的全 0 串，考虑<strong>最左边的位置</strong>有两种选择：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">选择 1: 第一个 0 保持不变</span><br><span class="line">        剩余 n-1 个 0 → f(n-1) 种组合</span><br><span class="line"></span><br><span class="line">选择 2: 前两个 0 压缩成一个 1</span><br><span class="line">        剩余 n-2 个 0 → f(n-2) 种组合</span><br></pre></td></tr></table></figure>
+
+<p>所以 <code>f(n) = f(n-1) + f(n-2)</code>，边界 <code>f(1) = 1, f(2) = 2</code>。</p>
+<p>这就是斐波那契数列，只是起始项和标准写法不同：标准斐波那契 <code>1, 1, 2, 3, 5...</code>，本题 <code>1, 2, 3, 5, 8...</code>，相当于标准斐波那契从第 2 项开始往后移一位。</p>
+<hr>
+<h2 id="递推过程"><a href="#递推过程" class="headerlink" title="递推过程"></a>递推过程</h2><p>手动推前几项来验证：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">n = 1:</span><br><span class="line">  只能 &quot;0&quot;</span><br><span class="line">  共 1 种</span><br><span class="line"></span><br><span class="line">n = 2:</span><br><span class="line">  &quot;00&quot; — 不压缩</span><br><span class="line">  &quot;1&quot;  — 压缩</span><br><span class="line">  共 2 种</span><br><span class="line"></span><br><span class="line">n = 3:</span><br><span class="line">  &quot;000&quot; — 不压缩</span><br><span class="line">  &quot;10&quot;  — 压缩前两个</span><br><span class="line">  &quot;01&quot;  — 压缩后两个</span><br><span class="line">  共 3 种</span><br><span class="line"></span><br><span class="line">n = 4:</span><br><span class="line">  &quot;0000&quot; — 全不压缩</span><br><span class="line">  &quot;100&quot;  — 压缩前两个</span><br><span class="line">  &quot;010&quot;  — 压缩中间两个</span><br><span class="line">  &quot;001&quot;  — 压缩后两个</span><br><span class="line">  &quot;11&quot;   — 压缩前两个 + 再压缩后两个</span><br><span class="line">  共 5 种</span><br><span class="line"></span><br><span class="line">n = 5:  f(4)+f(3) = 5+3 = 8 种</span><br><span class="line">n = 6:  f(5)+f(4) = 8+5 = 13 种</span><br></pre></td></tr></table></figure>
+
+<p>规律：<code>1, 2, 3, 5, 8, 13, 21, 34...</code>，就是斐波那契数列。</p>
+<h3 id="为什么这是对的"><a href="#为什么这是对的" class="headerlink" title="为什么这是对的"></a>为什么这是对的</h3><p>关键观察：<strong>每个位置只能和它相邻的位置压缩</strong>，且压缩后变成一个新字符，不再参与后续压缩。这个”选或不选”的结构天然就是斐波那契递推。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">位置:  1 2 3 4 5 ...</span><br><span class="line">       ↓</span><br><span class="line">看位置 1 和 2:</span><br><span class="line">  - 不压缩 → 位置 1 保持 &#x27;0&#x27;，剩下的 2~n 共 n-1 个位置，子问题 f(n-1)</span><br><span class="line">  - 压缩   → 位置 1&amp;2 变 &#x27;1&#x27;，剩下的 3~n 共 n-2 个位置，子问题 f(n-2)</span><br></pre></td></tr></table></figure>
+
+<p>两种选择互相独立、没有重叠，所以直接相加。</p>
+<hr>
+<h2 id="⚠️-递归的致命问题"><a href="#⚠️-递归的致命问题" class="headerlink" title="⚠️ 递归的致命问题"></a>⚠️ 递归的致命问题</h2><p>最自然的写法是递归：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">fun</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">2</span>) <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">return</span> (<span class="built_in">fun</span>(n - <span class="number">1</span>) + <span class="built_in">fun</span>(n - <span class="number">2</span>)) % <span class="number">2333333</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但这道题 <code>n ≤ 10000</code>，递归会直接爆栈（Stack Overflow）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fun(10000) 的递归深度 = 10000 层</span><br><span class="line">一般评测环境栈空间 ≈ 8MB</span><br><span class="line">10000 层调用 → 远远超出 → RE</span><br></pre></td></tr></table></figure>
+
+<p>即使不爆栈，无记忆化的递归是 $O(2^n)$，跑不完。</p>
+<h3 id="正确做法：迭代"><a href="#正确做法：迭代" class="headerlink" title="正确做法：迭代"></a>正确做法：迭代</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> f[<span class="number">10005</span>];</span><br><span class="line">f[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">f[<span class="number">2</span>] = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">3</span>; i &lt;= n; i++) &#123;</span><br><span class="line">    f[i] = (f[i - <span class="number">1</span>] + f[i - <span class="number">2</span>]) % <span class="number">2333333</span>;</span><br><span class="line">&#125;</span><br><span class="line">cout &lt;&lt; f[n] &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
+
+<p>O(N) 时间，O(N) 空间，n&#x3D;10000 毫无压力。</p>
+<h3 id="空间优化：滚动变量"><a href="#空间优化：滚动变量" class="headerlink" title="空间优化：滚动变量"></a>空间优化：滚动变量</h3><p>每项只依赖前两项，所以两个变量足够：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (n == <span class="number">1</span>) &#123; cout &lt;&lt; <span class="number">1</span>; <span class="keyword">return</span> <span class="number">0</span>; &#125;</span><br><span class="line"><span class="keyword">if</span> (n == <span class="number">2</span>) &#123; cout &lt;&lt; <span class="number">2</span>; <span class="keyword">return</span> <span class="number">0</span>; &#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> a = <span class="number">1</span>, b = <span class="number">2</span>, c;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">3</span>; i &lt;= n; i++) &#123;</span><br><span class="line">    c = (a + b) % <span class="number">2333333</span>;</span><br><span class="line">    a = b;</span><br><span class="line">    b = c;</span><br><span class="line">&#125;</span><br><span class="line">cout &lt;&lt; c &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
+
+<p>O(N) 时间，O(1) 空间。</p>
+<hr>
+<h2 id="⚠️-关键坑点"><a href="#⚠️-关键坑点" class="headerlink" title="⚠️ 关键坑点"></a>⚠️ 关键坑点</h2><h3 id="1-递归爆栈"><a href="#1-递归爆栈" class="headerlink" title="1. 递归爆栈"></a>1. 递归爆栈</h3><p><code>n ≤ 10000</code> 级别的斐波那契<strong>必须迭代</strong>。机试中只要 n ≥ 5000，递归就要警惕。</p>
+<h3 id="2-边界条件"><a href="#2-边界条件" class="headerlink" title="2. 边界条件"></a>2. 边界条件</h3><p>本题 <code>f(1)=1, f(2)=2</code>，而标准斐波那契 <code>f(0)=0, f(1)=1</code>。递推公式相同，边界不同，初始化时要确认。</p>
+<h3 id="3-取模的位置"><a href="#3-取模的位置" class="headerlink" title="3. 取模的位置"></a>3. 取模的位置</h3><p>每算一项就要取模，不是最后再取。<code>f(10000)</code> 大约有 2000 位，<code>int</code> 和 <code>long long</code> 都装不下。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ✅ 正确：每步取模</span></span><br><span class="line">f[i] = (f[i - <span class="number">1</span>] + f[i - <span class="number">2</span>]) % <span class="number">2333333</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ❌ 错误：最后才取模，中间值溢出</span></span><br><span class="line">f[i] = f[i - <span class="number">1</span>] + f[i - <span class="number">2</span>];</span><br><span class="line"><span class="comment">// 最后再 f[n] % 2333333  ← int 早溢出了</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-找规律的通用技巧：OEIS"><a href="#4-找规律的通用技巧：OEIS" class="headerlink" title="4. 找规律的通用技巧：OEIS"></a>4. 找规律的通用技巧：OEIS</h3><p>如果手推不出规律，可以把前几项 <code>1, 2, 3, 5, 8, 13</code> 输入 <a target="_blank" rel="noopener" href="https://oeis.org/">OEIS</a>，它立刻告诉你这是斐波那契数列。这是竞赛中常用的”暴力+查表”策略——与其自己推半天，不如几秒钟查出来。</p>
+<hr>
+<h2 id="完整代码模板"><a href="#完整代码模板" class="headerlink" title="完整代码模板"></a>完整代码模板</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">1</span>) &#123;</span><br><span class="line">        cout &lt;&lt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">2</span>) &#123;</span><br><span class="line">        cout &lt;&lt; <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> a = <span class="number">1</span>, b = <span class="number">2</span>, c;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">3</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        c = (a + b) % <span class="number">2333333</span>;</span><br><span class="line">        a = b;</span><br><span class="line">        b = c;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; c;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><table>
+<thead>
+<tr>
+<th>要点</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>递推公式</td>
+<td><code>f(n) = f(n-1) + f(n-2)</code></td>
+</tr>
+<tr>
+<td>边界</td>
+<td><code>f(1)=1, f(2)=2</code>（标准斐波那契偏移一项）</td>
+</tr>
+<tr>
+<td>推理方法</td>
+<td>考虑最左位置”选或不选”，分解成子问题</td>
+</tr>
+<tr>
+<td>n 较大时</td>
+<td>必须迭代，递归会爆栈</td>
+</tr>
+<tr>
+<td>取模</td>
+<td>每步都取模，不能最后取</td>
+</tr>
+<tr>
+<td>空间优化</td>
+<td>用滚动变量，O(1) 空间</td>
+</tr>
+<tr>
+<td>找规律</td>
+<td>手推不出来就查 OEIS</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+              <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag"># 动态规划</a>
+              <a href="/tags/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91/" rel="tag"># 斐波那契</a>
+              <a href="/tags/%E4%B8%8A%E6%9C%BA%E8%80%83%E8%AF%95/" rel="tag"># 上机考试</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/05/27/stable_sort%E7%A8%B3%E5%AE%9A%E6%80%A7%E6%8E%92%E5%BA%8F-%E4%BB%A5%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8E%92%E5%BA%8F%E4%B8%BA%E4%BE%8B/" rel="prev" title="stable_sort稳定性排序-以字符串排序为例">
+                  <i class="fa fa-angle-left"></i> stable_sort稳定性排序-以字符串排序为例
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/05/28/%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB-%E7%BB%8F%E5%85%B8%E4%BA%8C%E7%BB%B4DP/" rel="next" title="编辑距离-经典二维DP">
+                  编辑距离-经典二维DP <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Kmon</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

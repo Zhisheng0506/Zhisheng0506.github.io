@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhisheng0506.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="题目描述 题目链接：N诺&#x2F;DreamJudge 1287  凯撒密码：输入一个由字母组成的字符串，每个字符向后偏移 2 位（a→c, Z→B）。输出每个偏移后字符的奇校验码及其对应的十进制数。 奇校验规则：如果字符二进制中 1 的个数为偶数，将最高位置为 1（确保 1 的总数为奇数）。 123456输入: aD输出:原文：aD密文：cFc  11100011  227F  0100011">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二进制与十进制转换-位运算实战">
+<meta property="og:url" content="https://zhisheng0506.github.io/2026/05/30/%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%8E%E5%8D%81%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2-%E4%BD%8D%E8%BF%90%E7%AE%97%E5%AE%9E%E6%88%98/index.html">
+<meta property="og:site_name" content="Kmon Blogs">
+<meta property="og:description" content="题目描述 题目链接：N诺&#x2F;DreamJudge 1287  凯撒密码：输入一个由字母组成的字符串，每个字符向后偏移 2 位（a→c, Z→B）。输出每个偏移后字符的奇校验码及其对应的十进制数。 奇校验规则：如果字符二进制中 1 的个数为偶数，将最高位置为 1（确保 1 的总数为奇数）。 123456输入: aD输出:原文：aD密文：cFc  11100011  227F  0100011">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-05-30T10:00:00.000Z">
+<meta property="article:modified_time" content="2026-05-30T12:14:43.954Z">
+<meta property="article:author" content="Kmon">
+<meta property="article:tag" content="上机考试">
+<meta property="article:tag" content="位运算">
+<meta property="article:tag" content="字符串">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="进制转换">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://zhisheng0506.github.io/2026/05/30/%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%8E%E5%8D%81%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2-%E4%BD%8D%E8%BF%90%E7%AE%97%E5%AE%9E%E6%88%98/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://zhisheng0506.github.io/2026/05/30/%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%8E%E5%8D%81%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2-%E4%BD%8D%E8%BF%90%E7%AE%97%E5%AE%9E%E6%88%98/","path":"2026/05/30/二进制与十进制转换-位运算实战/","title":"二进制与十进制转换-位运算实战"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>二进制与十进制转换-位运算实战 | Kmon Blogs</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kmon Blogs</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E8%B7%AF"><span class="nav-number">2.</span> <span class="nav-text">核心思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E5%87%AF%E6%92%92%E5%81%8F%E7%A7%BB"><span class="nav-number">3.</span> <span class="nav-text">第一步：凯撒偏移</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E5%8D%81%E8%BF%9B%E5%88%B6-%E2%86%92-%E4%BA%8C%E8%BF%9B%E5%88%B6%EF%BC%88%E4%BD%8D%E8%BF%90%E7%AE%97%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">第二步：十进制 → 二进制（位运算）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A7%E6%96%B9%E6%B3%95-vs-%E4%BD%8D%E8%BF%90%E7%AE%97"><span class="nav-number">4.1.</span> <span class="nav-text">旧方法 vs 位运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">4.2.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%BB%E6%8E%89%E5%89%8D%E5%AF%BC%E9%9B%B6"><span class="nav-number">4.3.</span> <span class="nav-text">去掉前导零</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E5%A5%87%E6%A0%A1%E9%AA%8C"><span class="nav-number">5.</span> <span class="nav-text">第三步：奇校验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%EF%BC%9A%E4%BA%8C%E8%BF%9B%E5%88%B6-%E2%86%92-%E5%8D%81%E8%BF%9B%E5%88%B6%EF%BC%88%E4%BD%8D%E8%BF%90%E7%AE%97%EF%BC%89"><span class="nav-number">6.</span> <span class="nav-text">第四步：二进制 → 十进制（位运算）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A7%E6%96%B9%E6%B3%95-vs-%E4%BD%8D%E8%BF%90%E7%AE%97-1"><span class="nav-number">6.1.</span> <span class="nav-text">旧方法 vs 位运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E7%90%86%EF%BC%88%E4%BB%A5-x-11100011-%E4%B8%BA%E4%BE%8B%EF%BC%89"><span class="nav-number">6.2.</span> <span class="nav-text">原理（以 x &#x3D; &quot;11100011&quot; 为例）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%92%8C%E4%B8%8A%E4%B8%80%E7%AF%87%E4%BD%8D%E8%BF%90%E7%AE%97%E5%8D%9A%E5%AE%A2%E7%9A%84%E5%91%BC%E5%BA%94"><span class="nav-number">7.</span> <span class="nav-text">和上一篇位运算博客的呼应</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%9A%A0%EF%B8%8F-%E5%85%B3%E9%94%AE%E5%9D%91%E7%82%B9"><span class="nav-number">8.</span> <span class="nav-text">⚠️ 关键坑点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%BE%AA%E7%8E%AF%E4%BB%8E-31-%E5%BC%80%E5%A7%8B%EF%BC%88%E4%B8%8D%E6%98%AF-7%EF%BC%89"><span class="nav-number">8.1.</span> <span class="nav-text">1. 循环从 31 开始（不是 7）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%8E%BB%E5%89%8D%E5%AF%BC%E9%9B%B6%E8%A6%81%E8%87%B3%E5%B0%91%E4%BF%9D%E7%95%99%E4%B8%80%E4%BD%8D"><span class="nav-number">8.2.</span> <span class="nav-text">2. 去前导零要至少保留一位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E7%9A%84%E7%BB%93%E6%9E%9C%E8%BD%AC%E5%AD%97%E7%AC%A6%E8%A6%81-%E2%80%980%E2%80%99"><span class="nav-number">8.3.</span> <span class="nav-text">3. &amp; 1 的结果转字符要 + ‘0’</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%A5%87%E6%A0%A1%E9%AA%8C%E5%8A%A0%E5%9C%A8%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%89%8D%E9%9D%A2%EF%BC%88%E6%9C%80%E9%AB%98%E4%BD%8D%EF%BC%89"><span class="nav-number">8.4.</span> <span class="nav-text">4. 奇校验加在字符串前面（最高位）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81%E6%A8%A1%E6%9D%BF"><span class="nav-number">9.</span> <span class="nav-text">完整代码模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">10.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kmon"
+      src="/images/photo.jpg">
+  <p class="site-author-name" itemprop="name">Kmon</p>
+  <div class="site-description" itemprop="description"></div>
+  <div class="site-intro" style="margin-top: 10px; font-size: 14px; color: #666; line-height: 1.5;">
+    <p>分享学习笔记和自己的碎碎念~</p>
+  </div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Zhisheng0506" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Zhisheng0506" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1206300336@qq.com" title="E-Mail → mailto:1206300336@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/1495302036" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;1495302036" rel="noopener me" target="_blank"><i class="fab fa-bilibili fa-fw"></i>Bilibili</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://x.com/ByKmon_" title="Twitter → https:&#x2F;&#x2F;x.com&#x2F;ByKmon_" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://zhisheng0506.github.io/2026/05/30/%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%8E%E5%8D%81%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2-%E4%BD%8D%E8%BF%90%E7%AE%97%E5%AE%9E%E6%88%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/photo.jpg">
+      <meta itemprop="name" content="Kmon">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="二进制与十进制转换-位运算实战 | Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          二进制与十进制转换-位运算实战
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2026-05-30 18:00:00 / Modified: 20:14:43" itemprop="dateCreated datePublished" datetime="2026-05-30T18:00:00+08:00">2026-05-30</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><blockquote>
+<p>题目链接：<a target="_blank" rel="noopener" href="https://noobdream.com/DreamJudge/Issue/page/1287/">N诺&#x2F;DreamJudge 1287</a></p>
+</blockquote>
+<p>凯撒密码：输入一个由字母组成的字符串，每个字符向后偏移 2 位（a→c, Z→B）。输出每个偏移后字符的<strong>奇校验码</strong>及其对应的<strong>十进制数</strong>。</p>
+<p>奇校验规则：如果字符二进制中 1 的个数为<strong>偶数</strong>，将最高位置为 1（确保 1 的总数为奇数）。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入: aD</span><br><span class="line">输出:</span><br><span class="line">原文：aD</span><br><span class="line">密文：cF</span><br><span class="line">c  11100011  227</span><br><span class="line">F  01000110  70</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><p>这道题分为四步：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">原文 → 密文(+2) → 十进制转二进制 → 奇校验 → 二进制转回十进制</span><br></pre></td></tr></table></figure>
+
+<p>其中两步进制转换是本篇的重点——用位运算替代 %2&#x2F;÷2 和逐位加权。这是对 <a href="/2026/05/26/%E4%BD%8D%E8%BF%90%E7%AE%97%E6%8A%80%E5%B7%A7-%E4%BB%A5%E5%8E%8B%E7%BC%A9%E6%97%A5%E6%9C%9F%E4%B8%BA%E4%BE%8B/">位运算技巧-以压缩日期为例</a> 的知识复习和实战应用。</p>
+<hr>
+<h2 id="第一步：凯撒偏移"><a href="#第一步：凯撒偏移" class="headerlink" title="第一步：凯撒偏移"></a>第一步：凯撒偏移</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">    s[i] = s[i] + <span class="number">2</span>;  <span class="comment">// ASCII 码 +2</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‘a’(97) + 2 &#x3D; ‘c’(99)。题目不要求循环回绕（Z→B），直接 +2 即可。</p>
+<hr>
+<h2 id="第二步：十进制-→-二进制（位运算）"><a href="#第二步：十进制-→-二进制（位运算）" class="headerlink" title="第二步：十进制 → 二进制（位运算）"></a>第二步：十进制 → 二进制（位运算）</h2><h3 id="旧方法-vs-位运算"><a href="#旧方法-vs-位运算" class="headerlink" title="旧方法 vs 位运算"></a>旧方法 vs 位运算</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ❌ 旧方法：%2 /2 + reverse</span></span><br><span class="line">string s = <span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="keyword">while</span> (n) &#123;</span><br><span class="line">    s += (n % <span class="number">2</span>) + <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">    n /= <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">reverse</span>(s.<span class="built_in">begin</span>(), s.<span class="built_in">end</span>());</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ✅ 位运算：(n &gt;&gt; i) &amp; 1，逐位提取</span></span><br><span class="line"><span class="type">int</span> n = <span class="number">227</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">31</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">    cout &lt;&lt; ((n &gt;&gt; i) &amp; <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>(n &gt;&gt; i) &amp; 1</code> 就是上一篇位运算博客中位解包的核心模式——现在它被用来逐位提取二进制。</p>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">n = 227  →  00000000 00000000 00000000 11100011</span><br><span class="line"></span><br><span class="line">(n &gt;&gt; 7) &amp; 1:</span><br><span class="line">  227 &gt;&gt; 7  = 00000000 00000000 00000000 00000001    (第7位是1)</span><br><span class="line">  &amp; 1       = 00000000 00000000 00000000 00000001  = 1</span><br><span class="line"></span><br><span class="line">(n &gt;&gt; 6) &amp; 1:</span><br><span class="line">  227 &gt;&gt; 6  = 00000000 00000000 00000000 00000000    (第6位是0)</span><br><span class="line">  &amp; 1       = 00000000 00000000 00000000 00000000  = 0</span><br></pre></td></tr></table></figure>
+
+<p>两步：<code>&gt;&gt; i</code> 把第 i 位移到最低位，<code>&amp; 1</code> 只保留那一位。</p>
+<h3 id="去掉前导零"><a href="#去掉前导零" class="headerlink" title="去掉前导零"></a>去掉前导零</h3><p>32 位全输出会有大量前导 0。去掉它们（至少保留一位）：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">string x = <span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">31</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">    x += <span class="built_in">char</span>(((n &gt;&gt; i) &amp; <span class="number">1</span>) + <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">while</span> (x.<span class="built_in">size</span>() &gt; <span class="number">1</span> &amp;&amp; x[<span class="number">0</span>] == <span class="string">&#x27;0&#x27;</span>) &#123;</span><br><span class="line">    x.<span class="built_in">erase</span>(<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>x.size() &gt; 1</code> 保证即使原值是 0，也能保留一个 <code>&quot;0&quot;</code>。</p>
+<hr>
+<h2 id="第三步：奇校验"><a href="#第三步：奇校验" class="headerlink" title="第三步：奇校验"></a>第三步：奇校验</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 统计 1 的个数</span></span><br><span class="line"><span class="type">int</span> cnt = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; x.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (x[i] == <span class="string">&#x27;1&#x27;</span>) cnt++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 奇校验规则</span></span><br><span class="line"><span class="keyword">if</span> (cnt % <span class="number">2</span> == <span class="number">0</span>) &#123;</span><br><span class="line">    x = <span class="string">&quot;1&quot;</span> + x;   <span class="comment">// 偶数个1 → 最高位补1，变成奇数个</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    x = <span class="string">&quot;0&quot;</span> + x;   <span class="comment">// 奇数个1 → 补0，个数不变</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#x27;c&#x27; = 99</span><br><span class="line">  二进制: 1100011</span><br><span class="line">  1的个数: 1+1+0+0+0+1+1 = 4（偶数）</span><br><span class="line">  → 奇校验: 1 + 1100011 = 11100011 = 227 ✓</span><br><span class="line"></span><br><span class="line">&#x27;F&#x27; = 70</span><br><span class="line">  二进制: 1000110</span><br><span class="line">  1的个数: 1+0+0+0+1+1+0 = 3（奇数）</span><br><span class="line">  → 奇校验: 0 + 1000110 = 01000110 = 70 ✓</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>1 的个数</th>
+<th>操作</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>奇数</td>
+<td>最高位加 <code>0</code></td>
+<td>1 的个数不变</td>
+</tr>
+<tr>
+<td>偶数</td>
+<td>最高位加 <code>1</code></td>
+<td>多一个 1，变成奇数</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="第四步：二进制-→-十进制（位运算）"><a href="#第四步：二进制-→-十进制（位运算）" class="headerlink" title="第四步：二进制 → 十进制（位运算）"></a>第四步：二进制 → 十进制（位运算）</h2><h3 id="旧方法-vs-位运算-1"><a href="#旧方法-vs-位运算-1" class="headerlink" title="旧方法 vs 位运算"></a>旧方法 vs 位运算</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ❌ 逐位加权: ans = ans * 2 + bit</span></span><br><span class="line"><span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; x.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">    ans = ans * <span class="number">2</span> + (x[i] - <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ✅ 位运算: ans = (ans &lt;&lt; 1) | bit</span></span><br><span class="line"><span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; x.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">    ans = (ans &lt;&lt; <span class="number">1</span>) | (x[i] - <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>(ans &lt;&lt; 1) | bit</code> 正是上一篇博客中位打包的核心模式——现在被用来从二进制位串构建十进制数。</p>
+<h3 id="原理（以-x-11100011-为例）"><a href="#原理（以-x-11100011-为例）" class="headerlink" title="原理（以 x = &quot;11100011&quot; 为例）"></a>原理（以 <code>x = &quot;11100011&quot;</code> 为例）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">初始:  ans = 0 (二进制 0)</span><br><span class="line"></span><br><span class="line">i=0: bit=1</span><br><span class="line">  ans &lt;&lt; 1  →  0          (0 左移一位还是 0)</span><br><span class="line">  | 1       →  1</span><br><span class="line"></span><br><span class="line">i=1: bit=1</span><br><span class="line">  ans &lt;&lt; 1  →  10         (1 左移一位 = 2)</span><br><span class="line">  | 1       →  11         (2|1 = 3)</span><br><span class="line"></span><br><span class="line">i=2: bit=1</span><br><span class="line">  ans &lt;&lt; 1  →  110        (3 左移一位 = 6)</span><br><span class="line">  | 1       →  111        (6|1 = 7)</span><br><span class="line"></span><br><span class="line">i=3: bit=0</span><br><span class="line">  ans &lt;&lt; 1  →  1110       (7 左移一位 = 14)</span><br><span class="line">  | 0       →  1110       (14|0 = 14)</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">最终: ans = 11100011₂ = 227</span><br></pre></td></tr></table></figure>
+
+<p><strong>一句话</strong>：左移腾出最低位，<code>|</code> 把新位放进去。<code>ans = (ans &lt;&lt; 1) | bit</code> 等价于 <code>ans = ans * 2 + bit</code>，但位运算写法更”算法竞赛”。</p>
+<hr>
+<h2 id="和上一篇位运算博客的呼应"><a href="#和上一篇位运算博客的呼应" class="headerlink" title="和上一篇位运算博客的呼应"></a>和上一篇位运算博客的呼应</h2><p>两个核心模式在两篇博客中反复出现：</p>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>上一篇（压缩日期）</th>
+<th>本篇（进制转换）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&lt;&lt;</code> 和 <code>|</code> 拼接</td>
+<td><code>(year2&lt;&lt;9) | (day&lt;&lt;4) | month</code> 位打包</td>
+<td><code>(ans&lt;&lt;1) | bit</code> 拼接二进制位</td>
+</tr>
+<tr>
+<td><code>&gt;&gt;</code> 和 <code>&amp;</code> 提取</td>
+<td><code>(ans&gt;&gt;9) &amp; 0x7F</code> 解包字段</td>
+<td><code>(n&gt;&gt;i) &amp; 1</code> 逐位提取二进制</td>
+</tr>
+</tbody></table>
+<p>同一套位运算技能，在不同场景下的两种运用。懂了这两个模式，机试中位运算相关题目基本就覆盖了。</p>
+<hr>
+<h2 id="⚠️-关键坑点"><a href="#⚠️-关键坑点" class="headerlink" title="⚠️ 关键坑点"></a>⚠️ 关键坑点</h2><h3 id="1-循环从-31-开始（不是-7）"><a href="#1-循环从-31-开始（不是-7）" class="headerlink" title="1. 循环从 31 开始（不是 7）"></a>1. 循环从 31 开始（不是 7）</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">31</span>; i &gt;= <span class="number">0</span>; i--)  <span class="comment">// ✅ int 是 32 位</span></span><br><span class="line"><span class="comment">// 不是:</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">7</span>; i &gt;= <span class="number">0</span>; i--)   <span class="comment">// ❌ 赋值给 int n 后变成了 32 位</span></span><br></pre></td></tr></table></figure>
+
+<p><code>s[i]</code> 虽然是 char（8 位），但赋值给了 <code>int n</code>，所以是 32 位，从 31 开始遍历。</p>
+<h3 id="2-去前导零要至少保留一位"><a href="#2-去前导零要至少保留一位" class="headerlink" title="2. 去前导零要至少保留一位"></a>2. 去前导零要至少保留一位</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (x.<span class="built_in">size</span>() &gt; <span class="number">1</span> &amp;&amp; x[<span class="number">0</span>] == <span class="string">&#x27;0&#x27;</span>) &#123;</span><br><span class="line">    x.<span class="built_in">erase</span>(<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>x.size() &gt; 1</code> 保证值为 0 时至少保留 <code>&quot;0&quot;</code>。</p>
+<h3 id="3-1-的结果转字符要-‘0’"><a href="#3-1-的结果转字符要-‘0’" class="headerlink" title="3. &amp; 1 的结果转字符要 + ‘0’"></a>3. <code>&amp; 1</code> 的结果转字符要 + ‘0’</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x += <span class="built_in">char</span>(((n &gt;&gt; i) &amp; <span class="number">1</span>) + <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line"><span class="comment">//        ^^^^^^^^^^^^    ^^^^^</span></span><br><span class="line"><span class="comment">//        整数 0 或 1      转成字符</span></span><br></pre></td></tr></table></figure>
+
+<p><code>((n&gt;&gt;i)&amp;1)</code> 是整数 0 或 1。<code>+ &#39;0&#39;</code>（即 +48）变成字符 <code>&#39;0&#39;</code> 或 <code>&#39;1&#39;</code>。</p>
+<h3 id="4-奇校验加在字符串前面（最高位）"><a href="#4-奇校验加在字符串前面（最高位）" class="headerlink" title="4. 奇校验加在字符串前面（最高位）"></a>4. 奇校验加在字符串<strong>前面</strong>（最高位）</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="string">&quot;1&quot;</span> + x;   <span class="comment">// ✅ 前面 = 最高位</span></span><br><span class="line"><span class="comment">// 不是:</span></span><br><span class="line">x = x + <span class="string">&quot;1&quot;</span>;   <span class="comment">// ❌ 后面 = 最低位，语义错误</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="完整代码模板"><a href="#完整代码模板" class="headerlink" title="完整代码模板"></a>完整代码模板</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="literal">nullptr</span>);</span><br><span class="line"></span><br><span class="line">    string s;</span><br><span class="line">    cin &gt;&gt; s;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;原文：&quot;</span> &lt;&lt; s &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    string ss = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">        ss += s[i] + <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;密文：&quot;</span> &lt;&lt; ss &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">        s[i] = s[i] + <span class="number">2</span>;</span><br><span class="line">        cout &lt;&lt; s[i] &lt;&lt; <span class="string">&quot;  &quot;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 十进制 → 二进制（位运算）</span></span><br><span class="line">        <span class="type">int</span> n = (<span class="type">int</span>)s[i];</span><br><span class="line">        string x = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">31</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">            x += <span class="built_in">char</span>(((n &gt;&gt; i) &amp; <span class="number">1</span>) + <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (x.<span class="built_in">size</span>() &gt; <span class="number">1</span> &amp;&amp; x[<span class="number">0</span>] == <span class="string">&#x27;0&#x27;</span>) &#123;</span><br><span class="line">            x.<span class="built_in">erase</span>(<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 奇校验</span></span><br><span class="line">        <span class="type">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; x.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (x[i] == <span class="string">&#x27;1&#x27;</span>) cnt++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (cnt % <span class="number">2</span> == <span class="number">0</span>) &#123;</span><br><span class="line">            x = <span class="string">&quot;1&quot;</span> + x;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            x = <span class="string">&quot;0&quot;</span> + x;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        cout &lt;&lt; x &lt;&lt; <span class="string">&quot;  &quot;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 二进制 → 十进制（位运算）</span></span><br><span class="line">        <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; x.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            ans = (ans &lt;&lt; <span class="number">1</span>) | (x[i] - <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><table>
+<thead>
+<tr>
+<th>要点</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>十进制 → 二进制</td>
+<td><code>(n &gt;&gt; i) &amp; 1</code>，从高位到低位逐位提取</td>
+</tr>
+<tr>
+<td>二进制 → 十进制</td>
+<td><code>(ans &lt;&lt; 1) | bit</code>，左移腾位 + 放入新位</td>
+</tr>
+<tr>
+<td>去前导零</td>
+<td><code>while (size&gt;1 &amp;&amp; x[0]==&#39;0&#39;) erase(0,1)</code></td>
+</tr>
+<tr>
+<td>奇校验</td>
+<td>偶数个1 → 最高位补1；奇数个1 → 补0</td>
+</tr>
+<tr>
+<td>循环范围</td>
+<td>int 从 31 开始（32 位），不是 7</td>
+</tr>
+<tr>
+<td>与上一篇呼应</td>
+<td><code>&lt;&lt;</code> <code>|</code> 用于拼接，<code>&gt;&gt;</code> <code>&amp;</code> 用于提取，同模式</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+              <a href="/tags/%E4%B8%8A%E6%9C%BA%E8%80%83%E8%AF%95/" rel="tag"># 上机考试</a>
+              <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag"># 字符串</a>
+              <a href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/" rel="tag"># 位运算</a>
+              <a href="/tags/%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2/" rel="tag"># 进制转换</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/05/30/%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%9F%A5%E8%AF%A2-%E4%BA%8C%E7%BB%B4%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E4%BC%98%E5%8C%96/" rel="prev" title="字符串查询-二维前缀和与输入输出优化">
+                  <i class="fa fa-angle-left"></i> 字符串查询-二维前缀和与输入输出优化
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Kmon</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

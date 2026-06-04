@@ -261,6 +261,52 @@ while (getline(cin, s)) {  // ⚠️ 用 while，不是 if
 
 `isalpha` 对空格、标点、数字等都返回 false，它们会被跳过，保留在原位。这恰好满足规则 3。
 
+### 6. 对 `pair` 排序时 cmp 参数必须加 `const`
+
+当用 `stable_sort` 对 `vector<pair<string, int>>` 排序时，cmp 的参数**必须是 `const` 引用**，否则编译报错：
+
+```cpp
+// ✅ 正确：加 const
+bool cmp1(const pair<string, int>& a, const pair<string, int>& b) {
+    return a.second < b.second;  // 按 value 升序
+}
+
+bool cmp2(const pair<string, int>& a, const pair<string, int>& b) {
+    return a.second > b.second;  // 按 value 降序
+}
+
+// ❌ 编译错误：缺少 const
+bool cmp1(pair<string, int>& a, pair<string, int>& b) {
+    return a.second < b.second;
+}
+```
+
+**为什么报错？** `stable_sort`（以及 `sort`）内部会传递临时对象，非 const 引用无法绑定到临时对象上，编译器直接报错。基础类型如 `char`、`int` 按值传递不需要引用，但 `pair<string, int>` 这类复杂对象必须用引用避免拷贝，而引用又必须加 `const` 才能接收临时对象。
+
+### 完整示例：对 pair 排序
+
+```cpp
+int n, t;
+while (cin >> n >> t) {
+    vector<pair<string, int>> A;
+    for (int i = 0; i < n; i++) {
+        string x; int y;
+        cin >> x >> y;
+        A.push_back({x, y});
+    }
+    if (t) {
+        stable_sort(A.begin(), A.end(), cmp1);  // 升序
+    } else {
+        stable_sort(A.begin(), A.end(), cmp2);  // 降序
+    }
+    for (int i = 0; i < A.size(); i++) {
+        cout << A[i].first << " " << A[i].second << '\n';
+    }
+}
+```
+
+> **记忆**：只要写 `pair` 的 cmp，参数必加 `const &`。`sort`、`stable_sort`、`lower_bound` 等所有需要比较器的 STL 函数都是这个规则。
+
 ---
 
 ## 完整代码模板

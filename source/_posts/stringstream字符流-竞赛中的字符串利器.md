@@ -263,7 +263,106 @@ while (getline(cin, line)) {
 
 ---
 
-## 用法五：清空和重用
+## 用法五：用 getline 按指定分隔符切分
+
+`>>` 只能按空格/Tab 切分。如果要按**逗号**、**冒号**等自定义分隔符切分，用 `getline(ss, token, 分隔符)`。
+
+### 例题：逗号分隔的数字排序
+
+```
+输入: 5,3,8,1
+输出: 1 3 5 8
+```
+
+### ❌ 丑陋做法：先 replace 再 `>>`
+
+```cpp
+string s;
+getline(cin, s);
+while (s.find(',') != -1) {
+    s.replace(s.find(','), 1, " ");  // 把所有逗号替换成空格
+}
+stringstream ss(s);
+int x;
+while (ss >> x) { ... }
+```
+
+能跑，但修改了原始字符串，而且多次 `find` + `replace` 效率低。
+
+### ✅ 正确做法：`getline(ss, token, ',')`
+
+```cpp
+string s;
+getline(cin, s);
+
+stringstream ss(s);
+string token;
+vector<int> A;
+
+while (getline(ss, token, ',')) {  // 第三个参数指定分隔符
+    A.push_back(stoi(token));
+}
+```
+
+### `getline` 的第三个参数
+
+```cpp
+getline(cin, str);          // 默认按 '\n' 切分
+getline(ss, token, ',');    // 按 ',' 切分
+getline(ss, token, ':');    // 按 ':' 切分
+getline(ss, token, '|');    // 按 '|' 切分
+```
+
+`getline` 读到分隔符就停止，**分隔符被丢弃**，返回的 token 不包含分隔符。流耗尽时返回 `false`，所以 `while (getline(...))` 自然终止。
+
+### 和 `cin` 的 `getline` 是同一个函数
+
+```cpp
+getline(cin, line);           // 从标准输入读一行（按 '\n' 切）
+getline(ss, token, ',');      // 从 stringstream 读一段（按 ',' 切）
+```
+
+同一个 `getline`，第一个参数可以是 `cin` 也可以是 `stringstream`，行为完全一致。
+
+### 完整代码
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    string s;
+    getline(cin, s);
+
+    stringstream ss(s);
+    string token;
+    vector<int> A;
+
+    while (getline(ss, token, ',')) {
+        A.push_back(stoi(token));
+    }
+
+    sort(A.begin(), A.end());
+    for (int i = 0; i < A.size(); i++) {
+        if ((i + 1) % 4 != 0) {
+            cout << A[i] << " ";
+        } else {
+            cout << A[i] << endl;
+        }
+    }
+}
+```
+
+### 后续小节编号调整
+
+原来的"用法五~七"顺延到"用法六~八"，以下用新编号。
+
+---
+
+## 用法六：清空和重用
 
 同一个 stringstream 处理多组数据时，需要清空内容并重置状态：
 
@@ -299,7 +398,7 @@ for (int i = 0; i < n; i++) {
 
 ---
 
-## 用法六：判断读取是否成功
+## 用法七：判断读取是否成功
 
 ```cpp
 stringstream ss("hello 123");
@@ -325,7 +424,7 @@ if (!(ss >> n)) {
 
 ---
 
-## 用法七：初始化 stringstream 的三种方式
+## 用法八：初始化 stringstream 的三种方式
 
 ```cpp
 // 方式 1：构造时初始化
@@ -410,6 +509,7 @@ if (!(ss >> n)) {
 | 拼接字符串 | `ss << x << y;` 然后 `ss.str()` |
 | 逐行读取 | `getline(cin, line)` |
 | 行内再切分 | `stringstream ss(line); while (ss >> x)` |
+| 按指定分隔符切分 | `while (getline(ss, token, ','))` |
 | 清空重用 | `ss.str(""); ss.clear();` |
 | 格式化数字 | `ss << setw(2) << setfill('0') << n;` |
 | 判断读取是否成功 | `if (ss >> x)` |
@@ -449,6 +549,7 @@ int main() {
 | 类型转换 | `ss >> int/double/string`，自动按目标类型解析 |
 | 反向拼接 | `ss << x; ss.str()` 取出结果 |
 | 行内切分 | `getline + stringstream`，处理不定量数据 |
+| 按分隔符切分 | `getline(ss, token, ',')`，第三参数指定分隔符 |
 | 重用清空 | `ss.str("")` + `ss.clear()`，两个都不能少 |
 | 格式化 | `setw`、`setfill`、`fixed` 等在 stringstream 上全部可用 |
 | 头文件 | `<sstream>`，`bits/stdc++.h` 已包含 |

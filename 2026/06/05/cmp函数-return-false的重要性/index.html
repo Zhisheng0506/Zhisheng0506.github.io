@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhisheng0506.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="场景对 vector&lt;pair&lt;string, int&gt;&gt; 排序，cmp 按多个字段逐级比较： 12345678910bool mycmp(const pair&lt;string, int&gt;&amp; a, const pair&lt;string, int&gt;&amp; b) &#123;    &#x2F;&#x2F; 把 first 按 &#x27;&#x2F;&#x27; 拆成三个字">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cmp函数-最后一行return false的重要性">
+<meta property="og:url" content="https://zhisheng0506.github.io/2026/06/05/cmp%E5%87%BD%E6%95%B0-return-false%E7%9A%84%E9%87%8D%E8%A6%81%E6%80%A7/index.html">
+<meta property="og:site_name" content="Kmon Blogs">
+<meta property="og:description" content="场景对 vector&lt;pair&lt;string, int&gt;&gt; 排序，cmp 按多个字段逐级比较： 12345678910bool mycmp(const pair&lt;string, int&gt;&amp; a, const pair&lt;string, int&gt;&amp; b) &#123;    &#x2F;&#x2F; 把 first 按 &#x27;&#x2F;&#x27; 拆成三个字">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-06-05T02:00:00.000Z">
+<meta property="article:modified_time" content="2026-06-05T01:56:09.394Z">
+<meta property="article:author" content="Kmon">
+<meta property="article:tag" content="cmp">
+<meta property="article:tag" content="上机考试">
+<meta property="article:tag" content="排序">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://zhisheng0506.github.io/2026/06/05/cmp%E5%87%BD%E6%95%B0-return-false%E7%9A%84%E9%87%8D%E8%A6%81%E6%80%A7/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://zhisheng0506.github.io/2026/06/05/cmp%E5%87%BD%E6%95%B0-return-false%E7%9A%84%E9%87%8D%E8%A6%81%E6%80%A7/","path":"2026/06/05/cmp函数-return-false的重要性/","title":"cmp函数-最后一行return false的重要性"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>cmp函数-最后一行return false的重要性 | Kmon Blogs</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kmon Blogs</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E7%8E%B0%E8%B1%A1"><span class="nav-number">2.</span> <span class="nav-text">问题现象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BF%85%E9%A1%BB-return-false"><span class="nav-number">3.</span> <span class="nav-text">为什么必须 return false</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cmp-%E7%9A%84%E7%BA%A6%E5%AE%9A"><span class="nav-number">3.1.</span> <span class="nav-text">cmp 的约定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%80%E6%9C%89%E5%AD%97%E6%AE%B5%E9%83%BD%E7%9B%B8%E7%AD%89%E6%97%B6"><span class="nav-number">3.2.</span> <span class="nav-text">所有字段都相等时</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E7%A1%AE%E5%86%99%E6%B3%95"><span class="nav-number">3.3.</span> <span class="nav-text">正确写法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%9A%A0%EF%B8%8F-%E5%85%B3%E9%94%AE%E5%9D%91%E7%82%B9"><span class="nav-number">4.</span> <span class="nav-text">⚠️ 关键坑点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%B8%8D-return-false-%E7%9A%84%E5%90%8E%E6%9E%9C%EF%BC%9A%E6%B2%89%E9%BB%98%EF%BC%8C%E6%97%A0%E6%8A%A5%E9%94%99"><span class="nav-number">4.1.</span> <span class="nav-text">1. 不 return false 的后果：沉默，无报错</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%B8%8D%E6%98%AF%E2%80%9D%E6%95%B0%E6%8D%AE%E6%9C%89%E9%87%8D%E5%A4%8D%E6%89%8D%E9%9C%80%E8%A6%81%E2%80%9D"><span class="nav-number">4.2.</span> <span class="nav-text">2. 不是”数据有重复才需要”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-return-false-%E4%B8%8D%E8%83%BD%E5%86%99%E6%88%90-return-true"><span class="nav-number">4.3.</span> <span class="nav-text">3. return false 不能写成 return true</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kmon"
+      src="/images/photo.jpg">
+  <p class="site-author-name" itemprop="name">Kmon</p>
+  <div class="site-description" itemprop="description"></div>
+  <div class="site-intro" style="margin-top: 10px; font-size: 14px; color: #666; line-height: 1.5;">
+    <p>分享学习笔记和自己的碎碎念~</p>
+  </div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Zhisheng0506" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Zhisheng0506" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1206300336@qq.com" title="E-Mail → mailto:1206300336@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/1495302036" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;1495302036" rel="noopener me" target="_blank"><i class="fab fa-bilibili fa-fw"></i>Bilibili</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://x.com/ByKmon_" title="Twitter → https:&#x2F;&#x2F;x.com&#x2F;ByKmon_" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://zhisheng0506.github.io/2026/06/05/cmp%E5%87%BD%E6%95%B0-return-false%E7%9A%84%E9%87%8D%E8%A6%81%E6%80%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/photo.jpg">
+      <meta itemprop="name" content="Kmon">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="cmp函数-最后一行return false的重要性 | Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          cmp函数-最后一行return false的重要性
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2026-06-05 10:00:00 / Modified: 09:56:09" itemprop="dateCreated datePublished" datetime="2026-06-05T10:00:00+08:00">2026-06-05</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>对 <code>vector&lt;pair&lt;string, int&gt;&gt;</code> 排序，cmp 按多个字段逐级比较：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">mycmp</span><span class="params">(<span class="type">const</span> pair&lt;string, <span class="type">int</span>&gt;&amp; a, <span class="type">const</span> pair&lt;string, <span class="type">int</span>&gt;&amp; b)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 把 first 按 &#x27;/&#x27; 拆成三个字段 A[0] A[1] A[2]</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (a.second != b.second) <span class="keyword">return</span> a.second &gt; b.second;</span><br><span class="line">    <span class="keyword">if</span> (A[<span class="number">0</span>] != B[<span class="number">0</span>]) <span class="keyword">return</span> A[<span class="number">0</span>] &lt; B[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">if</span> (A[<span class="number">1</span>] != B[<span class="number">1</span>]) <span class="keyword">return</span> A[<span class="number">1</span>] &lt; B[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">if</span> (A[<span class="number">2</span>] != B[<span class="number">2</span>]) <span class="keyword">return</span> A[<span class="number">2</span>] &lt; B[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;  <span class="comment">// ← 没有这行，程序不输出任何结果</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h2 id="问题现象"><a href="#问题现象" class="headerlink" title="问题现象"></a>问题现象</h2><p><strong>没有 <code>return false</code>，程序不报错、不崩溃、不警告，但就是没有任何输出。</strong> debug 了很长时间才发现是 cmp 漏了一行。</p>
+<h2 id="为什么必须-return-false"><a href="#为什么必须-return-false" class="headerlink" title="为什么必须 return false"></a>为什么必须 return false</h2><h3 id="cmp-的约定"><a href="#cmp-的约定" class="headerlink" title="cmp 的约定"></a>cmp 的约定</h3><p><code>sort</code> 要求 cmp 满足<strong>严格弱序</strong>：<code>cmp(a, b)</code> 返回 <code>true</code> 表示 a 排在 b 前面。如果 <code>cmp(a, b)</code> 和 <code>cmp(b, a)</code> 都返回 <code>false</code>，a 和 b 等价。</p>
+<h3 id="所有字段都相等时"><a href="#所有字段都相等时" class="headerlink" title="所有字段都相等时"></a>所有字段都相等时</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 假设有四条数据，其中两条完全相同：</span></span><br><span class="line">A[<span class="number">0</span>] = <span class="string">&quot;a&quot;</span>, A[<span class="number">1</span>] = <span class="string">&quot;b&quot;</span>, A[<span class="number">2</span>] = <span class="string">&quot;c&quot;</span>, a.second = <span class="number">100</span></span><br><span class="line">B[<span class="number">0</span>] = <span class="string">&quot;a&quot;</span>, B[<span class="number">1</span>] = <span class="string">&quot;b&quot;</span>, B[<span class="number">2</span>] = <span class="string">&quot;c&quot;</span>, b.second = <span class="number">100</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 进入 mycmp(A, B):</span></span><br><span class="line">a.second != b.second → <span class="literal">false</span>（都是 <span class="number">100</span>），跳过</span><br><span class="line">A[<span class="number">0</span>] != B[<span class="number">0</span>] → <span class="literal">false</span>（都是 <span class="string">&quot;a&quot;</span>），跳过</span><br><span class="line">A[<span class="number">1</span>] != B[<span class="number">1</span>] → <span class="literal">false</span>（都是 <span class="string">&quot;b&quot;</span>），跳过</span><br><span class="line">A[<span class="number">2</span>] != B[<span class="number">2</span>] → <span class="literal">false</span>（都是 <span class="string">&quot;c&quot;</span>），跳过</span><br><span class="line"><span class="comment">// ⚠️ 走到函数末尾，没有 return 语句！</span></span><br></pre></td></tr></table></figure>
+
+<p>C++ 中<strong>有返回值的函数走到末尾却没有 return，是未定义行为</strong>。不同编译器表现不同：</p>
+<table>
+<thead>
+<tr>
+<th>情况</th>
+<th>现象</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>返回垃圾值（恰好 true）</td>
+<td>a&lt;b 且 b&lt;a 都 true → 破坏严格弱序 → sort 死循环</td>
+</tr>
+<tr>
+<td>编译优化</td>
+<td>程序直接卡死，无输出</td>
+</tr>
+<tr>
+<td>返回垃圾值（恰好 false）</td>
+<td>碰巧正常（但不能依赖）</td>
+</tr>
+</tbody></table>
+<p>我遇到的正是<strong>程序完全不输出</strong>——cmp 的未定义行为破坏了 sort 内部状态，后续的 <code>cout</code> 永远执行不到。</p>
+<h3 id="正确写法"><a href="#正确写法" class="headerlink" title="正确写法"></a>正确写法</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (a.f1 != b.f1) <span class="keyword">return</span> a.f1 &lt; b.f1;</span><br><span class="line"><span class="keyword">if</span> (a.f2 != b.f2) <span class="keyword">return</span> a.f2 &lt; b.f2;</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="keyword">return</span> <span class="literal">false</span>;  <span class="comment">// ⚠️ 必须：所有字段相等时，a 不排在 b 前面</span></span><br></pre></td></tr></table></figure>
+
+<p><code>return false</code> 的含义：所有字段都相等，a 和 b 完全等价，不需要交换。这是 cmp 函数的<strong>标准结尾</strong>，不是可选的。</p>
+<hr>
+<h2 id="⚠️-关键坑点"><a href="#⚠️-关键坑点" class="headerlink" title="⚠️ 关键坑点"></a>⚠️ 关键坑点</h2><h3 id="1-不-return-false-的后果：沉默，无报错"><a href="#1-不-return-false-的后果：沉默，无报错" class="headerlink" title="1. 不 return false 的后果：沉默，无报错"></a>1. 不 return false 的后果：沉默，无报错</h3><ul>
+<li>不输出任何结果</li>
+<li>排序结果乱</li>
+<li>程序崩溃</li>
+<li>本地能跑、OJ 上炸（不同编译器行为不同）</li>
+</ul>
+<p><strong>无报错、无提示。</strong> 这是最坑的地方——debug 时完全不会往 cmp 漏了一行上面想。</p>
+<h3 id="2-不是”数据有重复才需要”"><a href="#2-不是”数据有重复才需要”" class="headerlink" title="2. 不是”数据有重复才需要”"></a>2. 不是”数据有重复才需要”</h3><p>即使数据看起来不可能重复，也<strong>必须写</strong>。这是 cmp 函数的形式要求。</p>
+<h3 id="3-return-false-不能写成-return-true"><a href="#3-return-false-不能写成-return-true" class="headerlink" title="3. return false 不能写成 return true"></a>3. <code>return false</code> 不能写成 <code>return true</code></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> <span class="literal">false</span>;  <span class="comment">// ✅ &quot;a 不排在 b 前面&quot; → a 和 b 等价</span></span><br><span class="line"><span class="keyword">return</span> <span class="literal">true</span>;   <span class="comment">// ❌ &quot;a 排在 b 前面&quot; → 交换参数后 b 也排在 a 前面 → 矛盾</span></span><br></pre></td></tr></table></figure>
+
+<p>所有字段相等时返回 <code>true</code>，等于说 a &lt; b <strong>且</strong> b &lt; a，直接破坏严格弱序，sort 内部必然出错。</p>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><table>
+<thead>
+<tr>
+<th>要点</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>现象</td>
+<td>无 return false → 程序不输出，无报错</td>
+</tr>
+<tr>
+<td>原因</td>
+<td>走到函数末尾无 return &#x3D; 未定义行为</td>
+</tr>
+<tr>
+<td>正确写法</td>
+<td>所有 <code>!=</code> 判断之后，以 <code>return false;</code> 结尾</td>
+</tr>
+<tr>
+<td>含义</td>
+<td>所有字段相等时，a 不排在 b 前面</td>
+</tr>
+<tr>
+<td>记忆</td>
+<td><strong>cmp 的最后一行永远是 <code>return false;</code></strong></td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+              <a href="/tags/%E4%B8%8A%E6%9C%BA%E8%80%83%E8%AF%95/" rel="tag"># 上机考试</a>
+              <a href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag"># 排序</a>
+              <a href="/tags/cmp/" rel="tag"># cmp</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/06/04/%E4%BA%8C%E5%8F%89%E6%8E%92%E5%BA%8F%E6%A0%91-%E6%8F%92%E5%85%A5%E4%B8%8E%E7%88%B6%E8%8A%82%E7%82%B9%E6%9F%A5%E6%89%BE/" rel="prev" title="二叉排序树-插入与父节点查找">
+                  <i class="fa fa-angle-left"></i> 二叉排序树-插入与父节点查找
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/06/05/map%E5%AE%B9%E5%99%A8-%E6%9F%A5%E6%89%BE%E4%B8%8E%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%BD%BF%E7%94%A8/" rel="next" title="map容器-查找与迭代器使用">
+                  map容器-查找与迭代器使用 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Kmon</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

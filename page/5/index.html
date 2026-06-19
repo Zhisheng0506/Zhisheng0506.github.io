@@ -146,13 +146,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-count">62</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-count">44</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -183,6 +183,203 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://zhisheng0506.github.io/2025/12/30/Java-%E7%BB%A7%E6%89%BF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/photo.jpg">
+      <meta itemprop="name" content="Kmon">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/12/30/Java-%E7%BB%A7%E6%89%BF/" class="post-title-link" itemprop="url">Java-继承</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-12-30 20:30:41" itemprop="dateCreated datePublished" datetime="2025-12-30T20:30:41+08:00">2025-12-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-01-17 11:51:12" itemprop="dateModified" datetime="2026-01-17T11:51:12+08:00">2026-01-17</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>当类与类之间  存在相同的内容 并满足子类是父类的一种 就可以考虑使用继承 来优化代码<br>Java中只支持单继承  不支持多继承  但支持多层继承</p>
+<p><strong>每一个类都直接或者间接的继承于Object</strong></p>
+<p>子类不能调用父类中的私有方法</p>
+<p><strong>子类到底能继承父类中的那些内容</strong></p>
+<ul>
+<li>误区1：父类私有的东西  子类就无法继承</li>
+<li>误区2 ： 父类中非私有成员  就被子类继承下来了</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>父类</th>
+<th>public</th>
+<th>private</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>构造方法</td>
+<td>不能</td>
+<td>不能</td>
+</tr>
+<tr>
+<td>成员变量</td>
+<td>能</td>
+<td>能</td>
+</tr>
+<tr>
+<td>成员方法</td>
+<td>能</td>
+<td>不能</td>
+</tr>
+</tbody></table>
+<h4 id="构造方法是否可以被继承？"><a href="#构造方法是否可以被继承？" class="headerlink" title="构造方法是否可以被继承？"></a>构造方法是否可以被继承？</h4><hr>
+<p>其实这个问题很简单   构造方法一定要和类同名对吧？ 如果你调用父类的构造方法  子类的名称怎么可能和父类名称一样  构造方法自然就冲突了</p>
+<h4 id="成员变量是否可以被继承？"><a href="#成员变量是否可以被继承？" class="headerlink" title="成员变量是否可以被继承？"></a>成员变量是否可以被继承？</h4><hr>
+<p>注意表格里面  无论是否父类中成员变量是否私有化   子类貌似都可以继承</p>
+<p>实际上  子类确实会继承父类中的私有成员变量  不够不能去之间调用<br>其实黑马这里也是在放屁   私有化成员变量在类外本来就不能调用 无关子类</p>
+<h4 id="成员方法是否可以继承"><a href="#成员方法是否可以继承" class="headerlink" title="成员方法是否可以继承"></a>成员方法是否可以继承</h4><hr>
+<p>私有化的成员方法不可继承 </p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://zhisheng0506.github.io/2025/12/30/Java-%E9%9D%99%E6%80%81static/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/photo.jpg">
+      <meta itemprop="name" content="Kmon">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/12/30/Java-%E9%9D%99%E6%80%81static/" class="post-title-link" itemprop="url">Java-静态static</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-12-30 19:52:12" itemprop="dateCreated datePublished" datetime="2025-12-30T19:52:12+08:00">2025-12-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-01-17 11:51:12" itemprop="dateModified" datetime="2026-01-17T11:51:12+08:00">2026-01-17</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>​	对于同一个类的不同对象   如果存在一个共享的变量  那我们可以设置成静态变量<br>​	<strong>静态变量被该类的所有对象共享    静态变量通常直接通过类名来调用</strong></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/12/30/Java-%E9%9D%99%E6%80%81static/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -837,166 +1034,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://zhisheng0506.github.io/2025/11/27/%E6%95%B0%E7%BB%8401-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/photo.jpg">
-      <meta itemprop="name" content="Kmon">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kmon Blogs">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | Kmon Blogs">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/11/27/%E6%95%B0%E7%BB%8401-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" class="post-title-link" itemprop="url">数组01-二分查找</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2025-11-27 21:15:09 / Modified: 22:16:24" itemprop="dateCreated datePublished" datetime="2025-11-27T21:15:09+08:00">2025-11-27</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>二分作为大一就没有搞懂的硬骨头,模糊的主要原因是区分不了<strong>二分查找</strong>和<strong>二分答案</strong></p>
-<p>而且网上的二分答案模板实在是太多太多了  自己刷的题目数量也没跟上,导致模板总是忘</p>
-<p>借着这个博客,彻底搞懂二分!!😡</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/11/27/%E6%95%B0%E7%BB%8401-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://zhisheng0506.github.io/2025/11/27/%E9%93%BE%E8%A1%A806-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/photo.jpg">
-      <meta itemprop="name" content="Kmon">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kmon Blogs">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | Kmon Blogs">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/11/27/%E9%93%BE%E8%A1%A806-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/" class="post-title-link" itemprop="url">链表06-环形链表</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2025-11-27 19:33:22 / Modified: 20:31:00" itemprop="dateCreated datePublished" datetime="2025-11-27T19:33:22+08:00">2025-11-27</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><strong>题:</strong>  给定一个链表，返回链表开始入环的第一个节点。 如果链表无环，则返回 null。</p>
-<p>为了表示给定链表中的环，使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。</p>
-<p><img src="/img/ae5e11e9-081f-4487-9b5d-bc806aa2a352.png" alt="环形链表"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/11/27/%E9%93%BE%E8%A1%A806-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/6/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/6/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

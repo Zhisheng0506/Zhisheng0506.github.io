@@ -146,13 +146,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">63</span>
+          <span class="site-state-item-count">64</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-count">47</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -183,6 +183,93 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://zhisheng0506.github.io/2026/01/03/Java-%E5%8C%85%E5%92%8Cfinal/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/photo.jpg">
+      <meta itemprop="name" content="Kmon">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/01/03/Java-%E5%8C%85%E5%92%8Cfinal/" class="post-title-link" itemprop="url">Java-包和final</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-01-03 00:43:07" itemprop="dateCreated datePublished" datetime="2026-01-03T00:43:07+08:00">2026-01-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-01-17 11:51:12" itemprop="dateModified" datetime="2026-01-17T11:51:12+08:00">2026-01-17</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="包的使用"><a href="#包的使用" class="headerlink" title="包的使用"></a>包的使用</h3><p>不同包下的类调用时 要引用包名</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String []arg)</span>&#123;</span><br><span class="line">        heima.test.Student stu=<span class="keyword">new</span> <span class="title class_">heima</span>.test.Stuent()</span><br><span class="line">        <span class="comment">// 假如Student类不在当前包下而是在heima.test的包下</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果不想用包名来调用类  那就在代码前加入import引入包</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> heima.test.Studnt</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String []arg)</span>&#123;</span><br><span class="line">        Student stu=<span class="keyword">new</span> <span class="title class_">Stuent</span>() </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/01/03/Java-%E5%8C%85%E5%92%8Cfinal/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -940,90 +1027,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/12/12/%E6%95%B0%E7%BB%8404-%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://zhisheng0506.github.io/2025/12/05/%E6%95%B0%E7%BB%8403-%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E5%B9%B3%E6%96%B9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/photo.jpg">
-      <meta itemprop="name" content="Kmon">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kmon Blogs">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | Kmon Blogs">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/12/05/%E6%95%B0%E7%BB%8403-%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E5%B9%B3%E6%96%B9/" class="post-title-link" itemprop="url">数组03-有序数组的平方</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2025-12-05 20:57:09" itemprop="dateCreated datePublished" datetime="2025-12-05T20:57:09+08:00">2025-12-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-12-12 21:15:38" itemprop="dateModified" datetime="2025-12-12T21:15:38+08:00">2025-12-12</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>题意：给你一个按 非递减顺序 排序的整数数组 nums，返回 每个数字的平方 组成的新数组，要求也按 非递减顺序 排序</p>
-<p>暴力解法是把数组的每个元素取平方后，用各种排序算法来排序  时间复杂度为O(nlogn)    双指针可以直接把时间复杂度降到O(n)</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/12/05/%E6%95%B0%E7%BB%8403-%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E5%B9%B3%E6%96%B9/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>

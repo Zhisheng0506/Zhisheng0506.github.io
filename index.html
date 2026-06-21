@@ -258,13 +258,13 @@ mjx-container[display="true"] + br {
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">63</span>
+          <span class="site-state-item-count">64</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-count">47</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -355,6 +355,95 @@ mjx-container[display="true"] + br {
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2026/06/19/%E5%90%8C%E6%A8%A1%E4%BD%99%E5%AE%9A%E7%90%86-%E5%A4%A7%E6%95%B0%E8%BF%90%E7%AE%97%E5%8F%96%E6%A8%A1%E6%8A%80%E5%B7%A7/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://zhisheng0506.github.io/2026/06/08/%E5%9F%83%E5%BC%8F%E7%AD%9B%E6%B3%95-%E9%9D%9E%E7%B4%A0%E6%95%B0%E4%B8%AA%E6%95%B0%E4%B8%8Evector-bool%E9%99%B7%E9%98%B1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/photo.jpg">
+      <meta itemprop="name" content="Kmon">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/06/08/%E5%9F%83%E5%BC%8F%E7%AD%9B%E6%B3%95-%E9%9D%9E%E7%B4%A0%E6%95%B0%E4%B8%AA%E6%95%B0%E4%B8%8Evector-bool%E9%99%B7%E9%98%B1/" class="post-title-link" itemprop="url">埃式筛法-非素数个数与vector-bool陷阱</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-06-08 10:00:00" itemprop="dateCreated datePublished" datetime="2026-06-08T10:00:00+08:00">2026-06-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-06-20 19:52:05" itemprop="dateModified" datetime="2026-06-20T19:52:05+08:00">2026-06-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><blockquote>
+<p>题目链接：<a target="_blank" rel="noopener" href="https://noobdream.com/DreamJudge/Issue/page/1305/">N诺&#x2F;DreamJudge 1305</a></p>
+</blockquote>
+<p>求 [a, b] 之间的非素数个数。特别规定：1 算作素数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入:</span><br><span class="line">1 10</span><br><span class="line">2 5</span><br><span class="line"></span><br><span class="line">输出:</span><br><span class="line">5    ← 1~10 中非素数: 4,6,8,9,10 → 5个</span><br><span class="line">2    ← 2~5 中非素数: 4 → 1个? 再加... 2,3,5是素数,4非 → 1个? 2,3,5质,4非 → 1个</span><br></pre></td></tr></table></figure>
+
+<p><code>a ≤ b ≤ 10^7</code>，多组测试数据。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/06/08/%E5%9F%83%E5%BC%8F%E7%AD%9B%E6%B3%95-%E9%9D%9E%E7%B4%A0%E6%95%B0%E4%B8%AA%E6%95%B0%E4%B8%8Evector-bool%E9%99%B7%E9%98%B1/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1024,89 +1113,6 @@ mjx-container[display="true"] + br {
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2026/06/02/%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%89%A9%E5%B1%95-%E5%AD%97%E5%85%B8%E5%BA%8F%E8%B4%AA%E5%BF%83/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://zhisheng0506.github.io/2026/06/01/KMP%E7%AE%97%E6%B3%95-%E5%89%8D%E7%BC%80%E6%95%B0%E7%BB%84%E4%B8%8E%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/photo.jpg">
-      <meta itemprop="name" content="Kmon">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kmon Blogs">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | Kmon Blogs">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/06/01/KMP%E7%AE%97%E6%B3%95-%E5%89%8D%E7%BC%80%E6%95%B0%E7%BB%84%E4%B8%8E%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D/" class="post-title-link" itemprop="url">KMP算法-前缀数组与字符串匹配</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2026-06-01 18:00:00 / Modified: 19:45:33" itemprop="dateCreated datePublished" datetime="2026-06-01T18:00:00+08:00">2026-06-01</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><blockquote>
-<p>题目链接：<a target="_blank" rel="noopener" href="https://noobdream.com/DreamJudge/Issue/page/1617/">N诺&#x2F;DreamJudge 1617</a></p>
-</blockquote>
-<p>给出两个字符串 s1 和 s2，找出 s2 在 s1 中<strong>所有出现的位置</strong>（1-based），并输出 s2 的前缀数组 <code>next</code>。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">输入:</span><br><span class="line">abababab</span><br><span class="line">aba</span><br><span class="line"></span><br><span class="line">输出:</span><br><span class="line">1       ← &quot;aba&quot; 在位置 1 出现</span><br><span class="line">3       ← &quot;aba&quot; 在位置 3 出现</span><br><span class="line">5       ← &quot;aba&quot; 在位置 5 出现</span><br><span class="line">0 0 1   ← next 数组</span><br></pre></td></tr></table></figure>
-
-<p><code>N, M ≤ 1000000</code>。暴力 O(NM) 必超时，必须 KMP。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2026/06/01/KMP%E7%AE%97%E6%B3%95-%E5%89%8D%E7%BC%80%E6%95%B0%E7%BB%84%E4%B8%8E%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>

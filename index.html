@@ -258,13 +258,13 @@ mjx-container[display="true"] + br {
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-count">66</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">49</span>
+        <span class="site-state-item-count">50</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -355,6 +355,93 @@ mjx-container[display="true"] + br {
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2026/06/19/%E5%90%8C%E6%A8%A1%E4%BD%99%E5%AE%9A%E7%90%86-%E5%A4%A7%E6%95%B0%E8%BF%90%E7%AE%97%E5%8F%96%E6%A8%A1%E6%8A%80%E5%B7%A7/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://zhisheng0506.github.io/2026/06/10/%E9%AB%98%E7%B2%BE%E5%BA%A6%E8%BF%90%E7%AE%97-%E5%A4%A7%E6%95%B0%E5%8A%A0%E5%87%8F%E4%B9%98%E9%99%A4%E6%A8%A1%E6%9D%BF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/photo.jpg">
+      <meta itemprop="name" content="Kmon">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/06/10/%E9%AB%98%E7%B2%BE%E5%BA%A6%E8%BF%90%E7%AE%97-%E5%A4%A7%E6%95%B0%E5%8A%A0%E5%87%8F%E4%B9%98%E9%99%A4%E6%A8%A1%E6%9D%BF/" class="post-title-link" itemprop="url">高精度运算-大数加减乘除模板</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-06-10 10:00:00" itemprop="dateCreated datePublished" datetime="2026-06-10T10:00:00+08:00">2026-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-06-22 21:09:16" itemprop="dateModified" datetime="2026-06-22T21:09:16+08:00">2026-06-22</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>当数字远超 <code>long long</code> 范围（比如几百位甚至上千位），就不能用基本类型运算了。高精度（大数运算）用<strong>数组或 vector 逐位模拟</strong>手算过程。</p>
+<h3 id="存储方式"><a href="#存储方式" class="headerlink" title="存储方式"></a>存储方式</h3><p><strong>倒序存储</strong>：数组下标 0 存个位、下标 1 存十位……因为进位&#x2F;借位操作都是从低位往高位走，倒序最自然。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">数字 12345 存为:</span><br><span class="line">vector: [5, 4, 3, 2, 1]</span><br><span class="line">下标:     0  1  2  3  4</span><br><span class="line">          个  十  百  千  万</span><br></pre></td></tr></table></figure>
+
+<p>输入时把字符串反转，输出时再从后往前打印。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/06/10/%E9%AB%98%E7%B2%BE%E5%BA%A6%E8%BF%90%E7%AE%97-%E5%A4%A7%E6%95%B0%E5%8A%A0%E5%87%8F%E4%B9%98%E9%99%A4%E6%A8%A1%E6%9D%BF/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1026,93 +1113,6 @@ mjx-container[display="true"] + br {
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2026/06/04/%E4%BA%8C%E5%8F%89%E6%A0%91-%E5%89%8D%E4%B8%AD%E5%90%8E%E9%81%8D%E5%8E%86/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://zhisheng0506.github.io/2026/06/02/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%B7%9D%E7%A6%BB-%E7%BB%93%E6%9E%84%E4%BD%93%E6%8E%92%E5%BA%8F%E4%B8%8E%E5%A4%9A%E9%87%8D%E6%AF%94%E8%BE%83/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/photo.jpg">
-      <meta itemprop="name" content="Kmon">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kmon Blogs">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | Kmon Blogs">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/06/02/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%B7%9D%E7%A6%BB-%E7%BB%93%E6%9E%84%E4%BD%93%E6%8E%92%E5%BA%8F%E4%B8%8E%E5%A4%9A%E9%87%8D%E6%AF%94%E8%BE%83/" class="post-title-link" itemprop="url">字符串距离-结构体排序与多重比较</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2026-06-02 18:00:00" itemprop="dateCreated datePublished" datetime="2026-06-02T18:00:00+08:00">2026-06-02</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-06-01 22:19:22" itemprop="dateModified" datetime="2026-06-01T22:19:22+08:00">2026-06-01</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><blockquote>
-<p>题目链接：<a target="_blank" rel="noopener" href="https://noobdream.com/DreamJudge/Issue/page/1947/">N诺&#x2F;DreamJudge 1947</a></p>
-</blockquote>
-<p>字符串汉明距离：两个等长字符串不同字符位置的个数。给定 n 个字符串，输出前 6 对距离最小的 pair。排序优先级：距离小 → 较小字符串字典序小 → 较大字符串字典序小。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">输入:</span><br><span class="line">4</span><br><span class="line">abcd</span><br><span class="line">abcc</span><br><span class="line">abdc</span><br><span class="line">aaaa</span><br><span class="line"></span><br><span class="line">输出:</span><br><span class="line">abcd abcc 1</span><br><span class="line">abcd abdc 2</span><br><span class="line">abcc abdc 3</span><br><span class="line">aaaa abcc 4</span><br><span class="line">aaaa abdc 4</span><br><span class="line">aaaa abcd 4</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2026/06/02/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%B7%9D%E7%A6%BB-%E7%BB%93%E6%9E%84%E4%BD%93%E6%8E%92%E5%BA%8F%E4%B8%8E%E5%A4%9A%E9%87%8D%E6%AF%94%E8%BE%83/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>

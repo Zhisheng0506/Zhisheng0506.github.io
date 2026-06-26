@@ -258,13 +258,13 @@ mjx-container[display="true"] + br {
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">66</span>
+          <span class="site-state-item-count">68</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-count">53</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -355,6 +355,184 @@ mjx-container[display="true"] + br {
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2026/06/19/%E5%90%8C%E6%A8%A1%E4%BD%99%E5%AE%9A%E7%90%86-%E5%A4%A7%E6%95%B0%E8%BF%90%E7%AE%97%E5%8F%96%E6%A8%A1%E6%8A%80%E5%B7%A7/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://zhisheng0506.github.io/2026/06/12/%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91-%E6%9C%80%E5%B0%8F%E5%A0%86%E4%B8%8E%E5%B8%A6%E6%9D%83%E8%B7%AF%E5%BE%84%E5%92%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/photo.jpg">
+      <meta itemprop="name" content="Kmon">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/06/12/%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91-%E6%9C%80%E5%B0%8F%E5%A0%86%E4%B8%8E%E5%B8%A6%E6%9D%83%E8%B7%AF%E5%BE%84%E5%92%8C/" class="post-title-link" itemprop="url">哈夫曼树-最小堆与带权路径和</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-06-12 10:00:00" itemprop="dateCreated datePublished" datetime="2026-06-12T10:00:00+08:00">2026-06-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-06-25 21:47:43" itemprop="dateModified" datetime="2026-06-25T21:47:43+08:00">2026-06-25</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><blockquote>
+<p>题目链接：<a target="_blank" rel="noopener" href="https://noobdream.com/DreamJudge/Issue/page/1382/">N诺&#x2F;DreamJudge 1382</a></p>
+</blockquote>
+<p>给定 n 个叶节点的权值，构建哈夫曼树，输出<strong>所有节点的值与权值的乘积之和</strong>（即带权路径和 WPL）。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入:</span><br><span class="line">5</span><br><span class="line">1 2 2 5 9</span><br><span class="line"></span><br><span class="line">输出:</span><br><span class="line">37</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">构建过程:</span><br><span class="line">  取最小两个 1+2=3   → WPL += 3, 堆变为 [2,3,5,9]</span><br><span class="line">  取最小两个 2+3=5   → WPL += 5, 堆变为 [5,5,9]</span><br><span class="line">  取最小两个 5+5=10  → WPL += 10, 堆变为 [9,10]</span><br><span class="line">  取最小两个 9+10=19 → WPL += 19, 堆变为 [19]</span><br><span class="line">  WPL = 3+5+10+19 = 37</span><br></pre></td></tr></table></figure>
+
+<p><code>2 ≤ n ≤ 1000</code>，权值 ≤ 100。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/06/12/%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91-%E6%9C%80%E5%B0%8F%E5%A0%86%E4%B8%8E%E5%B8%A6%E6%9D%83%E8%B7%AF%E5%BE%84%E5%92%8C/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://zhisheng0506.github.io/2026/06/11/%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC-%E6%97%A0%E6%8B%AC%E5%8F%B7%E4%B8%AD%E7%BC%80%E4%B8%8E%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/photo.jpg">
+      <meta itemprop="name" content="Kmon">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/06/11/%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC-%E6%97%A0%E6%8B%AC%E5%8F%B7%E4%B8%AD%E7%BC%80%E4%B8%8E%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="post-title-link" itemprop="url">表达式求值-无括号中缀与后缀表达式</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-06-11 10:00:00" itemprop="dateCreated datePublished" datetime="2026-06-11T10:00:00+08:00">2026-06-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-06-25 20:49:20" itemprop="dateModified" datetime="2026-06-25T20:49:20+08:00">2026-06-25</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><blockquote>
+<p>题目链接：<a target="_blank" rel="noopener" href="https://noobdream.com/DreamJudge/Issue/page/1301/">N诺&#x2F;DreamJudge 1301</a></p>
+</blockquote>
+<p>计算不存在括号的中缀表达式，包含 <code>+</code> <code>-</code> <code>*</code> <code>/</code>，表达式不含空格。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: 6/2+3+3*4</span><br><span class="line">输出: 18</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/06/11/%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC-%E6%97%A0%E6%8B%AC%E5%8F%B7%E4%B8%AD%E7%BC%80%E4%B8%8E%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -951,168 +1129,6 @@ mjx-container[display="true"] + br {
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2026/06/05/cmp%E5%87%BD%E6%95%B0-return-false%E7%9A%84%E9%87%8D%E8%A6%81%E6%80%A7/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://zhisheng0506.github.io/2026/06/04/%E4%BA%8C%E5%8F%89%E6%8E%92%E5%BA%8F%E6%A0%91-%E6%8F%92%E5%85%A5%E4%B8%8E%E7%88%B6%E8%8A%82%E7%82%B9%E6%9F%A5%E6%89%BE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/photo.jpg">
-      <meta itemprop="name" content="Kmon">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kmon Blogs">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | Kmon Blogs">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/06/04/%E4%BA%8C%E5%8F%89%E6%8E%92%E5%BA%8F%E6%A0%91-%E6%8F%92%E5%85%A5%E4%B8%8E%E7%88%B6%E8%8A%82%E7%82%B9%E6%9F%A5%E6%89%BE/" class="post-title-link" itemprop="url">二叉排序树-插入与父节点查找</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2026-06-04 18:00:00 / Modified: 21:01:51" itemprop="dateCreated datePublished" datetime="2026-06-04T18:00:00+08:00">2026-06-04</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><blockquote>
-<p>题目链接：<a target="_blank" rel="noopener" href="https://noobdream.com/DreamJudge/Issue/page/1396/">N诺&#x2F;DreamJudge 1396</a></p>
-</blockquote>
-<p>按顺序向初始为空的二叉排序树插入 N 个互不相同的关键字。每次插入成功后，输出<strong>该节点的父节点关键字</strong>。根节点输出 <code>-1</code>。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">输入:</span><br><span class="line">5</span><br><span class="line">2 5 1 3 4</span><br><span class="line"></span><br><span class="line">输出:</span><br><span class="line">-1    ← 2 是根节点</span><br><span class="line">2     ← 5 的父节点是 2</span><br><span class="line">2     ← 1 的父节点是 2</span><br><span class="line">5     ← 3 的父节点是 5</span><br><span class="line">3     ← 4 的父节点是 3</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2026/06/04/%E4%BA%8C%E5%8F%89%E6%8E%92%E5%BA%8F%E6%A0%91-%E6%8F%92%E5%85%A5%E4%B8%8E%E7%88%B6%E8%8A%82%E7%82%B9%E6%9F%A5%E6%89%BE/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://zhisheng0506.github.io/2026/06/04/%E4%BA%8C%E5%8F%89%E6%A0%91-%E5%89%8D%E4%B8%AD%E5%90%8E%E9%81%8D%E5%8E%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/photo.jpg">
-      <meta itemprop="name" content="Kmon">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kmon Blogs">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | Kmon Blogs">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/06/04/%E4%BA%8C%E5%8F%89%E6%A0%91-%E5%89%8D%E4%B8%AD%E5%90%8E%E9%81%8D%E5%8E%86/" class="post-title-link" itemprop="url">二叉树-前中后序遍历模板</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2026-06-04 10:00:00 / Modified: 20:49:28" itemprop="dateCreated datePublished" datetime="2026-06-04T10:00:00+08:00">2026-06-04</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><blockquote>
-<p>题目链接：<a target="_blank" rel="noopener" href="https://noobdream.com/DreamJudge/Issue/page/1332/">N诺&#x2F;DreamJudge 1332</a></p>
-</blockquote>
-<p>输入 n 个整数，建立二叉排序树（BST），依次输出前序、中序、后序遍历结果。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入:</span><br><span class="line">5</span><br><span class="line">3 1 4 2 5</span><br><span class="line"></span><br><span class="line">输出:</span><br><span class="line">3 1 2 4 5    ← 前序</span><br><span class="line">1 2 3 4 5    ← 中序</span><br><span class="line">2 1 5 4 3    ← 后序</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2026/06/04/%E4%BA%8C%E5%8F%89%E6%A0%91-%E5%89%8D%E4%B8%AD%E5%90%8E%E9%81%8D%E5%8E%86/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>

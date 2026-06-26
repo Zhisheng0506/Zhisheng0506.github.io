@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhisheng0506.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="题目描述 题目链接：N诺&#x2F;DreamJudge 1382  给定 n 个叶节点的权值，构建哈夫曼树，输出所有节点的值与权值的乘积之和（即带权路径和 WPL）。 123456输入:51 2 2 5 9输出:37  123456构建过程:  取最小两个 1+2&#x3D;3   → WPL +&#x3D; 3, 堆变为 [2,3,5,9]  取最小两个 2+3&#x3D;5   → WPL +&#x3D; 5, 堆变为 [5,5,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="哈夫曼树-最小堆与带权路径和">
+<meta property="og:url" content="https://zhisheng0506.github.io/2026/06/12/%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91-%E6%9C%80%E5%B0%8F%E5%A0%86%E4%B8%8E%E5%B8%A6%E6%9D%83%E8%B7%AF%E5%BE%84%E5%92%8C/index.html">
+<meta property="og:site_name" content="Kmon Blogs">
+<meta property="og:description" content="题目描述 题目链接：N诺&#x2F;DreamJudge 1382  给定 n 个叶节点的权值，构建哈夫曼树，输出所有节点的值与权值的乘积之和（即带权路径和 WPL）。 123456输入:51 2 2 5 9输出:37  123456构建过程:  取最小两个 1+2&#x3D;3   → WPL +&#x3D; 3, 堆变为 [2,3,5,9]  取最小两个 2+3&#x3D;5   → WPL +&#x3D; 5, 堆变为 [5,5,">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-06-12T02:00:00.000Z">
+<meta property="article:modified_time" content="2026-06-25T13:47:43.882Z">
+<meta property="article:author" content="Kmon">
+<meta property="article:tag" content="上机考试">
+<meta property="article:tag" content="哈夫曼树">
+<meta property="article:tag" content="堆">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="贪心">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://zhisheng0506.github.io/2026/06/12/%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91-%E6%9C%80%E5%B0%8F%E5%A0%86%E4%B8%8E%E5%B8%A6%E6%9D%83%E8%B7%AF%E5%BE%84%E5%92%8C/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://zhisheng0506.github.io/2026/06/12/%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91-%E6%9C%80%E5%B0%8F%E5%A0%86%E4%B8%8E%E5%B8%A6%E6%9D%83%E8%B7%AF%E5%BE%84%E5%92%8C/","path":"2026/06/12/哈夫曼树-最小堆与带权路径和/","title":"哈夫曼树-最小堆与带权路径和"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>哈夫曼树-最小堆与带权路径和 | Kmon Blogs</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kmon Blogs</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">2.</span> <span class="nav-text">哈夫曼树是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E5%A0%86%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.</span> <span class="nav-text">最小堆实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#push-heap-pop-heap-vs-priority-queue"><span class="nav-number">3.1.</span> <span class="nav-text">push_heap &#x2F; pop_heap vs priority_queue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#greater-%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">3.2.</span> <span class="nav-text">greater&lt;int&gt;() 的作用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">完整执行过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%9A%A0%EF%B8%8F-%E5%85%B3%E9%94%AE%E5%9D%91%E7%82%B9"><span class="nav-number">5.</span> <span class="nav-text">⚠️ 关键坑点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%BF%85%E9%A1%BB%E7%94%A8%E5%B0%8F%E9%A1%B6%E5%A0%86"><span class="nav-number">5.1.</span> <span class="nav-text">1. 必须用小顶堆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-pop-heap-%E4%B8%8D%E6%98%AF%E5%88%A0%E9%99%A4%EF%BC%8C%E5%8F%AA%E6%98%AF%E6%8A%8A%E5%A0%86%E9%A1%B6%E7%A7%BB%E5%88%B0%E6%9C%80%E5%90%8E"><span class="nav-number">5.2.</span> <span class="nav-text">2. pop_heap 不是删除，只是把堆顶移到最后</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-push-heap-%E5%89%8D%E8%A6%81%E5%85%88-push-back"><span class="nav-number">5.3.</span> <span class="nav-text">3. push_heap 前要先 push_back</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-WPL-%E7%9A%84%E5%80%BC%E5%8F%AF%E8%83%BD%E8%B6%85-int"><span class="nav-number">5.4.</span> <span class="nav-text">4. WPL 的值可能超 int</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8-priority-queue-%E7%9A%84%E7%AD%89%E4%BB%B7%E5%86%99%E6%B3%95"><span class="nav-number">6.</span> <span class="nav-text">用 priority_queue 的等价写法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81%E6%A8%A1%E6%9D%BF"><span class="nav-number">7.</span> <span class="nav-text">完整代码模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">8.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kmon"
+      src="/images/photo.jpg">
+  <p class="site-author-name" itemprop="name">Kmon</p>
+  <div class="site-description" itemprop="description"></div>
+  <div class="site-intro" style="margin-top: 10px; font-size: 14px; color: #666; line-height: 1.5;">
+    <p>分享学习笔记和自己的碎碎念~</p>
+  </div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">68</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Zhisheng0506" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Zhisheng0506" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1206300336@qq.com" title="E-Mail → mailto:1206300336@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/1495302036" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;1495302036" rel="noopener me" target="_blank"><i class="fab fa-bilibili fa-fw"></i>Bilibili</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://x.com/ByKmon_" title="Twitter → https:&#x2F;&#x2F;x.com&#x2F;ByKmon_" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://zhisheng0506.github.io/2026/06/12/%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91-%E6%9C%80%E5%B0%8F%E5%A0%86%E4%B8%8E%E5%B8%A6%E6%9D%83%E8%B7%AF%E5%BE%84%E5%92%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/photo.jpg">
+      <meta itemprop="name" content="Kmon">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="哈夫曼树-最小堆与带权路径和 | Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          哈夫曼树-最小堆与带权路径和
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-06-12 10:00:00" itemprop="dateCreated datePublished" datetime="2026-06-12T10:00:00+08:00">2026-06-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-06-25 21:47:43" itemprop="dateModified" datetime="2026-06-25T21:47:43+08:00">2026-06-25</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><blockquote>
+<p>题目链接：<a target="_blank" rel="noopener" href="https://noobdream.com/DreamJudge/Issue/page/1382/">N诺&#x2F;DreamJudge 1382</a></p>
+</blockquote>
+<p>给定 n 个叶节点的权值，构建哈夫曼树，输出<strong>所有节点的值与权值的乘积之和</strong>（即带权路径和 WPL）。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入:</span><br><span class="line">5</span><br><span class="line">1 2 2 5 9</span><br><span class="line"></span><br><span class="line">输出:</span><br><span class="line">37</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">构建过程:</span><br><span class="line">  取最小两个 1+2=3   → WPL += 3, 堆变为 [2,3,5,9]</span><br><span class="line">  取最小两个 2+3=5   → WPL += 5, 堆变为 [5,5,9]</span><br><span class="line">  取最小两个 5+5=10  → WPL += 10, 堆变为 [9,10]</span><br><span class="line">  取最小两个 9+10=19 → WPL += 19, 堆变为 [19]</span><br><span class="line">  WPL = 3+5+10+19 = 37</span><br></pre></td></tr></table></figure>
+
+<p><code>2 ≤ n ≤ 1000</code>，权值 ≤ 100。</p>
+<span id="more"></span>
+
+<h2 id="哈夫曼树是什么"><a href="#哈夫曼树是什么" class="headerlink" title="哈夫曼树是什么"></a>哈夫曼树是什么</h2><p>哈夫曼树是一种<strong>最优二叉树</strong>：给定一组带权值的叶节点，通过不断合并权值最小的两个节点来构建树，使<strong>带权路径和最小</strong>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">带权路径和 (WPL) = Σ(叶节点权值 × 到根的距离)</span><br><span class="line"></span><br><span class="line">例如: 叶节点 [1,2,2,5,9]</span><br><span class="line"></span><br><span class="line">        19</span><br><span class="line">       /  \</span><br><span class="line">      9    10</span><br><span class="line">          /  \</span><br><span class="line">         5    5</span><br><span class="line">             / \</span><br><span class="line">            2   3</span><br><span class="line">               / \</span><br><span class="line">              1   2</span><br><span class="line"></span><br><span class="line">WPL = 1×4 + 2×4 + 2×3 + 5×2 + 9×1</span><br><span class="line">    = 4 + 8 + 6 + 10 + 9 = 37</span><br></pre></td></tr></table></figure>
+
+<p><strong>算法本质</strong>：每次取最小的两个数合并，它们的和代表新节点的权值，累加到 WPL 中。</p>
+<hr>
+<h2 id="最小堆实现"><a href="#最小堆实现" class="headerlink" title="最小堆实现"></a>最小堆实现</h2><p>算法需要频繁”取最小两数、插入新数”，最小堆天然适合。可以用 <code>priority_queue</code>，但这里用另一种写法——<code>vector</code> + <code>push_heap</code> &#x2F; <code>pop_heap</code>：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="type">int</span>&gt; v;</span><br><span class="line"><span class="comment">// 读取所有叶节点</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">    <span class="type">int</span> x; cin &gt;&gt; x;</span><br><span class="line">    v.<span class="built_in">push_back</span>(x);</span><br><span class="line">    <span class="built_in">push_heap</span>(v.<span class="built_in">begin</span>(), v.<span class="built_in">end</span>(), <span class="built_in">greater</span>&lt;<span class="type">int</span>&gt;());</span><br><span class="line">    <span class="comment">//  相当于 priority_queue.push(x)</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> wpl = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span> (v.<span class="built_in">size</span>() &gt; <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="comment">// 取最小</span></span><br><span class="line">    <span class="built_in">pop_heap</span>(v.<span class="built_in">begin</span>(), v.<span class="built_in">end</span>(), <span class="built_in">greater</span>&lt;<span class="type">int</span>&gt;());</span><br><span class="line">    <span class="type">int</span> a = v.<span class="built_in">back</span>(); v.<span class="built_in">pop_back</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 取次小</span></span><br><span class="line">    <span class="built_in">pop_heap</span>(v.<span class="built_in">begin</span>(), v.<span class="built_in">end</span>(), <span class="built_in">greater</span>&lt;<span class="type">int</span>&gt;());</span><br><span class="line">    <span class="type">int</span> b = v.<span class="built_in">back</span>(); v.<span class="built_in">pop_back</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 合并</span></span><br><span class="line">    <span class="type">int</span> sum = a + b;</span><br><span class="line">    wpl += sum;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 放回</span></span><br><span class="line">    v.<span class="built_in">push_back</span>(sum);</span><br><span class="line">    <span class="built_in">push_heap</span>(v.<span class="built_in">begin</span>(), v.<span class="built_in">end</span>(), <span class="built_in">greater</span>&lt;<span class="type">int</span>&gt;());</span><br><span class="line">&#125;</span><br><span class="line">cout &lt;&lt; wpl &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
+
+<h3 id="push-heap-pop-heap-vs-priority-queue"><a href="#push-heap-pop-heap-vs-priority-queue" class="headerlink" title="push_heap &#x2F; pop_heap vs priority_queue"></a>push_heap &#x2F; pop_heap vs priority_queue</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>vector + heap 操作</th>
+<th>priority_queue</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>定义</td>
+<td><code>vector&lt;int&gt; v;</code></td>
+<td><code>priority_queue&lt;int, vector&lt;int&gt;, greater&lt;int&gt;&gt; pq;</code></td>
+</tr>
+<tr>
+<td>入队</td>
+<td><code>v.push_back(x); push_heap(..., greater&lt;int&gt;());</code></td>
+<td><code>pq.push(x);</code></td>
+</tr>
+<tr>
+<td>取最小</td>
+<td><code>pop_heap(...); int a = v.back(); v.pop_back();</code></td>
+<td><code>int a = pq.top(); pq.pop();</code></td>
+</tr>
+<tr>
+<td>优点</td>
+<td>灵活，可直接访问底层</td>
+<td>代码更简洁</td>
+</tr>
+</tbody></table>
+<p>两种写法功能相同。<code>priority_queue</code> 更简洁，<code>vector + heap</code> 更灵活。</p>
+<h3 id="greater-的作用"><a href="#greater-的作用" class="headerlink" title="greater&lt;int&gt;() 的作用"></a><code>greater&lt;int&gt;()</code> 的作用</h3><p>默认是大顶堆（<code>less&lt;int&gt;</code>，最大值在堆顶）。加上 <code>greater&lt;int&gt;()</code> 变成<strong>小顶堆</strong>，最小值在堆顶。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">push_heap</span>(v.<span class="built_in">begin</span>(), v.<span class="built_in">end</span>());               <span class="comment">// 默认大顶堆 → 取最大</span></span><br><span class="line"><span class="built_in">push_heap</span>(v.<span class="built_in">begin</span>(), v.<span class="built_in">end</span>(), <span class="built_in">greater</span>&lt;<span class="type">int</span>&gt;()); <span class="comment">// 小顶堆   → 取最小</span></span><br></pre></td></tr></table></figure>
+
+<p>哈夫曼树需要每次取<strong>最小</strong>的两个数 → 用小顶堆。</p>
+<hr>
+<h2 id="完整执行过程"><a href="#完整执行过程" class="headerlink" title="完整执行过程"></a>完整执行过程</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">输入: 1 2 2 5 9</span><br><span class="line"></span><br><span class="line">初始堆: [1, 2, 2, 5, 9]</span><br><span class="line"></span><br><span class="line">轮 1: min=1, next=2 → sum=3, wpl=3</span><br><span class="line">  堆变为: [2, 3, 5, 9]</span><br><span class="line"></span><br><span class="line">轮 2: min=2, next=3 → sum=5, wpl=8</span><br><span class="line">  堆变为: [5, 5, 9]</span><br><span class="line"></span><br><span class="line">轮 3: min=5, next=5 → sum=10, wpl=18</span><br><span class="line">  堆变为: [9, 10]</span><br><span class="line"></span><br><span class="line">轮 4: min=9, next=10 → sum=19, wpl=37</span><br><span class="line">  堆变为: [19]</span><br><span class="line"></span><br><span class="line">堆大小=1 → 结束</span><br><span class="line">输出: 37</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="⚠️-关键坑点"><a href="#⚠️-关键坑点" class="headerlink" title="⚠️ 关键坑点"></a>⚠️ 关键坑点</h2><h3 id="1-必须用小顶堆"><a href="#1-必须用小顶堆" class="headerlink" title="1. 必须用小顶堆"></a>1. 必须用小顶堆</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">greater</span>&lt;<span class="type">int</span>&gt;()  <span class="comment">// ✅ 小顶堆，取最小</span></span><br><span class="line"><span class="built_in">less</span>&lt;<span class="type">int</span>&gt;()     <span class="comment">// ❌ 默认大顶堆，取最大 — 哈夫曼不对</span></span><br></pre></td></tr></table></figure>
+
+<p>不加 <code>greater&lt;int&gt;()</code>，每次取的是最大的两个节点合并，完全不符合哈夫曼算法。</p>
+<h3 id="2-pop-heap-不是删除，只是把堆顶移到最后"><a href="#2-pop-heap-不是删除，只是把堆顶移到最后" class="headerlink" title="2. pop_heap 不是删除，只是把堆顶移到最后"></a>2. pop_heap 不是删除，只是把堆顶移到最后</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">pop_heap</span>(v.<span class="built_in">begin</span>(), v.<span class="built_in">end</span>(), <span class="built_in">greater</span>&lt;<span class="type">int</span>&gt;());  <span class="comment">// 堆顶移到 v.back()</span></span><br><span class="line"><span class="type">int</span> a = v.<span class="built_in">back</span>();                              <span class="comment">// 读取</span></span><br><span class="line">v.<span class="built_in">pop_back</span>();                                  <span class="comment">// 真正删除</span></span><br></pre></td></tr></table></figure>
+
+<p><code>pop_heap</code> 只是把堆顶和最后一个元素交换位置并重新调整堆，<strong>不会删除元素</strong>。必须手动 <code>pop_back()</code>。</p>
+<h3 id="3-push-heap-前要先-push-back"><a href="#3-push-heap-前要先-push-back" class="headerlink" title="3. push_heap 前要先 push_back"></a>3. push_heap 前要先 push_back</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">v.<span class="built_in">push_back</span>(sum);                              <span class="comment">// 先加元素</span></span><br><span class="line"><span class="built_in">push_heap</span>(v.<span class="built_in">begin</span>(), v.<span class="built_in">end</span>(), <span class="built_in">greater</span>&lt;<span class="type">int</span>&gt;()); <span class="comment">// 再调堆</span></span><br></pre></td></tr></table></figure>
+
+<p><code>push_heap</code> 假设新元素已经在 <code>v.back()</code>，只负责把它”上浮”到正确位置。</p>
+<h3 id="4-WPL-的值可能超-int"><a href="#4-WPL-的值可能超-int" class="headerlink" title="4. WPL 的值可能超 int"></a>4. WPL 的值可能超 int</h3><p>n ≤ 1000，权值 ≤ 100，最坏情况下每次合并后值越来越大。最终 WPL 可能达到 10^6 级别，<code>int</code> 够用。但理论上如果 n 更大，要用 <code>long long</code>。</p>
+<hr>
+<h2 id="用-priority-queue-的等价写法"><a href="#用-priority-queue-的等价写法" class="headerlink" title="用 priority_queue 的等价写法"></a>用 priority_queue 的等价写法</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">priority_queue&lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;, greater&lt;<span class="type">int</span>&gt;&gt; pq;</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="keyword">while</span> (cin &gt;&gt; n) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="type">int</span> x; cin &gt;&gt; x;</span><br><span class="line">        pq.<span class="built_in">push</span>(x);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> wpl = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (pq.<span class="built_in">size</span>() &gt; <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="type">int</span> a = pq.<span class="built_in">top</span>(); pq.<span class="built_in">pop</span>();</span><br><span class="line">        <span class="type">int</span> b = pq.<span class="built_in">top</span>(); pq.<span class="built_in">pop</span>();</span><br><span class="line">        <span class="type">int</span> sum = a + b;</span><br><span class="line">        wpl += sum;</span><br><span class="line">        pq.<span class="built_in">push</span>(sum);</span><br><span class="line">    &#125;</span><br><span class="line">    pq.<span class="built_in">pop</span>();  <span class="comment">// 清空最后一个元素</span></span><br><span class="line">    cout &lt;&lt; wpl &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>代码更清晰，推荐日常使用。</p>
+<hr>
+<h2 id="完整代码模板"><a href="#完整代码模板" class="headerlink" title="完整代码模板"></a>完整代码模板</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="literal">nullptr</span>);</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    <span class="keyword">while</span> (cin &gt;&gt; n) &#123;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; v;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="type">int</span> x; cin &gt;&gt; x;</span><br><span class="line">            v.<span class="built_in">push_back</span>(x);</span><br><span class="line">            <span class="built_in">push_heap</span>(v.<span class="built_in">begin</span>(), v.<span class="built_in">end</span>(), <span class="built_in">greater</span>&lt;<span class="type">int</span>&gt;());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> wpl = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (v.<span class="built_in">size</span>() &gt; <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="built_in">pop_heap</span>(v.<span class="built_in">begin</span>(), v.<span class="built_in">end</span>(), <span class="built_in">greater</span>&lt;<span class="type">int</span>&gt;());</span><br><span class="line">            <span class="type">int</span> a = v.<span class="built_in">back</span>(); v.<span class="built_in">pop_back</span>();</span><br><span class="line"></span><br><span class="line">            <span class="built_in">pop_heap</span>(v.<span class="built_in">begin</span>(), v.<span class="built_in">end</span>(), <span class="built_in">greater</span>&lt;<span class="type">int</span>&gt;());</span><br><span class="line">            <span class="type">int</span> b = v.<span class="built_in">back</span>(); v.<span class="built_in">pop_back</span>();</span><br><span class="line"></span><br><span class="line">            <span class="type">int</span> sum = a + b;</span><br><span class="line">            wpl += sum;</span><br><span class="line"></span><br><span class="line">            v.<span class="built_in">push_back</span>(sum);</span><br><span class="line">            <span class="built_in">push_heap</span>(v.<span class="built_in">begin</span>(), v.<span class="built_in">end</span>(), <span class="built_in">greater</span>&lt;<span class="type">int</span>&gt;());</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; wpl &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><table>
+<thead>
+<tr>
+<th>要点</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>哈夫曼算法</td>
+<td>每次取最小的两个数合并，累加和</td>
+</tr>
+<tr>
+<td>数据结构</td>
+<td>小顶堆（<code>greater&lt;int&gt;()</code>）</td>
+</tr>
+<tr>
+<td>pop_heap</td>
+<td>只调整不删除，必须手动 <code>pop_back()</code></td>
+</tr>
+<tr>
+<td>push_heap</td>
+<td>先 <code>push_back()</code> 再调堆</td>
+</tr>
+<tr>
+<td>WPL</td>
+<td>所有合并中间值的累加和</td>
+</tr>
+<tr>
+<td>等效写法</td>
+<td><code>priority_queue&lt;int, vector&lt;int&gt;, greater&lt;int&gt;&gt;</code></td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+              <a href="/tags/%E4%B8%8A%E6%9C%BA%E8%80%83%E8%AF%95/" rel="tag"># 上机考试</a>
+              <a href="/tags/%E8%B4%AA%E5%BF%83/" rel="tag"># 贪心</a>
+              <a href="/tags/%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91/" rel="tag"># 哈夫曼树</a>
+              <a href="/tags/%E5%A0%86/" rel="tag"># 堆</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/06/11/%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC-%E6%97%A0%E6%8B%AC%E5%8F%B7%E4%B8%AD%E7%BC%80%E4%B8%8E%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="prev" title="表达式求值-无括号中缀与后缀表达式">
+                  <i class="fa fa-angle-left"></i> 表达式求值-无括号中缀与后缀表达式
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/06/19/%E5%90%8C%E6%A8%A1%E4%BD%99%E5%AE%9A%E7%90%86-%E5%A4%A7%E6%95%B0%E8%BF%90%E7%AE%97%E5%8F%96%E6%A8%A1%E6%8A%80%E5%B7%A7/" rel="next" title="同模余定理-大数运算取模技巧">
+                  同模余定理-大数运算取模技巧 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Kmon</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

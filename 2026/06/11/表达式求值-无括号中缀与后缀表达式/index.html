@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhisheng0506.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="题目描述 题目链接：N诺&#x2F;DreamJudge 1301  计算不存在括号的中缀表达式，包含 + - * &#x2F;，表达式不含空格。 12输入: 6&#x2F;2+3+3*4输出: 18">
+<meta property="og:type" content="article">
+<meta property="og:title" content="表达式求值-无括号中缀与后缀表达式">
+<meta property="og:url" content="https://zhisheng0506.github.io/2026/06/11/%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC-%E6%97%A0%E6%8B%AC%E5%8F%B7%E4%B8%AD%E7%BC%80%E4%B8%8E%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F/index.html">
+<meta property="og:site_name" content="Kmon Blogs">
+<meta property="og:description" content="题目描述 题目链接：N诺&#x2F;DreamJudge 1301  计算不存在括号的中缀表达式，包含 + - * &#x2F;，表达式不含空格。 12输入: 6&#x2F;2+3+3*4输出: 18">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-06-11T02:00:00.000Z">
+<meta property="article:modified_time" content="2026-06-25T12:49:20.468Z">
+<meta property="article:author" content="Kmon">
+<meta property="article:tag" content="上机考试">
+<meta property="article:tag" content="栈">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="表达式求值">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://zhisheng0506.github.io/2026/06/11/%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC-%E6%97%A0%E6%8B%AC%E5%8F%B7%E4%B8%AD%E7%BC%80%E4%B8%8E%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://zhisheng0506.github.io/2026/06/11/%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC-%E6%97%A0%E6%8B%AC%E5%8F%B7%E4%B8%AD%E7%BC%80%E4%B8%8E%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F/","path":"2026/06/11/表达式求值-无括号中缀与后缀表达式/","title":"表达式求值-无括号中缀与后缀表达式"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>表达式求值-无括号中缀与后缀表达式 | Kmon Blogs</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kmon Blogs</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E8%B7%AF"><span class="nav-number">2.</span> <span class="nav-text">核心思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E6%8B%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">算法拆解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E5%A3%B0%E6%98%8E"><span class="nav-number">3.1.</span> <span class="nav-text">变量声明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%8D%E5%8E%86%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">3.2.</span> <span class="nav-text">遍历表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A6%E5%8F%91%E6%97%B6%E6%9C%BA"><span class="nav-number">3.3.</span> <span class="nav-text">触发时机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E7%BB%88%E6%B1%82%E5%92%8C"><span class="nav-number">3.4.</span> <span class="nav-text">最终求和</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">完整执行过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%83%BD%E6%AD%A3%E7%A1%AE%E5%A4%84%E7%90%86%E4%BC%98%E5%85%88%E7%BA%A7"><span class="nav-number">5.</span> <span class="nav-text">为什么这样能正确处理优先级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%93%E5%B1%95%EF%BC%9A%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC"><span class="nav-number">6.</span> <span class="nav-text">拓展：后缀表达式求值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%AD%E7%BC%80-vs-%E5%90%8E%E7%BC%80"><span class="nav-number">6.1.</span> <span class="nav-text">中缀 vs 后缀</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%9A%A0%EF%B8%8F-%E5%85%B3%E9%94%AE%E5%9D%91%E7%82%B9"><span class="nav-number">7.</span> <span class="nav-text">⚠️ 关键坑点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%9C%80%E5%90%8E%E4%B8%80%E4%BD%8D%E5%BF%85%E9%A1%BB%E8%A7%A6%E5%8F%91"><span class="nav-number">7.1.</span> <span class="nav-text">1. 最后一位必须触发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%94%A8%E4%B8%8A%E4%B8%80%E4%B8%AA%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%8C%E4%B8%8D%E6%98%AF%E5%BD%93%E5%89%8D"><span class="nav-number">7.2.</span> <span class="nav-text">2. 用上一个运算符，不是当前</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E9%99%A4%E6%B3%95%E6%98%AF-top-num%EF%BC%8C%E4%B8%8D%E6%98%AF-num-top"><span class="nav-number">7.3.</span> <span class="nav-text">3. 除法是 top &#x2F; num，不是 num &#x2F; top</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%B8%A6%E6%8B%AC%E5%8F%B7%E7%9A%84%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">7.4.</span> <span class="nav-text">4. 带括号的表达式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81%E6%A8%A1%E6%9D%BF"><span class="nav-number">8.</span> <span class="nav-text">完整代码模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">9.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kmon"
+      src="/images/photo.jpg">
+  <p class="site-author-name" itemprop="name">Kmon</p>
+  <div class="site-description" itemprop="description"></div>
+  <div class="site-intro" style="margin-top: 10px; font-size: 14px; color: #666; line-height: 1.5;">
+    <p>分享学习笔记和自己的碎碎念~</p>
+  </div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">68</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Zhisheng0506" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Zhisheng0506" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1206300336@qq.com" title="E-Mail → mailto:1206300336@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/1495302036" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;1495302036" rel="noopener me" target="_blank"><i class="fab fa-bilibili fa-fw"></i>Bilibili</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://x.com/ByKmon_" title="Twitter → https:&#x2F;&#x2F;x.com&#x2F;ByKmon_" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://zhisheng0506.github.io/2026/06/11/%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC-%E6%97%A0%E6%8B%AC%E5%8F%B7%E4%B8%AD%E7%BC%80%E4%B8%8E%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/photo.jpg">
+      <meta itemprop="name" content="Kmon">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="表达式求值-无括号中缀与后缀表达式 | Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          表达式求值-无括号中缀与后缀表达式
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-06-11 10:00:00" itemprop="dateCreated datePublished" datetime="2026-06-11T10:00:00+08:00">2026-06-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-06-25 20:49:20" itemprop="dateModified" datetime="2026-06-25T20:49:20+08:00">2026-06-25</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><blockquote>
+<p>题目链接：<a target="_blank" rel="noopener" href="https://noobdream.com/DreamJudge/Issue/page/1301/">N诺&#x2F;DreamJudge 1301</a></p>
+</blockquote>
+<p>计算不存在括号的中缀表达式，包含 <code>+</code> <code>-</code> <code>*</code> <code>/</code>，表达式不含空格。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: 6/2+3+3*4</span><br><span class="line">输出: 18</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><p>只用一个<strong>数值栈</strong>，利用”遇见运算符才处理上一个运算符”的延迟策略，自然地解决了 <code>*</code> <code>/</code> 优先级高于 <code>+</code> <code>-</code> 的问题。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">思路:</span><br><span class="line">  遇见数字 → 累积</span><br><span class="line">  遇见运算符（或末尾）→ 根据上一个运算符决定如何处理累积的数字</span><br><span class="line">    + → 直接入栈</span><br><span class="line">    - → 取负入栈</span><br><span class="line">    * → 栈顶出栈 × 当前数，结果入栈</span><br><span class="line">    / → 栈顶出栈 ÷ 当前数，结果入栈</span><br><span class="line">  最后 → 栈中所有数字求和</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="算法拆解"><a href="#算法拆解" class="headerlink" title="算法拆解"></a>算法拆解</h2><h3 id="变量声明"><a href="#变量声明" class="headerlink" title="变量声明"></a>变量声明</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="type">int</span>&gt; stk;     <span class="comment">// 数值栈，存&quot;待求和&quot;的数字</span></span><br><span class="line"><span class="type">int</span> num = <span class="number">0</span>;         <span class="comment">// 当前正在累积的数字</span></span><br><span class="line"><span class="type">char</span> sign = <span class="string">&#x27;+&#x27;</span>;     <span class="comment">// 上一个运算符（初始为 +）</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="遍历表达式"><a href="#遍历表达式" class="headerlink" title="遍历表达式"></a>遍历表达式</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (s[i] &gt;= <span class="string">&#x27;0&#x27;</span> &amp;&amp; s[i] &lt;= <span class="string">&#x27;9&#x27;</span>) &#123;</span><br><span class="line">        num = num * <span class="number">10</span> + (s[i] - <span class="string">&#x27;0&#x27;</span>);   <span class="comment">// ① 累积数字（可能多位）</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!(s[i] &gt;= <span class="string">&#x27;0&#x27;</span> &amp;&amp; s[i] &lt;= <span class="string">&#x27;9&#x27;</span>) || i == s.<span class="built_in">size</span>() - <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="comment">// ② 遇到运算符或末尾 → 处理上一个运算符</span></span><br><span class="line">        <span class="keyword">if</span> (sign == <span class="string">&#x27;+&#x27;</span>)      stk.<span class="built_in">push_back</span>(num);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (sign == <span class="string">&#x27;-&#x27;</span>) stk.<span class="built_in">push_back</span>(-num);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (sign == <span class="string">&#x27;*&#x27;</span>) &#123; <span class="type">int</span> t = stk.<span class="built_in">back</span>(); stk.<span class="built_in">pop_back</span>(); stk.<span class="built_in">push_back</span>(t * num); &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (sign == <span class="string">&#x27;/&#x27;</span>) &#123; <span class="type">int</span> t = stk.<span class="built_in">back</span>(); stk.<span class="built_in">pop_back</span>(); stk.<span class="built_in">push_back</span>(t / num); &#125;</span><br><span class="line"></span><br><span class="line">        sign = s[i];   <span class="comment">// ③ 记录当前运算符，留给下一轮</span></span><br><span class="line">        num = <span class="number">0</span>;       <span class="comment">// ④ 重置 num</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="触发时机"><a href="#触发时机" class="headerlink" title="触发时机"></a>触发时机</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!(s[i] &gt;= <span class="string">&#x27;0&#x27;</span> &amp;&amp; s[i] &lt;= <span class="string">&#x27;9&#x27;</span>) || i == s.<span class="built_in">size</span>() - <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>当前字符<strong>不是数字</strong>（即运算符），或走到<strong>表达式末尾</strong>时触发处理。末尾的特殊判断保证最后一个数字不会漏掉。</p>
+<h3 id="最终求和"><a href="#最终求和" class="headerlink" title="最终求和"></a>最终求和</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span> (!stk.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">    res += stk.<span class="built_in">back</span>();</span><br><span class="line">    stk.<span class="built_in">pop_back</span>();</span><br><span class="line">&#125;</span><br><span class="line">cout &lt;&lt; res &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="完整执行过程"><a href="#完整执行过程" class="headerlink" title="完整执行过程"></a>完整执行过程</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">表达式: 6/2+3+3*4</span><br><span class="line"></span><br><span class="line">初始: stk=[], num=0, sign=&#x27;+&#x27;</span><br><span class="line"></span><br><span class="line">i=0: &#x27;6&#x27; → num=6</span><br><span class="line">i=1: &#x27;/&#x27; → 运算符!</span><br><span class="line">  sign=&#x27;+&#x27; → 压入 +6 → stk=[6]</span><br><span class="line">  sign=&#x27;/&#x27;, num=0</span><br><span class="line"></span><br><span class="line">i=2: &#x27;2&#x27; → num=2</span><br><span class="line">i=3: &#x27;+&#x27; → 运算符!</span><br><span class="line">  sign=&#x27;/&#x27; → pop 6, 6/2=3 → stk=[3]</span><br><span class="line">  sign=&#x27;+&#x27;, num=0</span><br><span class="line"></span><br><span class="line">i=4: &#x27;3&#x27; → num=3</span><br><span class="line">i=5: &#x27;+&#x27; → 运算符!</span><br><span class="line">  sign=&#x27;+&#x27; → 压入 +3 → stk=[3,3]</span><br><span class="line">  sign=&#x27;+&#x27;, num=0</span><br><span class="line"></span><br><span class="line">i=6: &#x27;3&#x27; → num=3</span><br><span class="line">i=7: &#x27;*&#x27; → 运算符!</span><br><span class="line">  sign=&#x27;+&#x27; → 压入 +3 → stk=[3,3,3]</span><br><span class="line">  sign=&#x27;*&#x27;, num=0</span><br><span class="line"></span><br><span class="line">i=8: &#x27;4&#x27; → num=4</span><br><span class="line">i=9: 末尾 → 触发!</span><br><span class="line">  sign=&#x27;*&#x27; → pop 3, 3*4=12 → stk=[3,3,12]</span><br><span class="line"></span><br><span class="line">求和: 3+3+12=18</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="为什么这样能正确处理优先级"><a href="#为什么这样能正确处理优先级" class="headerlink" title="为什么这样能正确处理优先级"></a>为什么这样能正确处理优先级</h2><p>关键：<code>*</code> 和 <code>/</code> 在<strong>遇到下一个运算符时立刻执行</strong>，而 <code>+</code> 和 <code>-</code> 只是把数压入栈中。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">3 + 2 * 4:</span><br><span class="line"></span><br><span class="line">i=0: &#x27;3&#x27; → num=3</span><br><span class="line">i=1: &#x27;+&#x27; → 压入 3 (sign=&#x27;+&#x27;)</span><br><span class="line">i=2: &#x27;2&#x27; → num=2</span><br><span class="line">i=3: &#x27;*&#x27; → 压入 2 (sign=&#x27;+&#x27;), 还没轮到 *</span><br><span class="line">i=4: &#x27;4&#x27; → num=4</span><br><span class="line">末尾 → sign=&#x27;*&#x27;, pop 2, 2*4=8, 压入 8</span><br><span class="line">栈: [3, 8] → 3+8=11 ✓</span><br></pre></td></tr></table></figure>
+
+<p><code>*</code> 在遇到下一个运算符（或末尾）时才执行——此时 <code>num</code> 已经是完整的第二个因数了。</p>
+<hr>
+<h2 id="拓展：后缀表达式求值"><a href="#拓展：后缀表达式求值" class="headerlink" title="拓展：后缀表达式求值"></a>拓展：后缀表达式求值</h2><p>后缀表达式（逆波兰表达式）运算符在操作数之后，<strong>天然无歧义、不需要括号、不需要优先级</strong>。求值更简单：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">evalRPN</span><span class="params">(vector&lt;string&gt;&amp; tokens)</span> </span>&#123;</span><br><span class="line">    stack&lt;<span class="type">int</span>&gt; stk;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; t : tokens) &#123;</span><br><span class="line">        <span class="keyword">if</span> (t == <span class="string">&quot;+&quot;</span> || t == <span class="string">&quot;-&quot;</span> || t == <span class="string">&quot;*&quot;</span> || t == <span class="string">&quot;/&quot;</span>) &#123;</span><br><span class="line">            <span class="type">int</span> b = stk.<span class="built_in">top</span>(); stk.<span class="built_in">pop</span>();</span><br><span class="line">            <span class="type">int</span> a = stk.<span class="built_in">top</span>(); stk.<span class="built_in">pop</span>();</span><br><span class="line">            <span class="keyword">if</span> (t == <span class="string">&quot;+&quot;</span>) stk.<span class="built_in">push</span>(a + b);</span><br><span class="line">            <span class="keyword">if</span> (t == <span class="string">&quot;-&quot;</span>) stk.<span class="built_in">push</span>(a - b);</span><br><span class="line">            <span class="keyword">if</span> (t == <span class="string">&quot;*&quot;</span>) stk.<span class="built_in">push</span>(a * b);</span><br><span class="line">            <span class="keyword">if</span> (t == <span class="string">&quot;/&quot;</span>) stk.<span class="built_in">push</span>(a / b);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            stk.<span class="built_in">push</span>(<span class="built_in">stoi</span>(t));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> stk.<span class="built_in">top</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">后缀: [&quot;6&quot;,&quot;2&quot;,&quot;/&quot;,&quot;3&quot;,&quot;+&quot;,&quot;3&quot;,&quot;4&quot;,&quot;*&quot;,&quot;+&quot;]</span><br><span class="line"></span><br><span class="line">6 2 /  → 6/2=3</span><br><span class="line">3 3 +  → 3+3=6</span><br><span class="line">3 4 *  → 3*4=12</span><br><span class="line">6 12 + → 6+12=18</span><br><span class="line">结果: 18</span><br></pre></td></tr></table></figure>
+
+<h3 id="中缀-vs-后缀"><a href="#中缀-vs-后缀" class="headerlink" title="中缀 vs 后缀"></a>中缀 vs 后缀</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>中缀</th>
+<th>后缀</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>形式</td>
+<td><code>3 + 4 * 2</code></td>
+<td><code>3 4 2 * +</code></td>
+</tr>
+<tr>
+<td>括号</td>
+<td>需要</td>
+<td>不需要</td>
+</tr>
+<tr>
+<td>优先级</td>
+<td>需要处理</td>
+<td>不需要</td>
+</tr>
+<tr>
+<td>求值算法</td>
+<td>数值栈 + 延迟运算</td>
+<td>数值栈，遇运算符就出栈两个</td>
+</tr>
+<tr>
+<td>复杂度</td>
+<td>O(N)</td>
+<td>O(N)</td>
+</tr>
+</tbody></table>
+<p>后缀表达式只需要一个栈、一个规则——“遇数字入栈，遇运算符弹出两个计算后入栈”。没有优先级判断，没有延迟处理，比中缀简单得多。</p>
+<hr>
+<h2 id="⚠️-关键坑点"><a href="#⚠️-关键坑点" class="headerlink" title="⚠️ 关键坑点"></a>⚠️ 关键坑点</h2><h3 id="1-最后一位必须触发"><a href="#1-最后一位必须触发" class="headerlink" title="1. 最后一位必须触发"></a>1. 最后一位必须触发</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!(s[i] &gt;= <span class="string">&#x27;0&#x27;</span> &amp;&amp; s[i] &lt;= <span class="string">&#x27;9&#x27;</span>) || i == s.<span class="built_in">size</span>() - <span class="number">1</span>)</span><br><span class="line"><span class="comment">//                                   ^^^^^^^^^^^^^^^^ 末尾！</span></span><br></pre></td></tr></table></figure>
+
+<p>漏了这个条件，最后一个数字永远不会被处理。</p>
+<h3 id="2-用上一个运算符，不是当前"><a href="#2-用上一个运算符，不是当前" class="headerlink" title="2. 用上一个运算符，不是当前"></a>2. 用上一个运算符，不是当前</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sign = s[i];  <span class="comment">// 记录当前运算符，留给**下一轮**用</span></span><br></pre></td></tr></table></figure>
+
+<p>每次处理的是 <strong>上一个</strong> <code>sign</code>，当前这个存起来等下一轮。</p>
+<h3 id="3-除法是-top-num，不是-num-top"><a href="#3-除法是-top-num，不是-num-top" class="headerlink" title="3. 除法是 top / num，不是 num / top"></a>3. 除法是 <code>top / num</code>，不是 <code>num / top</code></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stk.<span class="built_in">push_back</span>(top / num);  <span class="comment">// ✅ 栈顶 ÷ 当前数</span></span><br></pre></td></tr></table></figure>
+
+<p>栈顶是先出现的操作数（被除数），<code>num</code> 是后出现的（除数）。</p>
+<h3 id="4-带括号的表达式"><a href="#4-带括号的表达式" class="headerlink" title="4. 带括号的表达式"></a>4. 带括号的表达式</h3><p>本文算法不含括号。带括号的中缀需要<strong>双栈</strong>（操作数栈 + 运算符栈）或先转后缀再求值。</p>
+<hr>
+<h2 id="完整代码模板"><a href="#完整代码模板" class="headerlink" title="完整代码模板"></a>完整代码模板</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="literal">nullptr</span>);</span><br><span class="line"></span><br><span class="line">    string s;</span><br><span class="line">    <span class="keyword">while</span> (cin &gt;&gt; s) &#123;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; stk;</span><br><span class="line">        <span class="type">int</span> num = <span class="number">0</span>;</span><br><span class="line">        <span class="type">char</span> sign = <span class="string">&#x27;+&#x27;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (s[i] &gt;= <span class="string">&#x27;0&#x27;</span> &amp;&amp; s[i] &lt;= <span class="string">&#x27;9&#x27;</span>) &#123;</span><br><span class="line">                num = num * <span class="number">10</span> + (s[i] - <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (!(s[i] &gt;= <span class="string">&#x27;0&#x27;</span> &amp;&amp; s[i] &lt;= <span class="string">&#x27;9&#x27;</span>) || i == s.<span class="built_in">size</span>() - <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (sign == <span class="string">&#x27;+&#x27;</span>) stk.<span class="built_in">push_back</span>(num);</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (sign == <span class="string">&#x27;-&#x27;</span>) stk.<span class="built_in">push_back</span>(-num);</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (sign == <span class="string">&#x27;*&#x27;</span>) &#123;</span><br><span class="line">                    <span class="type">int</span> t = stk.<span class="built_in">back</span>(); stk.<span class="built_in">pop_back</span>();</span><br><span class="line">                    stk.<span class="built_in">push_back</span>(t * num);</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sign == <span class="string">&#x27;/&#x27;</span>) &#123;</span><br><span class="line">                    <span class="type">int</span> t = stk.<span class="built_in">back</span>(); stk.<span class="built_in">pop_back</span>();</span><br><span class="line">                    stk.<span class="built_in">push_back</span>(t / num);</span><br><span class="line">                &#125;</span><br><span class="line">                sign = s[i];</span><br><span class="line">                num = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> x : stk) res += x;</span><br><span class="line">        cout &lt;&lt; res &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><table>
+<thead>
+<tr>
+<th>要点</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>核心技巧</td>
+<td>只有一个数值栈，利用”延迟运算”处理优先级</td>
+</tr>
+<tr>
+<td>+ -</td>
+<td>直接入栈（或取负入栈）</td>
+</tr>
+<tr>
+<td>* &#x2F;</td>
+<td>立刻出栈运算，结果入栈</td>
+</tr>
+<tr>
+<td>触发时机</td>
+<td>遇到运算符 或 走到末尾</td>
+</tr>
+<tr>
+<td>后缀求值</td>
+<td>遇数字入栈，遇运算符弹二算一</td>
+</tr>
+<tr>
+<td>无括号</td>
+<td>本文算法适用于无括号中缀，有括号需要双栈</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+              <a href="/tags/%E4%B8%8A%E6%9C%BA%E8%80%83%E8%AF%95/" rel="tag"># 上机考试</a>
+              <a href="/tags/%E6%A0%88/" rel="tag"># 栈</a>
+              <a href="/tags/%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC/" rel="tag"># 表达式求值</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/06/10/%E9%AB%98%E7%B2%BE%E5%BA%A6%E8%BF%90%E7%AE%97-%E5%A4%A7%E6%95%B0%E5%8A%A0%E5%87%8F%E4%B9%98%E9%99%A4%E6%A8%A1%E6%9D%BF/" rel="prev" title="高精度运算-大数加减乘除模板">
+                  <i class="fa fa-angle-left"></i> 高精度运算-大数加减乘除模板
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/06/12/%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91-%E6%9C%80%E5%B0%8F%E5%A0%86%E4%B8%8E%E5%B8%A6%E6%9D%83%E8%B7%AF%E5%BE%84%E5%92%8C/" rel="next" title="哈夫曼树-最小堆与带权路径和">
+                  哈夫曼树-最小堆与带权路径和 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Kmon</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

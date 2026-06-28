@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhisheng0506.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="题目描述 题目链接：N诺&#x2F;DreamJudge 1300  给定二叉树的前序遍历和中序遍历，求后序遍历。 123456789输入:ABCBACFDXEAGXDEFAG输出:BCAXEDGAF  n ≤ 26，结点以大写字命名。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二叉树-前中序推后序">
+<meta property="og:url" content="https://zhisheng0506.github.io/2026/06/13/%E4%BA%8C%E5%8F%89%E6%A0%91-%E5%89%8D%E4%B8%AD%E5%BA%8F%E6%8E%A8%E5%90%8E%E5%BA%8F/index.html">
+<meta property="og:site_name" content="Kmon Blogs">
+<meta property="og:description" content="题目描述 题目链接：N诺&#x2F;DreamJudge 1300  给定二叉树的前序遍历和中序遍历，求后序遍历。 123456789输入:ABCBACFDXEAGXDEFAG输出:BCAXEDGAF  n ≤ 26，结点以大写字命名。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-06-13T10:00:00.000Z">
+<meta property="article:modified_time" content="2026-06-26T13:11:36.742Z">
+<meta property="article:author" content="Kmon">
+<meta property="article:tag" content="上机考试">
+<meta property="article:tag" content="二叉树">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="递归">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://zhisheng0506.github.io/2026/06/13/%E4%BA%8C%E5%8F%89%E6%A0%91-%E5%89%8D%E4%B8%AD%E5%BA%8F%E6%8E%A8%E5%90%8E%E5%BA%8F/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://zhisheng0506.github.io/2026/06/13/%E4%BA%8C%E5%8F%89%E6%A0%91-%E5%89%8D%E4%B8%AD%E5%BA%8F%E6%8E%A8%E5%90%8E%E5%BA%8F/","path":"2026/06/13/二叉树-前中序推后序/","title":"二叉树-前中序推后序"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>二叉树-前中序推后序 | Kmon Blogs</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kmon Blogs</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E8%B7%AF"><span class="nav-number">2.</span> <span class="nav-text">核心思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E6%8B%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">算法拆解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">完整执行过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E8%A7%A3"><span class="nav-number">5.</span> <span class="nav-text">图解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%89%8D%E5%BA%8F-%E4%B8%AD%E5%BA%8F%E8%83%BD%E5%94%AF%E4%B8%80%E7%A1%AE%E5%AE%9A%E4%B8%80%E6%A3%B5%E6%A0%91"><span class="nav-number">6.</span> <span class="nav-text">为什么前序+中序能唯一确定一棵树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%9A%A0%EF%B8%8F-%E5%85%B3%E9%94%AE%E5%9D%91%E7%82%B9"><span class="nav-number">7.</span> <span class="nav-text">⚠️ 关键坑点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%89%8D%E5%BA%8F%E5%88%87%E5%88%86%E6%97%B6%E7%9A%84%E5%81%8F%E7%A7%BB"><span class="nav-number">7.1.</span> <span class="nav-text">1. 前序切分时的偏移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-find-%E8%BF%94%E5%9B%9E%E5%80%BC%E6%98%AF-size-t"><span class="nav-number">7.2.</span> <span class="nav-text">2. find 返回值是 size_t</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%A9%BA%E4%B8%B2%E7%BB%88%E6%AD%A2%E6%9D%A1%E4%BB%B6"><span class="nav-number">7.3.</span> <span class="nav-text">3. 空串终止条件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81%E6%A8%A1%E6%9D%BF"><span class="nav-number">8.</span> <span class="nav-text">完整代码模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">9.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kmon"
+      src="/images/photo.jpg">
+  <p class="site-author-name" itemprop="name">Kmon</p>
+  <div class="site-description" itemprop="description"></div>
+  <div class="site-intro" style="margin-top: 10px; font-size: 14px; color: #666; line-height: 1.5;">
+    <p>分享学习笔记和自己的碎碎念~</p>
+  </div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">71</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Zhisheng0506" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Zhisheng0506" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1206300336@qq.com" title="E-Mail → mailto:1206300336@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/1495302036" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;1495302036" rel="noopener me" target="_blank"><i class="fab fa-bilibili fa-fw"></i>Bilibili</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://x.com/ByKmon_" title="Twitter → https:&#x2F;&#x2F;x.com&#x2F;ByKmon_" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://zhisheng0506.github.io/2026/06/13/%E4%BA%8C%E5%8F%89%E6%A0%91-%E5%89%8D%E4%B8%AD%E5%BA%8F%E6%8E%A8%E5%90%8E%E5%BA%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/photo.jpg">
+      <meta itemprop="name" content="Kmon">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="二叉树-前中序推后序 | Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          二叉树-前中序推后序
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-06-13 18:00:00" itemprop="dateCreated datePublished" datetime="2026-06-13T18:00:00+08:00">2026-06-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-06-26 21:11:36" itemprop="dateModified" datetime="2026-06-26T21:11:36+08:00">2026-06-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><blockquote>
+<p>题目链接：<a target="_blank" rel="noopener" href="https://noobdream.com/DreamJudge/Issue/page/1300/">N诺&#x2F;DreamJudge 1300</a></p>
+</blockquote>
+<p>给定二叉树的前序遍历和中序遍历，求后序遍历。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">输入:</span><br><span class="line">ABC</span><br><span class="line">BAC</span><br><span class="line">FDXEAG</span><br><span class="line">XDEFAG</span><br><span class="line"></span><br><span class="line">输出:</span><br><span class="line">BCA</span><br><span class="line">XEDGAF</span><br></pre></td></tr></table></figure>
+
+<p><code>n ≤ 26</code>，结点以大写字命名。</p>
+<span id="more"></span>
+
+<h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><p>前序确定根，中序划分左右子树。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">前序: A B C</span><br><span class="line">中序: B A C</span><br><span class="line"></span><br><span class="line">1. 前序第一个 &#x27;A&#x27; 是根</span><br><span class="line">2. 在中序找到 &#x27;A&#x27; → 左边 &quot;B&quot; 是左子树，右边 &quot;C&quot; 是右子树</span><br><span class="line">3. 递归处理左子树和右子树</span><br><span class="line">4. 后序 = 左后序 + 右后序 + 根</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="算法拆解"><a href="#算法拆解" class="headerlink" title="算法拆解"></a>算法拆解</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">string <span class="title">getPostOrder</span><span class="params">(string pre, string in)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (pre.<span class="built_in">empty</span>()) <span class="keyword">return</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">char</span> root = pre[<span class="number">0</span>];                          <span class="comment">// ① 前序第一个 = 根</span></span><br><span class="line">    <span class="type">int</span> rootIndex = in.<span class="built_in">find</span>(root);               <span class="comment">// ② 根在中序的位置</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// ③ 根据根的位置，切分中序</span></span><br><span class="line">    string leftIn  = in.<span class="built_in">substr</span>(<span class="number">0</span>, rootIndex);</span><br><span class="line">    string rightIn = in.<span class="built_in">substr</span>(rootIndex + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ④ 根据左子树长度，切分前序</span></span><br><span class="line">    string leftPre  = pre.<span class="built_in">substr</span>(<span class="number">1</span>, leftIn.<span class="built_in">size</span>());</span><br><span class="line">    string rightPre = pre.<span class="built_in">substr</span>(leftIn.<span class="built_in">size</span>() + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ⑤ 后序 = 左后序 + 右后序 + 根</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">getPostOrder</span>(leftPre, leftIn)</span><br><span class="line">         + <span class="built_in">getPostOrder</span>(rightPre, rightIn)</span><br><span class="line">         + root;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="完整执行过程"><a href="#完整执行过程" class="headerlink" title="完整执行过程"></a>完整执行过程</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">前序: F D X E A G</span><br><span class="line">中序: X D E F A G</span><br><span class="line"></span><br><span class="line">根 = &#x27;F&#x27;</span><br><span class="line">中序中 &#x27;F&#x27; 位置 = 3</span><br><span class="line">  leftIn  = &quot;XDE&quot;  (中序 0~2)</span><br><span class="line">  rightIn = &quot;AG&quot;   (中序 4~5)</span><br><span class="line"></span><br><span class="line">左子树长度 = 3</span><br><span class="line">  leftPre  = &quot;DXE&quot;  (前序 1~3)</span><br><span class="line">  rightPre = &quot;AG&quot;   (前序 4~5)</span><br><span class="line"></span><br><span class="line">递归左:</span><br><span class="line">  前序 &quot;DXE&quot;, 中序 &quot;XDE&quot;</span><br><span class="line">  根 = &#x27;D&#x27;, 位置 = 1</span><br><span class="line">  leftIn = &quot;X&quot;, leftPre = &quot;X&quot;</span><br><span class="line">  rightIn = &quot;E&quot;, rightPre = &quot;E&quot;</span><br><span class="line">  </span><br><span class="line">  递归 leftPre=&quot;X&quot;, leftIn=&quot;X&quot;:</span><br><span class="line">    根=&#x27;X&#x27;, 位置=0 → 左右都空 → 返回 &quot;X&quot;</span><br><span class="line">  递归 rightPre=&quot;E&quot;, rightIn=&quot;E&quot;:</span><br><span class="line">    根=&#x27;E&#x27;, 位置=0 → 左右都空 → 返回 &quot;E&quot;</span><br><span class="line">  返回 &quot;X&quot; + &quot;E&quot; + &quot;D&quot; = &quot;XED&quot;</span><br><span class="line"></span><br><span class="line">递归右:</span><br><span class="line">  前序 &quot;AG&quot;, 中序 &quot;AG&quot;</span><br><span class="line">  根 = &#x27;A&#x27;, 位置 = 0</span><br><span class="line">  leftIn=&quot;&quot; rightIn=&quot;G&quot;, leftPre=&quot;&quot; rightPre=&quot;G&quot;</span><br><span class="line">  递归右: 前序 &quot;G&quot;, 中序 &quot;G&quot; → &quot;G&quot;</span><br><span class="line">  返回 &quot;&quot; + &quot;G&quot; + &quot;A&quot; = &quot;GA&quot;</span><br><span class="line"></span><br><span class="line">最终: &quot;XED&quot; + &quot;GA&quot; + &quot;F&quot; = &quot;XEDGAF&quot;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">前序: F D X E A G          中序: X D E F A G</span><br><span class="line"></span><br><span class="line">         根=F</span><br><span class="line">    ┌─────┴─────┐</span><br><span class="line">左: D X E      右: A G</span><br><span class="line">    │</span><br><span class="line">   根=D</span><br><span class="line"> ┌──┴──┐</span><br><span class="line">左: X  右: E       后序 = 左后序 + 右后序 + 根</span><br><span class="line"> │       │               = &quot;XED&quot; + &quot;GA&quot; + &quot;F&quot;</span><br><span class="line"> X       E               = &quot;XEDGAF&quot;</span><br><span class="line"></span><br><span class="line">右: A G</span><br><span class="line">    │</span><br><span class="line">   根=A</span><br><span class="line">    └──┐</span><br><span class="line">   右: G</span><br><span class="line">      │</span><br><span class="line">      G</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="为什么前序-中序能唯一确定一棵树"><a href="#为什么前序-中序能唯一确定一棵树" class="headerlink" title="为什么前序+中序能唯一确定一棵树"></a>为什么前序+中序能唯一确定一棵树</h2><ul>
+<li><strong>前序第一个确定根节点</strong></li>
+<li><strong>中序中根的位置确定左右子树的节点集合</strong></li>
+<li>左右子树又是同样的结构 → 递归</li>
+</ul>
+<p>前序+后序<strong>不能</strong>唯一确定（缺少左右子树的分界信息）。但前序+中序、中序+后序都可以。</p>
+<hr>
+<h2 id="⚠️-关键坑点"><a href="#⚠️-关键坑点" class="headerlink" title="⚠️ 关键坑点"></a>⚠️ 关键坑点</h2><h3 id="1-前序切分时的偏移"><a href="#1-前序切分时的偏移" class="headerlink" title="1. 前序切分时的偏移"></a>1. 前序切分时的偏移</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string leftPre  = pre.<span class="built_in">substr</span>(<span class="number">1</span>, leftIn.<span class="built_in">size</span>());    <span class="comment">// 从1开始，长度=左子树节点数</span></span><br><span class="line">string rightPre = pre.<span class="built_in">substr</span>(leftIn.<span class="built_in">size</span>() + <span class="number">1</span>);   <span class="comment">// 跳过根+左子树</span></span><br></pre></td></tr></table></figure>
+
+<p>前序的布局是 <code>[根][左子树][右子树]</code>。左前序跳过根（下标 1），右前序跳过根+左子树。</p>
+<h3 id="2-find-返回值是-size-t"><a href="#2-find-返回值是-size-t" class="headerlink" title="2. find 返回值是 size_t"></a>2. <code>find</code> 返回值是 size_t</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> rootIndex = in.<span class="built_in">find</span>(root);  <span class="comment">// ✅ 存 int</span></span><br><span class="line"><span class="type">size_t</span> rootIndex = in.<span class="built_in">find</span>(root); <span class="comment">// 也可以，但和 substr 混用要注意符号</span></span><br></pre></td></tr></table></figure>
+
+<p>用 <code>int</code> 更安全，避免 <code>size_t</code> 和负数比较时的隐式转换问题。</p>
+<h3 id="3-空串终止条件"><a href="#3-空串终止条件" class="headerlink" title="3. 空串终止条件"></a>3. 空串终止条件</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (pre.<span class="built_in">empty</span>()) <span class="keyword">return</span> <span class="string">&quot;&quot;</span>;  <span class="comment">// 或 pre.size() == 0</span></span><br></pre></td></tr></table></figure>
+
+<p>叶子节点递归下去，左右子树为空，返回空串。</p>
+<hr>
+<h2 id="完整代码模板"><a href="#完整代码模板" class="headerlink" title="完整代码模板"></a>完整代码模板</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function">string <span class="title">getPostOrder</span><span class="params">(string pre, string in)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (pre.<span class="built_in">empty</span>()) <span class="keyword">return</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">char</span> root = pre[<span class="number">0</span>];</span><br><span class="line">    <span class="type">int</span> rootIndex = in.<span class="built_in">find</span>(root);</span><br><span class="line"></span><br><span class="line">    string leftIn  = in.<span class="built_in">substr</span>(<span class="number">0</span>, rootIndex);</span><br><span class="line">    string rightIn = in.<span class="built_in">substr</span>(rootIndex + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    string leftPre  = pre.<span class="built_in">substr</span>(<span class="number">1</span>, leftIn.<span class="built_in">size</span>());</span><br><span class="line">    string rightPre = pre.<span class="built_in">substr</span>(leftIn.<span class="built_in">size</span>() + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">getPostOrder</span>(leftPre, leftIn)</span><br><span class="line">         + <span class="built_in">getPostOrder</span>(rightPre, rightIn)</span><br><span class="line">         + root;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="literal">nullptr</span>);</span><br><span class="line">    string pre, in;</span><br><span class="line">    <span class="keyword">while</span> (cin &gt;&gt; pre &gt;&gt; in) &#123;</span><br><span class="line">        cout &lt;&lt; <span class="built_in">getPostOrder</span>(pre, in) &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><table>
+<thead>
+<tr>
+<th>要点</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>核心</td>
+<td>前序首字符 &#x3D; 根，中序根位置分左右</td>
+</tr>
+<tr>
+<td>前序布局</td>
+<td><code>[根][左子树][右子树]</code></td>
+</tr>
+<tr>
+<td>切分</td>
+<td>左 pre 从 1 开始，右 pre 跳过根+左子树长度</td>
+</tr>
+<tr>
+<td>递归公式</td>
+<td>后序 &#x3D; 左后序 + 右后序 + 根</td>
+</tr>
+<tr>
+<td>终止条件</td>
+<td><code>pre.empty()</code> → <code>&quot;&quot;</code></td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+              <a href="/tags/%E4%B8%8A%E6%9C%BA%E8%80%83%E8%AF%95/" rel="tag"># 上机考试</a>
+              <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="tag"># 二叉树</a>
+              <a href="/tags/%E9%80%92%E5%BD%92/" rel="tag"># 递归</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/06/13/%E4%BA%8C%E5%8F%89%E6%A0%91-%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86%E4%B8%8E%E5%85%88%E5%BA%8F%E5%BB%BA%E6%A0%91/" rel="prev" title="二叉树-层序遍历与先序建树">
+                  <i class="fa fa-angle-left"></i> 二叉树-层序遍历与先序建树
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/06/14/%E4%BA%8C%E5%8F%89%E6%A0%91LCA-%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%8E%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/" rel="next" title="二叉树LCA-完全二叉树与二叉搜索树的最近公共祖先">
+                  二叉树LCA-完全二叉树与二叉搜索树的最近公共祖先 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Kmon</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

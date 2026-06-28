@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhisheng0506.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="题目描述 题目链接：N诺&#x2F;DreamJudge 1348  一棵无限大的完全二叉树，节点按层从上到下、从左到右编号 1, 2, 3, …。已知最后一个节点是 n，问节点 m 所在的子树中共有多少个节点。 1234567891011例如 n&#x3D;12, m&#x3D;3:        1      &#x2F;   \     2     3    &#x2F; \   &#x2F; \   4   5 6   7  &#x2F; \  &#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="完全二叉树-子树节点计数">
+<meta property="og:url" content="https://zhisheng0506.github.io/2026/06/15/%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91-%E5%AD%90%E6%A0%91%E8%8A%82%E7%82%B9%E8%AE%A1%E6%95%B0/index.html">
+<meta property="og:site_name" content="Kmon Blogs">
+<meta property="og:description" content="题目描述 题目链接：N诺&#x2F;DreamJudge 1348  一棵无限大的完全二叉树，节点按层从上到下、从左到右编号 1, 2, 3, …。已知最后一个节点是 n，问节点 m 所在的子树中共有多少个节点。 1234567891011例如 n&#x3D;12, m&#x3D;3:        1      &#x2F;   \     2     3    &#x2F; \   &#x2F; \   4   5 6   7  &#x2F; \  &#x2F;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-06-15T10:00:00.000Z">
+<meta property="article:modified_time" content="2026-06-28T10:25:24.832Z">
+<meta property="article:author" content="Kmon">
+<meta property="article:tag" content="上机考试">
+<meta property="article:tag" content="二叉树">
+<meta property="article:tag" content="完全二叉树">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://zhisheng0506.github.io/2026/06/15/%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91-%E5%AD%90%E6%A0%91%E8%8A%82%E7%82%B9%E8%AE%A1%E6%95%B0/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://zhisheng0506.github.io/2026/06/15/%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91-%E5%AD%90%E6%A0%91%E8%8A%82%E7%82%B9%E8%AE%A1%E6%95%B0/","path":"2026/06/15/完全二叉树-子树节点计数/","title":"完全二叉树-子树节点计数"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>完全二叉树-子树节点计数 | Kmon Blogs</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kmon Blogs</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E8%B7%AF"><span class="nav-number">2.</span> <span class="nav-text">核心思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E6%8B%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">算法拆解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E5%B1%82%E5%88%86%E6%9E%90%EF%BC%88n-12-m-3%EF%BC%89"><span class="nav-number">3.1.</span> <span class="nav-text">逐层分析（n&#x3D;12, m&#x3D;3）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E7%AC%AC-2-%E5%B1%82%E7%94%A8-min-n-right"><span class="nav-number">3.2.</span> <span class="nav-text">为什么第 2 层用 min(n, right)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E7%88%B6%E5%AD%90%E5%85%AC%E5%BC%8F"><span class="nav-number">4.</span> <span class="nav-text">完全二叉树的父子公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B%EF%BC%88n-20-m-2%EF%BC%89"><span class="nav-number">5.</span> <span class="nav-text">完整执行过程（n&#x3D;20, m&#x3D;2）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%9A%A0%EF%B8%8F-%E5%85%B3%E9%94%AE%E5%9D%91%E7%82%B9"><span class="nav-number">6.</span> <span class="nav-text">⚠️ 关键坑点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%94%A8-long-long"><span class="nav-number">6.1.</span> <span class="nav-text">1. 用 long long</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%88%AB%E6%BC%8F-min-n-right"><span class="nav-number">6.2.</span> <span class="nav-text">2. 别漏 min(n, right)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%BE%AA%E7%8E%AF%E7%BB%88%E6%AD%A2%E6%9D%A1%E4%BB%B6"><span class="nav-number">6.3.</span> <span class="nav-text">3. 循环终止条件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81%E6%A8%A1%E6%9D%BF"><span class="nav-number">7.</span> <span class="nav-text">完整代码模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">8.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kmon"
+      src="/images/photo.jpg">
+  <p class="site-author-name" itemprop="name">Kmon</p>
+  <div class="site-description" itemprop="description"></div>
+  <div class="site-intro" style="margin-top: 10px; font-size: 14px; color: #666; line-height: 1.5;">
+    <p>分享学习笔记和自己的碎碎念~</p>
+  </div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">73</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Zhisheng0506" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Zhisheng0506" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1206300336@qq.com" title="E-Mail → mailto:1206300336@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/1495302036" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;1495302036" rel="noopener me" target="_blank"><i class="fab fa-bilibili fa-fw"></i>Bilibili</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://x.com/ByKmon_" title="Twitter → https:&#x2F;&#x2F;x.com&#x2F;ByKmon_" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://zhisheng0506.github.io/2026/06/15/%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91-%E5%AD%90%E6%A0%91%E8%8A%82%E7%82%B9%E8%AE%A1%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/photo.jpg">
+      <meta itemprop="name" content="Kmon">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="完全二叉树-子树节点计数 | Kmon Blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          完全二叉树-子树节点计数
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-06-15 18:00:00" itemprop="dateCreated datePublished" datetime="2026-06-15T18:00:00+08:00">2026-06-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-06-28 18:25:24" itemprop="dateModified" datetime="2026-06-28T18:25:24+08:00">2026-06-28</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><blockquote>
+<p>题目链接：<a target="_blank" rel="noopener" href="https://noobdream.com/DreamJudge/Issue/page/1348/">N诺&#x2F;DreamJudge 1348</a></p>
+</blockquote>
+<p>一棵无限大的完全二叉树，节点按层从上到下、从左到右编号 1, 2, 3, …。已知最后一个节点是 n，问节点 m 所在的子树中共有多少个节点。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">例如 n=12, m=3:</span><br><span class="line"></span><br><span class="line">        1</span><br><span class="line">      /   \</span><br><span class="line">     2     3</span><br><span class="line">    / \   / \</span><br><span class="line">   4   5 6   7</span><br><span class="line">  / \  / \ / \</span><br><span class="line"> 8  9 10 11 12 (13之后不存在)</span><br><span class="line"></span><br><span class="line">m=3 的子树包含: 3, 6, 7, 12 → 共 4 个节点</span><br></pre></td></tr></table></figure>
+
+<p><code>1 ≤ m ≤ n ≤ 10^9</code>。</p>
+<span id="more"></span>
+
+<h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><p>m 的子树就是包含 m 及其所有后代节点的集合。</p>
+<p>完全二叉树中，节点 i 的左孩子 &#x3D; 2i，右孩子 &#x3D; 2i+1。所以 m 的第 k 层后代范围是 <code>[m × 2^k, m × 2^{k+1} - 1]</code>。</p>
+<p>算法：<strong>逐层累加</strong>——从 m 开始，每层算出该层的节点数，累加到 left &gt; n 为止。</p>
+<hr>
+<h2 id="算法拆解"><a href="#算法拆解" class="headerlink" title="算法拆解"></a>算法拆解</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ll left = m, right = m;   <span class="comment">// 当前层的最左和最右节点</span></span><br><span class="line">ll ans = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (left &lt;= n) &#123;</span><br><span class="line">    ans += <span class="built_in">min</span>(n, right) - left + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    left  = left * <span class="number">2</span>;       <span class="comment">// 下一层的最左节点</span></span><br><span class="line">    right = right * <span class="number">2</span> + <span class="number">1</span>;  <span class="comment">// 下一层的最右节点</span></span><br><span class="line">&#125;</span><br><span class="line">cout &lt;&lt; ans &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
+
+<h3 id="逐层分析（n-12-m-3）"><a href="#逐层分析（n-12-m-3）" class="headerlink" title="逐层分析（n&#x3D;12, m&#x3D;3）"></a>逐层分析（n&#x3D;12, m&#x3D;3）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">第0层 (m自身): [3, 3]</span><br><span class="line">  left=3, right=3</span><br><span class="line">  min(12, 3) - 3 + 1 = 3 - 3 + 1 = 1  ← m 本身</span><br><span class="line">  ans=1</span><br><span class="line"></span><br><span class="line">第1层 (m的孩子): [6, 7]</span><br><span class="line">  left=3×2=6, right=3×2+1=7</span><br><span class="line">  min(12, 7) - 6 + 1 = 7 - 6 + 1 = 2  ← 6, 7</span><br><span class="line">  ans=3</span><br><span class="line"></span><br><span class="line">第2层 (m的孙子): [12, 15]</span><br><span class="line">  left=6×2=12, right=7×2+1=15</span><br><span class="line">  min(12, 15) - 12 + 1 = 12 - 12 + 1 = 1  ← 12（14,15 超出 n）</span><br><span class="line">  ans=4</span><br><span class="line"></span><br><span class="line">第3层: [24, 31]</span><br><span class="line">  left=12×2=24 &gt; n=12 → 退出</span><br><span class="line"></span><br><span class="line">最终 ans = 4</span><br></pre></td></tr></table></figure>
+
+<h3 id="为什么第-2-层用-min-n-right"><a href="#为什么第-2-层用-min-n-right" class="headerlink" title="为什么第 2 层用 min(n, right)"></a>为什么第 2 层用 min(n, right)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">节点 m=3 的第 2 层范围: [12, 15]</span><br><span class="line">但 n=12，所以只有 12 存在，13,14,15 都在树外</span><br><span class="line"></span><br><span class="line">实际该层节点数 = min(12, 15) - 12 + 1 = 1</span><br><span class="line">不是 15 - 12 + 1 = 4（那样会把不存在的节点也算进去）</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="完全二叉树的父子公式"><a href="#完全二叉树的父子公式" class="headerlink" title="完全二叉树的父子公式"></a>完全二叉树的父子公式</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">节点 i 的左孩子: 2i</span><br><span class="line">节点 i 的右孩子: 2i + 1</span><br><span class="line">节点 i 的父节点: i / 2</span><br><span class="line"></span><br><span class="line">第 k 层的最左节点: m × 2^k</span><br><span class="line">第 k 层的最右节点: m × 2^&#123;k+1&#125; - 1</span><br><span class="line">  （或者迭代: left = left×2, right = right×2+1）</span><br></pre></td></tr></table></figure>
+
+<p>这是完全二叉树编号的核心性质，也是这道题能用 O(log n) 层遍历解决的原因。</p>
+<hr>
+<h2 id="完整执行过程（n-20-m-2）"><a href="#完整执行过程（n-20-m-2）" class="headerlink" title="完整执行过程（n&#x3D;20, m&#x3D;2）"></a>完整执行过程（n&#x3D;20, m&#x3D;2）</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">      2</span><br><span class="line">     / \</span><br><span class="line">    4   5</span><br><span class="line">   / \  / \</span><br><span class="line">  8  9 10 11</span><br><span class="line"> / \  / \  / \</span><br><span class="line">16 17 18 19 20 (21+不存在)</span><br><span class="line"></span><br><span class="line">第0层: [2,2]   → min(20,2)-2+1=1     ans=1</span><br><span class="line">第1层: [4,5]   → min(20,5)-4+1=2     ans=3</span><br><span class="line">第2层: [8,11]  → min(20,11)-8+1=4    ans=7</span><br><span class="line">第3层: [16,23] → min(20,23)-16+1=5   ans=12</span><br><span class="line">第4层: [32,47] → 32&gt;20 → 退出</span><br><span class="line"></span><br><span class="line">m=2 的子树共有 12 个节点</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="⚠️-关键坑点"><a href="#⚠️-关键坑点" class="headerlink" title="⚠️ 关键坑点"></a>⚠️ 关键坑点</h2><h3 id="1-用-long-long"><a href="#1-用-long-long" class="headerlink" title="1. 用 long long"></a>1. 用 <code>long long</code></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ll left = m, right = m, ans = <span class="number">0</span>;  <span class="comment">// ✅</span></span><br><span class="line"><span class="type">int</span> left = m;                      <span class="comment">// ❌ n ≤ 10^9，乘以 2 可能超 int</span></span><br></pre></td></tr></table></figure>
+
+<p><code>right = right * 2 + 1</code> 在层数较多时可能超过 <code>2 × 10^9</code>，int 溢出。</p>
+<h3 id="2-别漏-min-n-right"><a href="#2-别漏-min-n-right" class="headerlink" title="2. 别漏 min(n, right)"></a>2. 别漏 min(n, right)</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ans += <span class="built_in">min</span>(<span class="number">1LL</span> * n, right) - left + <span class="number">1</span>;  <span class="comment">// ✅ cap at n</span></span><br><span class="line">ans += right - left + <span class="number">1</span>;                <span class="comment">// ❌ 会把不存在的节点算进去</span></span><br></pre></td></tr></table></figure>
+
+<p>树的最后一层可能只有左边几个节点存在，右边超出 n 的要截断。</p>
+<h3 id="3-循环终止条件"><a href="#3-循环终止条件" class="headerlink" title="3. 循环终止条件"></a>3. 循环终止条件</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (left &lt;= n) &#123; ... &#125;  <span class="comment">// ✅ left 超出 n 时退出</span></span><br><span class="line"><span class="keyword">while</span> (right &lt;= n) &#123; ... &#125; <span class="comment">// ❌ 如果 right&gt;n 但 left≤n，最后一层还有节点</span></span><br></pre></td></tr></table></figure>
+
+<p>即使最右节点超出 n，只要最左节点还在范围内，这一层就至少有一个节点。</p>
+<hr>
+<h2 id="完整代码模板"><a href="#完整代码模板" class="headerlink" title="完整代码模板"></a>完整代码模板</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">using</span> ll = <span class="type">long</span> <span class="type">long</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="literal">nullptr</span>);</span><br><span class="line"></span><br><span class="line">    ll m, n;</span><br><span class="line">    <span class="keyword">while</span> (cin &gt;&gt; m &gt;&gt; n) &#123;</span><br><span class="line">        ll left = m, right = m, ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (left &lt;= n) &#123;</span><br><span class="line">            ans += <span class="built_in">min</span>(n, right) - left + <span class="number">1</span>;</span><br><span class="line">            left  = left * <span class="number">2</span>;</span><br><span class="line">            right = right * <span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><table>
+<thead>
+<tr>
+<th>要点</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>左孩子&#x2F;右孩子</td>
+<td><code>2i</code> &#x2F; <code>2i + 1</code></td>
+</tr>
+<tr>
+<td>第 k 层范围</td>
+<td><code>[m×2^k, m×2^{k+1}-1]</code></td>
+</tr>
+<tr>
+<td>每层节点数</td>
+<td><code>min(n, right) - left + 1</code></td>
+</tr>
+<tr>
+<td>用 long long</td>
+<td>n ≤ 10^9，乘 2 后可能溢出 int</td>
+</tr>
+<tr>
+<td>终止条件</td>
+<td><code>left &gt; n</code>（不是 right &gt; n）</td>
+</tr>
+<tr>
+<td>复杂度</td>
+<td>O(log n)</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+              <a href="/tags/%E4%B8%8A%E6%9C%BA%E8%80%83%E8%AF%95/" rel="tag"># 上机考试</a>
+              <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="tag"># 二叉树</a>
+              <a href="/tags/%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="tag"># 完全二叉树</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/06/15/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91-%E5%88%A4%E6%96%AD%E4%B8%A4%E5%BA%8F%E5%88%97%E6%98%AF%E5%90%A6%E4%B8%BA%E5%90%8C%E4%B8%80BST/" rel="prev" title="二叉搜索树-判断两序列是否为同一BST">
+                  <i class="fa fa-angle-left"></i> 二叉搜索树-判断两序列是否为同一BST
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Kmon</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
